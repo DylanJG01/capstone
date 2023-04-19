@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .tag_tables import story_tags
+from .story_tags import story_tags
 
 
 class Story(db.Model):
