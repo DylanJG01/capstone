@@ -1,8 +1,8 @@
-"""miiigrate
+"""miigrate
 
-Revision ID: e8f55278318e
+Revision ID: 041953e2692f
 Revises:
-Create Date: 2023-04-18 21:56:59.780097
+Create Date: 2023-04-19 08:47:28.527237
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'e8f55278318e'
+revision = '041953e2692f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -43,7 +43,7 @@ def upgrade():
     sa.Column('status', sa.Boolean(), nullable=True),
     sa.Column('cost', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user_tags',
