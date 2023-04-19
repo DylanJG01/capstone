@@ -17,7 +17,7 @@ class Story(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"))
 
-    tags = db.relationship('Tag', secondary=story_tags, backref=db.backref('stories', lazy='dynamic'))
+    tags = db.relationship('Tag', secondary=story_tags, backref='stories', lazy=True)
 
     def to_dict(self):
         return {
