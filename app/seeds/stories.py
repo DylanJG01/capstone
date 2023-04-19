@@ -1,4 +1,5 @@
 from app.models import db, Story, Tag, environment, SCHEMA
+from sqlalchemy.sql import text
 
 def seed_stories():
     story1 = Story(

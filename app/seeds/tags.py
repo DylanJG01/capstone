@@ -1,4 +1,5 @@
 from app.models import db, Tag, environment, SCHEMA
+from sqlalchemy.sql import text
 
 def seed_tags():
     tag1 = Tag(name="Tag1")
