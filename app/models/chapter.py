@@ -8,7 +8,7 @@ class Chapter(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text(), default="")
-    cost = db.Column(db.Integer(), default=0)
+    cost = db.Column(db.Integer, default=0)
 
     story = db.relationship('Story', backref='stories')
     story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('stories.id')))
