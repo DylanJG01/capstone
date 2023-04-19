@@ -11,7 +11,7 @@ def stories():
     Query for all stories and returns them in a list of story dictionaries
     """
     stories = Story.query.all()
-    return {"stoires" : [story.to_dict() for story in stories]}
+    return {"stories" : [story.to_dict() for story in stories]}
 
 @story_routes.route('/<int:id>')
 def story(id):

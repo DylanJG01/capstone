@@ -28,5 +28,4 @@ class Story(db.Model):
             'status': self.status,
             'cost': self.cost,
             'user_id': self.user_id,
-            'tag_id': self.tag_id,
         }
