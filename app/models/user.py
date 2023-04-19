@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from .tag_tables import user_tags
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -13,6 +13,10 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    # tag_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    tags = db.relationship('Tag', secondary=user_tags, backref=db.backref('users', lazy='dynamic'))
+    stories = db.relationship('Story', backref='users', cascade='all, delete-orphan')
 
     @property
     def password(self):
