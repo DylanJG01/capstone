@@ -1,4 +1,4 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, Tag, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
@@ -20,6 +20,11 @@ def seed_users():
         password='password',
         )
 
+    tag1 = Tag.query.get(1)
+    tag2 = Tag.query.get(2)
+
+    demo.tags.append(tag1)
+    demo.tags.append(tag2)
 
     db.session.add(demo)
     db.session.add(marnie)

@@ -1,8 +1,21 @@
-from app.models import db, User, environment, SCHEMA
-from sqlalchemy.sql import text
+from app.models import db, Story, Tag, environment, SCHEMA
 
 def seed_stories():
-    pass
+    story1 = Story(
+        user_id = 1,
+    )
+    story2 = Story(
+        user_id = 1,
+    )
+    tag1 = Tag.query.get(3)
+    tag2 = Tag.query.get(2)
+
+    story1.tags.append(tag1)
+    story1.tags.append(tag2)
+
+    db.session.add(story1)
+    db.session.add(story2)
+    db.session.commit()
 
 def undo_stories():
     if environment == "production":
