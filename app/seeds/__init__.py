@@ -2,6 +2,7 @@ from flask.cli import AppGroup
 from .tags import seed_tags, undo_tags
 from .users import seed_users, undo_users
 from .stories import seed_stories, undo_stories
+from .chapters import seed_chapters, undo_chapters
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -20,9 +21,11 @@ def seed():
         undo_tags()
         undo_users()
         undo_stories()
+        undo_chapters()
     seed_tags()
     seed_users()
     seed_stories()
+    seed_chapters()
 
     # Add other seed functions here
 
@@ -33,4 +36,5 @@ def undo():
     undo_tags()
     undo_users()
     undo_stories()
+    undo_chapters()
     # Add other undo functions here
