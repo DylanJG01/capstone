@@ -19,5 +19,5 @@ def story(id):
     """
     Query for a story by id and returns that story in a dictionary
     """
-    user = User.query.get(id)
-    return user.to_dict()
+    story = Story.query.get(id)
+    return story.to_dict()
