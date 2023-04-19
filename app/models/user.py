@@ -14,7 +14,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    # tag_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     tags = db.relationship('Tag', secondary=user_tags, backref='users', lazy=True)
     stories = db.relationship('Story', backref='users', cascade='all, delete-orphan')
 
