@@ -1,13 +1,16 @@
 """miiigrate
 
 Revision ID: e8f55278318e
-Revises: 
+Revises:
 Create Date: 2023-04-18 21:56:59.780097
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
 revision = 'e8f55278318e'
