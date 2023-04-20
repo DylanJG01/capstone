@@ -1,8 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStoriesForUser } from '../../store/story';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-import OpenModalButton from "../OpenModalButton";
 import StoryModal from './StoryModal';
 import { useModal } from '../../context/Modal';
 
@@ -41,7 +39,6 @@ export default function RecommendedStories(){
                             />
 
                         </li>
-
                     ))}</ul>
                 </div>
             </div>

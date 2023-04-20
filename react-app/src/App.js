@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import RecommendedStories from "./components/Story/RecommendedStories";
+import SingleStory from './components/SingleStory'
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path='/' exact={true}>
             <RecommendedStories />
+          </Route>
+          <Route path='/stories/:storyId'>
+              <SingleStory />
           </Route>
         </Switch>
       )}

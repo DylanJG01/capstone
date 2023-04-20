@@ -33,6 +33,14 @@ def recommended_stories():
     return return_item, 200
     return { }, 200
 
+@story_routes.route('/<int:id>/')
+def story(id):
+    """
+    Query for a story by id and returns that story in a dictionary
+    """
+    story = Story.query.get(id)
+
+    return story.to_dict()
 
 @story_routes.route('/')
 def stories():
@@ -41,11 +49,3 @@ def stories():
     """
     stories = Story.query.all()
     return {"stories" : [story.to_dict() for story in stories]}
-
-@story_routes.route('/<int:id>')
-def story(id):
-    """
-    Query for a story by id and returns that story in a dictionary
-    """
-    story = Story.query.get(id)
-    return story.to_dict()
