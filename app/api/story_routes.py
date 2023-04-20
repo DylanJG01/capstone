@@ -22,10 +22,16 @@ def recommended_stories():
             return_item[tag] = [story.to_dict() for story in stories]
         return  return_item, 200
 
-    user = User.query.get(current_user.id)\
-          .join(Tag, User.tags)
-
-    return {"whaddup" : thug}
+    user = User.query.get(current_user.id)
+    return_item = {}
+    for tag in user.tags:
+        stories = Story.query\
+            .join(Tag, Story.tags)\
+            .filter((Tag.name == tag.name))\
+            .limit(5)
+        return_item[tag.name] = [story.to_dict() for story in stories]
+    return return_item, 200
+    return { }, 200
 
 
 @story_routes.route('/')

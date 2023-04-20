@@ -25,7 +25,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path='/recommended'>
+          <Route path='/' exact={true}>
             <RecommendedStories />
           </Route>
         </Switch>
