@@ -10,9 +10,10 @@ export const storiesForUser = (stories) => ({
 
 export const fetchStoriesForUser = () => async dispatch => {
     const res = await fetch('/api/stories/recommended')
-
+        console.log("RES?", res)
     if (res.ok){
         const stories = await res.json()
+        console.log("STORIES", stories)
         dispatch(storiesForUser(stories))
     }
 }
@@ -24,6 +25,7 @@ export default function reducer(state = initialState, action) {
         case GET_STORIES_BY_USER_TAG: {
             const newState = {...state}
             newState.storiesForUser = action.stories
+            console.log("NEWSTATE", newState)
             return {...newState}
         }
 		default:

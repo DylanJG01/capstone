@@ -11,6 +11,7 @@ export default function RecommendedStories(){
     useEffect(() => {
         dispatch(fetchStoriesForUser())
     },[dispatch])
+    console.log("STORIES", stories)
     if (!stories) return null
 
     console.log((stories))
