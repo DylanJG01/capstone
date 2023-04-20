@@ -5,66 +5,79 @@ from random import randrange
 def seed_stories():
     story1 = Story(
         user_id = 1,
-        cover = 'https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg'
+        cover = 'https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg',
+        published = True,
     )
     story2 = Story(
         user_id = 1,
-        cover = 'https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg'
+        cover = 'https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg',
+        published = True,
     )
     stories = [
         Story(
             user_id = 1,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #0
         Story(
             user_id = 1,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #1
         Story(
             user_id = 1,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #2
         Story(
             user_id = 1,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #3
         Story(
             user_id = 1,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #4
         Story(
             user_id = 2,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #5
         Story(
             user_id = 2,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #6
         Story(
             user_id = 2,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #7
         Story(
             user_id = 2,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #8
         Story(
             user_id = 2,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #9
         Story(
             user_id = 2,
             cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
+            published = False,
             description="A testing description"
         ), #10
     ]

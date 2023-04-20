@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Story, User, Tag, story_tags, Chapter
+from app.forms import story_form
 from ..models.db import db
 
 story_routes = Blueprint('stories', __name__)
@@ -33,6 +34,24 @@ def recommended_stories():
     return return_item, 200
     return { }, 200
 
+@story_routes.route('/<int:id>')
+def story(id):
+    """
+    Query for a story by id and returns that story in a dictionary
+    """
+    story = Story.query.get(id)
+
+    return story.to_dict()
+
+@story_routes.route('/')
+def stories():
+    """
+    Query for all stories and returns them in a list of story dictionaries
+    """
+    stories = Story.query.all()
+    return {"stories" : [story.to_dict() for story in stories]}
+
+
 @story_routes.route('/<int:sid>/chapter/<int:cid>')
 def story_and_chapter(sid, cid):
     """
@@ -61,19 +80,15 @@ def story_and_chapter(sid, cid):
     print(story.user)
     return return_object, 200
 
-@story_routes.route('/<int:id>/')
-def story(id):
-    """
-    Query for a story by id and returns that story in a dictionary
-    """
-    story = Story.query.get(id)
+@story_routes.route('/', methods=['POST','PUT','DELETE'])
+def create_edit_delete_story(id):
+    if request.method == 'POST':
+        form = story_form(**form.data)
+        form['csrf_token'].data = request.cookies['csrf_token']
+        pass
+    if request.method == 'PUT':
+        pass
+    if request.method == 'DELETE':
+        pass
 
-    return story.to_dict()
-
-@story_routes.route('/')
-def stories():
-    """
-    Query for all stories and returns them in a list of story dictionaries
-    """
-    stories = Story.query.all()
-    return {"stories" : [story.to_dict() for story in stories]}
+    return {}

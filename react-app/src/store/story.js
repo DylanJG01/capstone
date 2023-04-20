@@ -3,11 +3,35 @@ const GET_STORY = "stories/GET_STORY";
 const GET_STORIES_BY_USER_TAG = "stories/GET_STORIES_FOR_USER"
 
 const GET_CHAPTER = "chapters/GET_CHAPTER"
+const POST_STORY = "stories/POST_STORY"
 
-export const storyWithChapter = story => ({
+export const postStory = story => {
+    return {
+        type: POST_STORY,
+        story
+    }
+}
+
+export const storyWithChapter = story => {
+    return {
     type: GET_CHAPTER,
     story
-})
+    }
+}
+
+export const storiesForUser = (stories) => {
+    return {
+	type: GET_STORIES_BY_USER_TAG,
+	stories
+    }
+};
+
+export const singleStory = story => {
+    return {
+    type: GET_STORY,
+    story
+    }
+}
 
 export const fetchChapter = (chapterId, storyId ) => async dispatch => {
     const res = await fetch(`/api/stories/${storyId}/chapter/${chapterId}`)
@@ -18,16 +42,6 @@ export const fetchChapter = (chapterId, storyId ) => async dispatch => {
         dispatch(storyWithChapter(story))
     }
 }
-
-export const storiesForUser = (stories) => ({
-	type: GET_STORIES_BY_USER_TAG,
-	stories
-});
-
-export const singleStory = story => ({
-    type: GET_STORY,
-    story
-})
 
 export const fetchSingleStory = storyId => async dispatch => {
     const res = await fetch(`/api/stories/${storyId}`)
@@ -45,6 +59,11 @@ export const fetchStoriesForUser = () => async dispatch => {
         dispatch(storiesForUser(stories))
     }
 }
+
+export const fetchPostStory = (data) => async dispatch => {
+
+}
+
 export const initialState = { storiesForUser: { }, storiesByUser: {}, singleStory: { chapter: {} } };
 
 export default function reducer(state = initialState, action) {

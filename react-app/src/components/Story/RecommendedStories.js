@@ -9,8 +9,7 @@ import './Story.css'
 export default function RecommendedStories(){
 	const [user, stories] = useSelector(state => [state.session.user, state.stories.storiesForUser]);
     const dispatch = useDispatch()
-    const [showMenu, setShowMenu] = useState(false);
-    const { setModalContent, setOnModalClose, closeModal } = useModal();
+    const { setModalContent, closeModal } = useModal();
     useEffect(() => {
         dispatch(fetchStoriesForUser())
     },[dispatch, user])

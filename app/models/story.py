@@ -14,6 +14,8 @@ class Story(db.Model):
     description = db.Column(db.String(1000), default="")
     status = db.Column(db.Boolean, default=False)
     cost = db.Column(db.Integer, default=0)
+    published = db.Column(db.Boolean, default=False)
+    mature = db.Column(db.Boolean, default=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     user = db.relationship("User", back_populates="stories")
