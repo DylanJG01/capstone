@@ -1,0 +1,15 @@
+.story-img-li {
+    display: flex;
+    height: 10rem;
+    width: 10rem;
+    text-decoration: none;
+}
+
+.story-cover-img {
+    height: 100px;
+    width: 100px;
+}
+
+.recommended-ul {
+    display: flex;
+}
