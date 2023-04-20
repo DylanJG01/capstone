@@ -8,7 +8,7 @@ export default function StoryModal({story, closeModal}) {
     const history = useHistory()
 
     const toTheStory = () => {
-        history.push(`/stories/${story.id}`)
+        history.push(`/stories/${story.id}/chapter/1`)
         closeModal()
     }
 

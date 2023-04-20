@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import RecommendedStories from "./components/Story/RecommendedStories";
 import SingleStory from './components/SingleStory'
+import Chapter from './components/Chapter'
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,10 @@ function App() {
           <Route path='/' exact={true}>
             <RecommendedStories />
           </Route>
-          <Route path='/stories/:storyId'>
+          <Route path='/stories/:storyId/chapter/:chapterId' exact={true}>
+              <Chapter />
+          </Route>
+          <Route path='/stories/:storyId' exact={true}>
               <SingleStory />
           </Route>
         </Switch>
