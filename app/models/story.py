@@ -16,7 +16,7 @@ class Story(db.Model):
     cost = db.Column(db.Integer, default=0)
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-
+    user = db.relationship("User", back_populates="stories")
     tags = db.relationship('Tag', secondary=story_tags, backref='stories', lazy=True)
 
     def to_dict(self):

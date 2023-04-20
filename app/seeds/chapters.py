@@ -12,7 +12,12 @@ def seed_chapters():
         story_id=1
     )
     chapter3 = Chapter(
-        body="Testing test",
+        body="""
+        TEST
+        TEST
+        TEST
+        TEST
+        """,
         story_id=2
     )
     db.session.add(chapter1)

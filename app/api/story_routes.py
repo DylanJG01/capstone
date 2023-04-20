@@ -41,22 +41,24 @@ def story_and_chapter(sid, cid):
     """
 
     story = Story.query.get(sid) # Get me dat stori
-    chapter = story.chapters[cid - 1] # WE ARE ASSUMING THAT CHAPTERS WILL ALWAYS BE STORED
-                                      # SEQUENTIALLY. THEY ARE 0-INDEXED, WHICH IS WHY THE -1
-                                      # THIS THE WORK AROUND TO EDITING THE MODELS.
     return_object = story.to_dict()
+
+    print (cid)
+    try:
+        chapter = story.chapters[cid - 1]
+    except IndexError as e:
+        return_object['chapter'] = {'title' : "Doesn't Exist",
+                                    'body': """
+                                    Either an error occured on the backend, oops!
+                                    Or you're going to places you shouldn't!
+                                    There is no chapter here.
+                                    """}
+        return return_object, 200
+
+
     return_object['chapter'] = chapter.to_dict()
-    # print(story.user)
-    # print(story.user)
-    # print(story.user)
-    # print(story.user)
-    # print(story.user)
-    # print(story.user)
-    # print(story.user)
-    # print(story.user)
-    # print(story.user)
-    # print(story.user)
-    print(story.user_id)
+
+    print(story.user)
     return return_object, 200
 
 @story_routes.route('/<int:id>/')

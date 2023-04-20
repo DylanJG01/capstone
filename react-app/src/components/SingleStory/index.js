@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleStory } from '../../store/story';
+import { fetchChapter, fetchSingleStory } from '../../store/story';
 import { useModal } from '../../context/Modal';
 import { useParams } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ export default function SingleStory(){
     console.log(params)
 
     useEffect(() => {
-        dispatch(fetchSingleStory(params.storyId))
+        dispatch(fetchChapter( params.chapterId, params.storyId, ))
     },[dispatch, user])
     console.log("STORIES", story)
     if (!story) return null

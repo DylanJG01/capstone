@@ -13,7 +13,7 @@ export default function Chapter(){
     console.log(params)
 
     useEffect(() => {
-        dispatch(fetchChapter(params.storyId, params.chapterId))
+        dispatch(fetchChapter( params.chapterId, params.storyId,))
     },[dispatch, user])
     console.log("STORIES", story)
     if (!story) return null
