@@ -118,12 +118,8 @@ def get_users_stories():
     """
     Get all a user's stories.
     """
-    user = User.query.get(current_user.id)
-    print (user.stories)
-    print (user.stories)
-    print (user.stories)
-    print (user.stories)
-    print (user.stories)
-    print (user.stories)
+    stories = Story.query.filter_by(user_id=current_user.id).all()
 
-    return {}
+    return_obj = {'storiesByUser' : [story.to_dict() for story in stories]}
+
+    return return_obj, 200

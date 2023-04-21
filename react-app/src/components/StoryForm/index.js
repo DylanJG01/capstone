@@ -63,7 +63,7 @@ export default function StoryFormPage() {
             onChange={() => changeRating()}
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Post Story</button>
       </form>
     </>
   );

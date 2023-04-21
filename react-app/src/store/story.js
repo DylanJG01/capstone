@@ -1,7 +1,7 @@
 // constants
 const GET_STORY = "stories/GET_STORY";
 const GET_STORIES_BY_USER_TAG = "stories/GET_STORIES_FOR_USER"
-
+const GET_USERS_STORIES = "stories/GET_USERS_STORIES"
 const GET_CHAPTER = "chapters/GET_CHAPTER"
 const POST_STORY = "stories/POST_STORY"
 
@@ -30,6 +30,13 @@ export const singleStory = story => {
     return {
     type: GET_STORY,
     story
+    }
+}
+
+export const usersStories = stories => {
+    return {
+        type: GET_USERS_STORIES,
+        stories
     }
 }
 
@@ -72,6 +79,15 @@ export const fetchPostStory = (data) => async dispatch => {
     }
 }
 
+export const fetchUsersStories = () => async dispatch => {
+    const res = await fetch('/api/stories/mine')
+
+    if (res.ok){
+        const stories = await res.json()
+        dispatch(usersStories(stories))
+    }
+}
+
 export const initialState = { storiesForUser: { }, storiesByUser: {}, singleStory: { chapter: {} } };
 
 export default function reducer(state = initialState, action) {
@@ -85,6 +101,11 @@ export default function reducer(state = initialState, action) {
             const newState = {...state}
             newState.storiesForUser = action.stories
             // console.log("NEWSTATE", newState)
+            return {...newState}
+        }
+        case GET_USERS_STORIES: {
+            const newState = {...state}
+            newState.storiesByUser = action.stories.storiesByUser
             return {...newState}
         }
         case GET_CHAPTER : {
