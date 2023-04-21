@@ -9,6 +9,7 @@ import RecommendedStories from "./components/Story/RecommendedStories";
 import SingleStory from './components/SingleStory'
 import Chapter from './components/Chapter'
 import StoryFormPage from "./components/StoryForm";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,16 +33,16 @@ function App() {
             <RecommendedStories />
           </Route>
           <Route path='/stories/:storyId/chapter/:chapterId' exact={true}>
-              <Chapter />
+            <Chapter />
           </Route>
           <Route path='/stories/:storyId' exact={true}>
-              <SingleStory />
+            <SingleStory />
           </Route>
           <Route path='/myworks/new' exact={true}>
-              <StoryFormPage />
+            <StoryFormPage />
           </Route>
           <Route path='/user/'>
-            STUFF
+            <UserProfile />
           </Route>
         </Switch>
       )}

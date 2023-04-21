@@ -97,9 +97,8 @@ def create_story():
 @story_routes.route('/<int:id>', methods=['PUT', 'DELETE'])
 def delete_edit_story(id):
     """
-    EDIT AND DELETE STORY ROUTES
+    Edit or delete a story details.
     """
-    pass
     if request.method == "DELETE":
         story = Story.query.get(id)
         db.session.deleted(story)
@@ -112,3 +111,19 @@ def delete_edit_story(id):
             form.populate_obj(story_to_edit)
             db.session.commit()
             return
+
+@story_routes.route('/mine')
+@login_required
+def get_users_stories():
+    """
+    Get all a user's stories.
+    """
+    user = User.query.get(current_user.id)
+    print (user.stories)
+    print (user.stories)
+    print (user.stories)
+    print (user.stories)
+    print (user.stories)
+    print (user.stories)
+
+    return {}
