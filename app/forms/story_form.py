@@ -10,5 +10,4 @@ class StoryForm(FlaskForm):
     status = BooleanField('status')
     cost = IntegerField('cost')
     published = BooleanField('published')
-
-    user_id = IntegerField('user_id', DataRequired())
+    user_id = IntegerField('user_id', [DataRequired()])

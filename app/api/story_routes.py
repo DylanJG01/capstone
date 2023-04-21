@@ -1,11 +1,10 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Story, User, Tag, story_tags, Chapter
-from app.forms import story_form
+from app.forms.story_form import StoryForm
 from ..models.db import db
 
 story_routes = Blueprint('stories', __name__)
-
 
 @story_routes.route('/recommended')
 def recommended_stories():
@@ -40,8 +39,10 @@ def story(id):
     Query for a story by id and returns that story in a dictionary
     """
     story = Story.query.get(id)
-
-    return story.to_dict()
+    return_obj = story.to_dict()
+    for chapter in story.chapters:
+        print(chapter.to_dict())
+    return return_obj, 200
 
 @story_routes.route('/')
 def stories():
@@ -62,7 +63,6 @@ def story_and_chapter(sid, cid):
     story = Story.query.get(sid) # Get me dat stori
     return_object = story.to_dict()
 
-    print (cid)
     try:
         chapter = story.chapters[cid - 1]
     except IndexError as e:
@@ -73,22 +73,42 @@ def story_and_chapter(sid, cid):
                                     There is no chapter here.
                                     """}
         return return_object, 200
-
-
     return_object['chapter'] = chapter.to_dict()
-
-    print(story.user)
     return return_object, 200
 
-@story_routes.route('/', methods=['POST','PUT','DELETE'])
-def create_edit_delete_story(id):
-    if request.method == 'POST':
-        form = story_form(**form.data)
+@story_routes.route('/', methods=['POST'])
+def create_story():
+        """
+        POST A NEW STORY! AND MAKE A NEW CHAPTER ATTACHED TO IT
+        """
+        form = StoryForm()
         form['csrf_token'].data = request.cookies['csrf_token']
-        pass
-    if request.method == 'PUT':
-        pass
-    if request.method == 'DELETE':
-        pass
+        if form.validate_on_submit():
+            del form['csrf_token']
+            new_story = Story(**form.data)
+            db.session.add(new_story)
+            db.session.flush()
+            new_chapter = Chapter(story_id=new_story.id)
+            db.session.add(new_chapter)
+            db.session.commit()
+            return {'story': new_story.to_dict(), 'chapter': new_chapter.to_dict()}, 200
+        return {}, 500
 
-    return {}
+@story_routes.route('/<int:id>', methods=['PUT', 'DELETE'])
+def delete_edit_story(id):
+    """
+    EDIT AND DELETE STORY ROUTES
+    """
+    pass
+    if request.method == "DELETE":
+        story = Story.query.get(id)
+        db.session.deleted(story)
+        return {"message": "story deleted"}, 204
+    if request.method == "PUT":
+        form = StoryForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            story_to_edit = Story.query.get(id)
+            form.populate_obj(story_to_edit)
+            db.session.commit()
+            return

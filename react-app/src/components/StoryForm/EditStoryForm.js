@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostStory } from "../../store/story";
 
-export default function StoryFormPage() {
+export default function EditStoryForm() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
+  const [user, story] = useSelector((state) => [state.session.user, state.stories.Singl]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
