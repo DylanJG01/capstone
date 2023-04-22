@@ -10,6 +10,8 @@ import SingleStory from './components/SingleStory'
 import Chapter from './components/Chapter'
 import StoryFormPage from "./components/StoryForm";
 import UserProfile from "./components/UserProfile";
+import MyWorks from './components/MyWorks'
+import EditStoryForm from "./components/StoryForm/EditStoryForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,14 +25,14 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/' exact={true}>
+            <RecommendedStories />
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-          </Route>
-          <Route path='/' exact={true}>
-            <RecommendedStories />
           </Route>
           <Route path='/stories/:storyId/chapter/:chapterId' exact={true}>
             <Chapter />
@@ -41,7 +43,13 @@ function App() {
           <Route path='/myworks/new' exact={true}>
             <StoryFormPage />
           </Route>
-          <Route path='/user/'>
+          <Route path='/myworks/:storyId' exact={true}>
+            <EditStoryForm />
+          </Route>
+          <Route path='/myworks' exact={true}>
+            <MyWorks />
+          </Route>
+          <Route path='/user/:username'>
             <UserProfile />
           </Route>
         </Switch>

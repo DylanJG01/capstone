@@ -4,7 +4,17 @@ const GET_STORIES_BY_USER_TAG = "stories/GET_STORIES_FOR_USER"
 const GET_USERS_STORIES = "stories/GET_USERS_STORIES"
 const GET_CHAPTER = "chapters/GET_CHAPTER"
 const POST_STORY = "stories/POST_STORY"
+const DELETE_STORY = "stories/DELETE_STORY"
+const PUT_STORY = "stories/PUT_STORY"
 
+export const putStory = story => ({
+    type: PUT_STORY,
+    story
+})
+export const deleteStory = story => ({
+    type: DELETE_STORY,
+    story
+})
 export const postStory = story => {
     return {
         type: POST_STORY,
@@ -78,44 +88,71 @@ export const fetchPostStory = (data) => async dispatch => {
         dispatch(postStory(newStory))
     }
 }
+export const fetchPutStory = (data, storyId ) => async dispatch => {
+    const res = await fetch(`/api/stories/${storyId}`, {
+        method : "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    })
+    if (res.ok){
+        const newStory = await res.json()
+        dispatch(putStory(newStory))
+    }
+}
 
-export const fetchUsersStories = () => async dispatch => {
-    const res = await fetch('/api/stories/mine')
+export const fetchUsersStories = (username) => async dispatch => {
+    const res = await fetch(`/api/stories/${username}`)
 
     if (res.ok){
         const stories = await res.json()
         dispatch(usersStories(stories))
     }
 }
+export const fetchDeleteStory = (storyId) => async dispatch => {
+    const res = await fetch(`/api/stories/${storyId}`, {
+        method : "DELETE",
+        headers: {"Content-Type": "application/json"},
+    })
+
+    if (res.ok){
+        dispatch(deleteStory(storyId))
+    }
+}
 
 export const initialState = { storiesForUser: { }, storiesByUser: {}, singleStory: { chapter: {} } };
 
 export default function reducer(state = initialState, action) {
+    const newState = {...state}
 	switch (action.type) {
         case GET_STORY : {
-            const newState = {...state}
             newState.singleStory = action.story
             return {...newState}
         }
         case GET_STORIES_BY_USER_TAG: {
-            const newState = {...state}
             newState.storiesForUser = action.stories
             // console.log("NEWSTATE", newState)
             return {...newState}
         }
         case GET_USERS_STORIES: {
-            const newState = {...state}
-            newState.storiesByUser = action.stories.storiesByUser
+            newState.storiesByUser = action.stories
             return {...newState}
         }
         case GET_CHAPTER : {
-            const newState = {...state}
             newState.singleStory = action.story
             return {...newState}
         }
         case POST_STORY : {
-            const newState = {...state}
             // console.log("!!!!", newState)
+            //Do I need to update state when I am redirecting to another page that is going
+            //to call a dispatch to update the store and override that value anyway?
+            return {...newState}
+        }
+        case DELETE_STORY : {
+            delete newState.storiesByUser[action.story]
+            return {...newState}
+        }
+        case PUT_STORY : {
+            newState.singleStory = action.story
             return {...newState}
         }
 		default:

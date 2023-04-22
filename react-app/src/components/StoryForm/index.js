@@ -8,7 +8,7 @@ export default function StoryFormPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
-  const [rating, setRating] = useState("")
+  const [mature, setMature] = useState("")
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
@@ -20,7 +20,7 @@ export default function StoryFormPage() {
     }
 
   const changeRating = () => {
-    rating ? setRating(false) : setRating(true)
+    mature ? setMature(false) : setMature(true)
   }
 
   return (
@@ -56,10 +56,10 @@ export default function StoryFormPage() {
           />
         </label>
         <label>
-          Rating
+          mature
           <input
             type="checkbox"
-            value={rating}
+            value={mature}
             onChange={() => changeRating()}
           />
         </label>

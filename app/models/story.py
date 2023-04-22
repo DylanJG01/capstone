@@ -29,5 +29,7 @@ class Story(db.Model):
             'description': self.description,
             'status': self.status,
             'cost': self.cost,
+            'mature': self.mature,
             'user_id': self.user_id,
+
         }

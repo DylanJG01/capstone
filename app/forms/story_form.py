@@ -11,3 +11,4 @@ class StoryForm(FlaskForm):
     cost = IntegerField('cost')
     published = BooleanField('published')
     user_id = IntegerField('user_id', [DataRequired()])
+    mature = BooleanField('mature')

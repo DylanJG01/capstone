@@ -31,7 +31,6 @@ def recommended_stories():
             .limit(5)
         return_item[tag.name] = [story.to_dict() for story in stories]
     return return_item, 200
-    return { }, 200
 
 @story_routes.route('/<int:id>')
 def story(id):
@@ -40,18 +39,10 @@ def story(id):
     """
     story = Story.query.get(id)
     return_obj = story.to_dict()
+    return_obj['chapters'] = {}
     for chapter in story.chapters:
-        print(chapter.to_dict())
+        return_obj['chapters'][chapter.id] = chapter.to_dict()
     return return_obj, 200
-
-@story_routes.route('/')
-def stories():
-    """
-    Query for all stories and returns them in a list of story dictionaries
-    """
-    stories = Story.query.all()
-    return {"stories" : [story.to_dict() for story in stories]}
-
 
 @story_routes.route('/<int:sid>/chapter/<int:cid>')
 def story_and_chapter(sid, cid):
@@ -65,7 +56,7 @@ def story_and_chapter(sid, cid):
 
     try:
         chapter = story.chapters[cid - 1]
-    except IndexError as e:
+    except IndexError:
         return_object['chapter'] = {'title' : "Doesn't Exist",
                                     'body': """
                                     Either an error occured on the backend, oops!
@@ -101,7 +92,8 @@ def delete_edit_story(id):
     """
     if request.method == "DELETE":
         story = Story.query.get(id)
-        db.session.deleted(story)
+        db.session.delete(story)
+        db.session.commit()
         return {"message": "story deleted"}, 204
     if request.method == "PUT":
         form = StoryForm()
@@ -110,16 +102,32 @@ def delete_edit_story(id):
             story_to_edit = Story.query.get(id)
             form.populate_obj(story_to_edit)
             db.session.commit()
-            return
 
-@story_routes.route('/mine')
-@login_required
-def get_users_stories():
+            return_obj = story_to_edit.to_dict()
+            return_obj['chapters'] = {}
+            for chapter in story_to_edit.chapters:
+                return_obj['chapters'][chapter.id] = chapter.to_dict()
+
+            return return_obj, 200
+    return {"falure" : "FAILURE"}
+
+@story_routes.route('/<string:username>')
+def get_stories_by_user(username):
     """
-    Get all a user's stories.
+    Get all of a user's stories.
     """
-    stories = Story.query.filter_by(user_id=current_user.id).all()
+    user = User.query.filter_by(username=username).first()
+    another_obj = {}
+    for story in user.stories:
+        another_obj[story.id] = story.to_dict()
+    # print(another_obj)
+    return another_obj, 200
 
-    return_obj = {'storiesByUser' : [story.to_dict() for story in stories]}
 
-    return return_obj, 200
+@story_routes.route('/')
+def stories():
+    """
+    Query for all stories and returns them in a list of story dictionaries
+    """
+    stories = Story.query.all()
+    return {"stories" : [story.to_dict() for story in stories]}
