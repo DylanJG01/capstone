@@ -39,9 +39,9 @@ def story(id):
     """
     story = Story.query.get(id)
     return_obj = story.to_dict()
-    return_obj['chapters'] = {}
+    return_obj['allChapters'] = {}
     for chapter in story.chapters:
-        return_obj['chapters'][chapter.id] = chapter.to_dict()
+        return_obj['allChapters'][chapter.id] = chapter.to_dict()
     return return_obj, 200
 
 @story_routes.route('/<int:sid>/chapter/<int:cid>')
@@ -57,14 +57,14 @@ def story_and_chapter(sid, cid):
     try:
         chapter = story.chapters[cid - 1]
     except IndexError:
-        return_object['chapter'] = {'title' : "Doesn't Exist",
+        return_object['singleChapter'] = {'title' : "Doesn't Exist",
                                     'body': """
                                     Either an error occured on the backend, oops!
                                     Or you're going to places you shouldn't!
                                     There is no chapter here.
                                     """}
         return return_object, 200
-    return_object['chapter'] = chapter.to_dict()
+    return_object['singleChapter'] = chapter.to_dict()
     return return_object, 200
 
 @story_routes.route('/', methods=['POST'])
@@ -82,7 +82,9 @@ def create_story():
             new_chapter = Chapter(story_id=new_story.id)
             db.session.add(new_chapter)
             db.session.commit()
-            return {'story': new_story.to_dict(), 'chapter': new_chapter.to_dict()}, 200
+            return_obj = new_story.to_dict()
+            return_obj['singleChapter'] = new_chapter.to_dict()
+            return return_obj, 200
         return {}, 500
 
 @story_routes.route('/<int:id>', methods=['PUT', 'DELETE'])
@@ -104,9 +106,9 @@ def delete_edit_story(id):
             db.session.commit()
 
             return_obj = story_to_edit.to_dict()
-            return_obj['chapters'] = {}
+            return_obj['allChapters'] = {}
             for chapter in story_to_edit.chapters:
-                return_obj['chapters'][chapter.id] = chapter.to_dict()
+                return_obj['allChapters'][chapter.id] = chapter.to_dict()
 
             return return_obj, 200
     return {"falure" : "FAILURE"}

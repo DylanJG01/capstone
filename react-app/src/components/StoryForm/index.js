@@ -4,7 +4,7 @@ import { fetchPostStory } from "../../store/story";
 
 export default function StoryFormPage() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
+  const [user, story] = useSelector((state) => [state.session.user, state.stories.singleStory]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
@@ -13,10 +13,10 @@ export default function StoryFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(fetchPostStory({title, description, tags, 'user_id': user.id}))
+    let x = await dispatch(fetchPostStory({title, description, tags, 'user_id': user.id}))
+    console.log(x)
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
-
     }
 
   const changeRating = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {fetchPutStory, fetchSingleStory, } from "../../store/story";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 export default function EditStoryForm() {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export default function EditStoryForm() {
   const [loaded, setLoaded] = useState(false)
   const [tab, setTab] = useState('details')
   const params = useParams()
+  const history = useHistory()
 
   const storyId = parseInt(params.storyId.slice(0, 2))
   console.log(story)
@@ -44,6 +45,9 @@ export default function EditStoryForm() {
   return (
 
     <>
+        <div>
+            <button onClick={() => history.push('/myworks')}>Back</button>
+        </div>
         <div>
             <button onClick={() =>  setTab('details')}>Story Details</button>
             <button onClick={() =>  setTab('contents')}>Table of Contents</button>
@@ -92,9 +96,12 @@ export default function EditStoryForm() {
         </form>
         </>)}
         {
-            tab === "details" && (<>
-                {<button onClick={() => {/*+ New Port*/}}>New Part</button>}
-            </>)
+            tab === "contents" ? (<>
+                {/* <button onClick={() => console.log("+ New Port")}>New Part</button> */}
+                {story.chapters && Object.values(story.chapters).map(chapter => (
+                    <li className="chapter-li">{chapter.title}</li>
+                ))}
+            </>) : null
         }
     </>
   );

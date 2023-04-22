@@ -85,7 +85,9 @@ export const fetchPostStory = (data) => async dispatch => {
     })
     if (res.ok){
         const newStory = await res.json()
+        console.log("HIT ME!!!")
         dispatch(postStory(newStory))
+        return await res.json()
     }
 }
 export const fetchPutStory = (data, storyId ) => async dispatch => {
@@ -119,7 +121,7 @@ export const fetchDeleteStory = (storyId) => async dispatch => {
     }
 }
 
-export const initialState = { storiesForUser: { }, storiesByUser: {}, singleStory: { chapter: {} } };
+export const initialState = { storiesForUser: { }, storiesByUser: {}, singleStory: { allChapters: {}, singleChapter: {} } };
 
 export default function reducer(state = initialState, action) {
     const newState = {...state}
@@ -142,9 +144,7 @@ export default function reducer(state = initialState, action) {
             return {...newState}
         }
         case POST_STORY : {
-            // console.log("!!!!", newState)
-            //Do I need to update state when I am redirecting to another page that is going
-            //to call a dispatch to update the store and override that value anyway?
+            newState.singleStory ={ ...action.story}
             return {...newState}
         }
         case DELETE_STORY : {
