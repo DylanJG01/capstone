@@ -7,6 +7,7 @@ class Chapter(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), default="Untitled")
     body = db.Column(db.Text(), default="")
     cost = db.Column(db.Integer, default=0)
     story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('stories.id')))
@@ -16,6 +17,7 @@ class Chapter(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'title': self.title,
             'body': self.body,
             'cost': self.cost,
             'story_id': self.story_id

@@ -9,9 +9,10 @@ export default function EditStoryForm() {
   const [title, setTitle] = useState(story?.title || "");
   const [description, setDescription] = useState(story?.description || "");
   const [tags, setTags] = useState(story?.tags || "");
-  const [mature, setMature] = useState(story?.mature || false)
+  const [mature, setMature] = useState(story?.mature ?? false)
   const [errors, setErrors] = useState([]);
   const [loaded, setLoaded] = useState(false)
+  const [tab, setTab] = useState('details')
   const params = useParams()
 
   const storyId = parseInt(params.storyId.slice(0, 2))
@@ -34,17 +35,20 @@ export default function EditStoryForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(mature)
-    console.log(story.mature)
-    dispatch(fetchPutStory({title, description, tags, 'user_id': user.id, mature: mature}, storyId))
+    dispatch(fetchPutStory({title, description, tags, 'user_id': user.id, mature}, storyId))
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
     }
 
   if (!story) (<>One moment, love</>)
   return (
+
     <>
-         {true && (<>
+        <div>
+            <button onClick={() =>  setTab('details')}>Story Details</button>
+            <button onClick={() =>  setTab('contents')}>Table of Contents</button>
+        </div>
+         { tab === "details" && (<>
         <h3>Story Details</h3>
         <form onSubmit={handleSubmit}>
             <ul>
@@ -87,6 +91,11 @@ export default function EditStoryForm() {
             <button type="submit">Save</button>
         </form>
         </>)}
+        {
+            tab === "details" && (<>
+                {<button onClick={() => {/*+ New Port*/}}>New Part</button>}
+            </>)
+        }
     </>
   );
 }
