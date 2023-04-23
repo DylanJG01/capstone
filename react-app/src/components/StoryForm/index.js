@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostStory } from "../../store/story";
+import { useHistory } from "react-router-dom/";
+import { titleToSword } from "../_helpers";
+
 
 export default function StoryFormPage() {
   const dispatch = useDispatch();
@@ -10,11 +13,12 @@ export default function StoryFormPage() {
   const [tags, setTags] = useState("");
   const [mature, setMature] = useState("")
   const [errors, setErrors] = useState([]);
-
+  const history = useHistory()
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let x = await dispatch(fetchPostStory({title, description, tags, 'user_id': user.id}))
-    console.log(x)
+    let newStory = await dispatch(fetchPostStory({title, description, tags, 'user_id': user.id}))
+    history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/${newStory.singleChapter.id}-${titleToSword(newStory.singleChapter.title)}`)
+    console.log(newStory)
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
     }

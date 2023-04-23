@@ -22,7 +22,7 @@ export default function Chapter(){
 
 	return (
         <>
-        {story.chapter?.body}
+        {story.singleChapter?.body}
         </>
 	);
 }

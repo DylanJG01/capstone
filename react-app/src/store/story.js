@@ -87,7 +87,7 @@ export const fetchPostStory = (data) => async dispatch => {
         const newStory = await res.json()
         console.log("HIT ME!!!")
         dispatch(postStory(newStory))
-        return await res.json()
+        return newStory
     }
 }
 export const fetchPutStory = (data, storyId ) => async dispatch => {
@@ -127,32 +127,55 @@ export default function reducer(state = initialState, action) {
     const newState = {...state}
 	switch (action.type) {
         case GET_STORY : {
-            newState.singleStory = action.story
-            return {...newState}
+            return {
+                ...state,
+                singleStory: action.story,
+                storiesByUser: {...state.storiesByUser}
+            }
         }
         case GET_STORIES_BY_USER_TAG: {
             newState.storiesForUser = action.stories
-            // console.log("NEWSTATE", newState)
+            const singleStory = {}
+            singleStory.allChapters = {...state.singleStory.allChapters}
+            singleStory.singleChapter = {...state.singleStory.singleChapter}
+            newState.singleStory = {...singleStory}
             return {...newState}
         }
         case GET_USERS_STORIES: {
             newState.storiesByUser = action.stories
-            return {...newState}
+            return {
+                ...state,
+                singleStory: {...state.singleStory},
+                storiesByUser: action.stories
+            }
         }
         case GET_CHAPTER : {
-            newState.singleStory = action.story
-            return {...newState}
+            return {
+                ...state,
+                singleStory: action.story,
+                storiesByUser: {...state.storiesByUser}
+            }
         }
         case POST_STORY : {
-            newState.singleStory ={ ...action.story}
-            return {...newState}
+
+            newState.storiesByUser = {...state.storiesByUser}
+            return {
+                ...state,
+                singleStory: {...action.story},
+                storiesByUser: {...state.storiesByUser}
+            }
         }
         case DELETE_STORY : {
+            newState.storiesByUser = {...state.storiesByUser}
+            newState.singleStory = {...state.singleStory}
             delete newState.storiesByUser[action.story]
-            return {...newState}
+            return {
+
+            }
         }
         case PUT_STORY : {
             newState.singleStory = action.story
+            newState.storiesByUser = {...state.storiesByUser}
             return {...newState}
         }
 		default:

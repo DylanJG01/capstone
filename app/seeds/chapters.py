@@ -20,6 +20,65 @@ def seed_chapters():
         """,
         story_id=2
     )
+    chapters = [
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=3,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=4,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=5,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=6,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=7,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=8,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=9,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=10,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=11,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=12,
+        ),
+        Chapter(
+        title="untitled",
+        body="once there was a twice and then there were a many and then none. Huzzah.",
+        story_id=13,
+        )
+    ]
+
+    [db.session.add(chapter) for chapter in chapters]
     db.session.add(chapter1)
     db.session.add(chapter2)
     db.session.add(chapter3)

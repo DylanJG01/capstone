@@ -54,18 +54,13 @@ def story_and_chapter(sid, cid):
     story = Story.query.get(sid) # Get me dat stori
     return_object = story.to_dict()
 
-    try:
-        chapter = story.chapters[cid - 1]
-    except IndexError:
-        return_object['singleChapter'] = {'title' : "Doesn't Exist",
-                                    'body': """
-                                    Either an error occured on the backend, oops!
-                                    Or you're going to places you shouldn't!
-                                    There is no chapter here.
-                                    """}
-        return return_object, 200
-    return_object['singleChapter'] = chapter.to_dict()
+    for chapter in story.chapters:
+        if chapter.id == cid:
+            return_object['singleChapter'] = chapter.to_dict()
+            return return_object, 200
+
     return return_object, 200
+    return {}, 404
 
 @story_routes.route('/', methods=['POST'])
 def create_story():
@@ -88,6 +83,7 @@ def create_story():
         return {}, 500
 
 @story_routes.route('/<int:id>', methods=['PUT', 'DELETE'])
+@login_required
 def delete_edit_story(id):
     """
     Edit or delete a story details.

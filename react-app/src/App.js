@@ -12,7 +12,7 @@ import StoryFormPage from "./components/StoryForm";
 import UserProfile from "./components/UserProfile";
 import MyWorks from './components/MyWorks'
 import EditStoryForm from "./components/StoryForm/EditStoryForm";
-
+import EditChapter from "./components/Chapter/EditChapter"
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -42,6 +42,9 @@ function App() {
           </Route>
           <Route path='/myworks/new' exact={true}>
             <StoryFormPage />
+          </Route>
+          <Route path='/myworks/:storyId/:chapterId' exact={true}>
+            <EditChapter />
           </Route>
           <Route path='/myworks/:storyId' exact={true}>
             <EditStoryForm />

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchPutStory, fetchSingleStory, } from "../../store/story";
+import {fetchPutStory, fetchSingleStory,fetchUsersStories } from "../../store/story";
 import { useParams, useHistory } from "react-router-dom";
+import { titleToSword } from "../_helpers";
 
 export default function EditStoryForm() {
   const dispatch = useDispatch();
@@ -11,17 +12,18 @@ export default function EditStoryForm() {
   const [tags, setTags] = useState(story?.tags || "");
   const [mature, setMature] = useState(story?.mature ?? false)
   const [errors, setErrors] = useState([]);
-  const [loaded, setLoaded] = useState(false)
   const [tab, setTab] = useState('details')
+  const [loaded, setLoaded] = useState(false)
   const params = useParams()
   const history = useHistory()
 
-  const storyId = parseInt(params.storyId.slice(0, 2))
-  console.log(story)
+  const storyId = parseInt(params.storyId)
+
 
   useEffect(() => {
     // console.log(parseInt(params.storyId.slice(0, 2)))
     dispatch(fetchSingleStory(storyId))
+    setLoaded(true)
     // if (!story) return
   },[dispatch, storyId])
 
@@ -37,13 +39,17 @@ export default function EditStoryForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(fetchPutStory({title, description, tags, 'user_id': user.id, mature}, storyId))
+    history.push()
+    history.push(`/myworks/${story.id}-${titleToSword(title)}`)
+    dispatch(fetchUsersStories(user.username))
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
     }
+  if (!loaded) return <h2>Loading...</h2>
+  if (!story || !story.allChapters) return <h2>Loading...</h2>
 
-  if (!story) (<>One moment, love</>)
+
   return (
-
     <>
         <div>
             <button onClick={() => history.push('/myworks')}>Back</button>
@@ -52,7 +58,7 @@ export default function EditStoryForm() {
             <button onClick={() =>  setTab('details')}>Story Details</button>
             <button onClick={() =>  setTab('contents')}>Table of Contents</button>
         </div>
-         { tab === "details" && (<>
+         {tab === "details" && (<>
         <h3>Story Details</h3>
         <form onSubmit={handleSubmit}>
             <ul>
@@ -95,13 +101,16 @@ export default function EditStoryForm() {
             <button type="submit">Save</button>
         </form>
         </>)}
-        {
-            tab === "contents" ? (<>
-                {/* <button onClick={() => console.log("+ New Port")}>New Part</button> */}
-                {story.chapters && Object.values(story.chapters).map(chapter => (
-                    <li className="chapter-li">{chapter.title}</li>
-                ))}
-            </>) : null
+
+        { tab === "contents" ? (<>
+            {/* <button onClick={() => console.log("+ New Port")}>New Part</button> */}
+            {story.allChapters && Object.values(story?.allChapters).map(chapter => (
+                <li className="chapter-li">
+                    <h3>{chapter.title}</h3>
+                    <button onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}>Edit Chapter</button>
+                </li>
+            ))}
+        </>) : null
         }
     </>
   );
