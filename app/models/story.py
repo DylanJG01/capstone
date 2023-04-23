@@ -19,6 +19,7 @@ class Story(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     user = db.relationship("User", back_populates="stories")
+    chapters = db.relationship("Chapter", back_populates="stories", cascade="all, delete-orphan")
     tags = db.relationship('Tag', secondary=story_tags, backref='stories', lazy=True)
 
     def to_dict(self):

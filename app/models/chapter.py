@@ -10,9 +10,9 @@ class Chapter(db.Model):
     title = db.Column(db.String(100), default="Untitled")
     body = db.Column(db.Text(), default="")
     cost = db.Column(db.Integer, default=0)
-    story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('stories.id')))
-
-    story = db.relationship('Story', backref='chapters')
+    story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('stories.id')), nullable=False)
+    stories = db.relationship("Story", back_populates="chapters")
+    # story = db.relationship('Story', backref='chapters')
 
     def to_dict(self):
         return {

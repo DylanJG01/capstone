@@ -28,13 +28,13 @@ export default function EditStoryForm() {
   },[dispatch, storyId])
 
   useEffect(() => {
-    if (story) {
+    if (loaded) {
         setTitle(story.title)
         setDescription(story.description)
         setTags(story.tags)
         setMature(story.mature)
     }
-  },[story])
+  },[story, loaded])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

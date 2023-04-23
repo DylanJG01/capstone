@@ -52,7 +52,6 @@ export const usersStories = stories => {
 
 export const fetchChapter = (chapterId, storyId ) => async dispatch => {
     const res = await fetch(`/api/stories/${storyId}/chapter/${chapterId}`)
-
     if(res.ok){
         const story = await res.json()
         console.log(story)
@@ -90,7 +89,7 @@ export const fetchPostStory = (data) => async dispatch => {
         return newStory
     }
 }
-export const fetchPutStory = (data, storyId ) => async dispatch => {
+export const fetchPutStory = (data, storyId) => async dispatch => {
     const res = await fetch(`/api/stories/${storyId}`, {
         method : "PUT",
         headers: {"Content-Type": "application/json"},
@@ -149,15 +148,14 @@ export default function reducer(state = initialState, action) {
                 storiesByUser: action.stories
             }
         }
-        case GET_CHAPTER : {
-            return {
-                ...state,
-                singleStory: action.story,
-                storiesByUser: {...state.storiesByUser}
-            }
-        }
+        // case GET_CHAPTER : {
+        //     return {
+        //         ...state,
+        //         singleStory: action.story,
+        //         storiesByUser: {...state.storiesByUser}
+        //     }
+        // }
         case POST_STORY : {
-
             newState.storiesByUser = {...state.storiesByUser}
             return {
                 ...state,
@@ -170,7 +168,7 @@ export default function reducer(state = initialState, action) {
             newState.singleStory = {...state.singleStory}
             delete newState.storiesByUser[action.story]
             return {
-
+                ...newState
             }
         }
         case PUT_STORY : {

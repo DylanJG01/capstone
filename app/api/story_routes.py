@@ -14,12 +14,17 @@ def recommended_stories():
     if not hasattr(current_user, 'id'):
         return_item = {}
         user_tags = ['Romance', 'Fantasy', 'Mystery']
-        for tag in user_tags:
+        for tag_name in user_tags:
             stories = Story.query\
             .join(Tag, Story.tags)\
-            .filter((Tag.name == tag))\
+            .filter((Tag.name == tag_name))\
             .limit(5)
-            return_item[tag] = [story.to_dict() for story in stories]
+            # return_item[tag] = [story.to_dict() for story in stories]
+            return_item[tag_name] = []
+            for story in stories:
+                new_story = story.to_dict()
+                new_story['firstChapterId'] = story.chapters[0].id
+                return_item[tag_name].append(new_story)
         return  return_item, 200
 
     user = User.query.get(current_user.id)
@@ -29,7 +34,11 @@ def recommended_stories():
             .join(Tag, Story.tags)\
             .filter((Tag.name == tag.name))\
             .limit(5)
-        return_item[tag.name] = [story.to_dict() for story in stories]
+        return_item[tag.name] = []
+        for story in stories:
+            new_story = story.to_dict()
+            new_story['firstChapterId'] = story.chapters[0].id
+            return_item[tag.name].append(new_story)
     return return_item, 200
 
 @story_routes.route('/<int:id>')

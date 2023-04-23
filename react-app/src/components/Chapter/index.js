@@ -8,6 +8,7 @@ export default function Chapter(){
 	const [user, story] = useSelector(state => [state.session.user, state.stories.singleStory]);
     const dispatch = useDispatch()
     const params = useParams()
+
     // const { setModalContent, setOnModalClose, closeModal } = useModal();
 
     console.log(params)

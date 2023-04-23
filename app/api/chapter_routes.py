@@ -21,10 +21,8 @@ def chapter(id):
     Query for a chapter by id and returns that chapter in a dictionary
     """
     chapter = Chapter.query.get(id)
-
     if request.method == "GET":
         return chapter.to_dict(), 200
-
     if request.method == "PUT":
         form = ChapterForm()
         form['csrf_token'].data = request.cookies['csrf_token']
@@ -32,4 +30,8 @@ def chapter(id):
             chapter_to_edit = Chapter.query.get(id)
             form.populate_obj(chapter_to_edit)
             db.session.commit()
-            return chapter_to_edit.to_dict(), 291
+            return chapter_to_edit.to_dict(), 201
+    if request.method == "DELETE":
+        db.session.delete(chapter)
+        db.session.commit()
+        return {"message": "Chapter Deleted"}, 204

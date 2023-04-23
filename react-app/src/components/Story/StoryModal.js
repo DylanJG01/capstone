@@ -8,10 +8,10 @@ export default function StoryModal({story, closeModal}) {
     const history = useHistory()
 
     const toTheStory = () => {
-        history.push(`/stories/${story.id}/chapter/1`)
+        history.push(`/stories/${story.id}/chapter/${story.firstChapterId}`)
         closeModal()
     }
-
+    console.log("!!!!!!!",story)
     return (<>
     <button onClick={() => toTheStory()}>Click me baby, one more time</button>
     {story.title}
