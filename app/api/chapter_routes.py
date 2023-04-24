@@ -7,7 +7,7 @@ from ..models.db import db
 chapter_routes = Blueprint('chapters', __name__)
 
 
-@chapter_routes.route('/')
+@chapter_routes.route('/', )
 def chapters():
     """
     Query for all stories and returns them in a list of chapter dictionaries
@@ -26,12 +26,35 @@ def chapter(id):
     if request.method == "PUT":
         form = ChapterForm()
         form['csrf_token'].data = request.cookies['csrf_token']
+        print (form.data)
         if form.validate_on_submit():
             chapter_to_edit = Chapter.query.get(id)
             form.populate_obj(chapter_to_edit)
             db.session.commit()
             return chapter_to_edit.to_dict(), 201
+        print (form.errors.items())
     if request.method == "DELETE":
         db.session.delete(chapter)
         db.session.commit()
         return {"message": "Chapter Deleted"}, 204
+
+@chapter_routes.route('/new', methods=['POST'])
+def new_chapter():
+    print(request.get_json())
+    print(request.get_json())
+    print(request.get_json())
+    print(request.get_json())
+    form = ChapterForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data)
+    print(form.data)
+    print(form.data)
+    print(form.data)
+    print(form.data)
+    if form.validate_on_submit():
+
+        del form['csrf_token']
+        new_chapter = Chapter(**form.data)
+        db.session.add(new_chapter)
+        db.session.commit()
+        return new_chapter.to_dict(), 200

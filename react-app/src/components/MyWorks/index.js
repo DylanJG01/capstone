@@ -4,6 +4,8 @@ import { fetchUsersStories, fetchDeleteStory, fetchSingleStory } from '../../sto
 import { useModal } from '../../context/Modal';
 import { useHistory } from 'react-router-dom'
 import { titleToSword } from '../_helpers';
+import StoryCard from './StoryCard'
+import './MyWorks.css'
 
 export default function MyWorks(){
 	const [user, stories] = useSelector(state => [state.session.user, state.stories.storiesByUser]);
@@ -30,10 +32,7 @@ export default function MyWorks(){
 	return (
         <>
 		{Object.values(stories).map(story => (
-        <li>{story.cost} {story.title}
-        <button onClick={() => editTheStory(story.id, story.title)}>Edit</button>
-        <button onClick={() => deleteStory(story.id)}>Delete</button>
-        </li>
+        <li className='story-card-li'><StoryCard story={story}/></li>
        ))}
         </>
 	);

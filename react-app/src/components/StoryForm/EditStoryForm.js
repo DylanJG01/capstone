@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {fetchPutStory, fetchSingleStory,fetchUsersStories } from "../../store/story";
 import { useParams, useHistory } from "react-router-dom";
 import { titleToSword } from "../_helpers";
+import { fetchDeleteChapter, fetchPostChapter } from "../../store/chapter";
 
 export default function EditStoryForm() {
   const dispatch = useDispatch();
@@ -11,7 +12,9 @@ export default function EditStoryForm() {
   const [description, setDescription] = useState(story?.description || "");
   const [tags, setTags] = useState(story?.tags || "");
   const [mature, setMature] = useState(story?.mature ?? false)
+  const [cover, setCover] = useState(story?.cover || '')
   const [errors, setErrors] = useState([]);
+
   const [tab, setTab] = useState('details')
   const [loaded, setLoaded] = useState(false)
   const params = useParams()
@@ -33,18 +36,29 @@ export default function EditStoryForm() {
         setDescription(story.description)
         setTags(story.tags)
         setMature(story.mature)
+        setCover(story.cover)
     }
   },[story, loaded])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(fetchPutStory({title, description, tags, 'user_id': user.id, mature}, storyId))
-    history.push()
     history.push(`/myworks/${story.id}-${titleToSword(title)}`)
     dispatch(fetchUsersStories(user.username))
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
-    }
+
+  }
+  const deleteChapter = async (id) => {
+    await dispatch(fetchDeleteChapter(id))
+    dispatch(fetchSingleStory(storyId))
+  }
+  const postChapter = async () => {
+    let newChapter = await dispatch(fetchPostChapter({story_id: story.id}))
+
+    history.push(`/myworks/${story.id}-${titleToSword(story.title)}/${newChapter.id}-${titleToSword(newChapter.title)}`)
+  }
+
   if (!loaded) return <h2>Loading...</h2>
   if (!story || !story.allChapters) return <h2>Loading...</h2>
 
@@ -98,16 +112,25 @@ export default function EditStoryForm() {
                 onChange={() => {setMature(!mature)}}
             />
             </label>
+            <label>
+            Cover
+            <input
+                type="text"
+                value={cover}
+                onChange={(e) => setCover(e.target.value)}
+            />
+            </label>
             <button type="submit">Save</button>
         </form>
         </>)}
 
         { tab === "contents" ? (<>
-            {/* <button onClick={() => console.log("+ New Port")}>New Part</button> */}
+            <button onClick={() => postChapter()}>New Part</button>
             {story.allChapters && Object.values(story?.allChapters).map(chapter => (
                 <li className="chapter-li">
                     <h3>{chapter.title}</h3>
                     <button onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}>Edit Chapter</button>
+                    <button onClick={() => deleteChapter(chapter.id)}>Delete Chapter</button>
                 </li>
             ))}
         </>) : null

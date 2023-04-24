@@ -1,7 +1,39 @@
+body {
+  background: rgb(133, 124, 124);
+
+}
+* {
+  padding: 0;
+  margin: 0;
+}
 .profile-dropdown {
   position: absolute;
 }
 
+.wordwraiths-home {
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  box-shadow: 0 0 10px 20px rgb(0, 0, 0);
+}
+
+.wordwraiths-home:hover {
+  color: red;
+}
+
+.home-li {
+  font-size: large;
+  text-decoration: none;
+}
 .hidden {
   display: none;
+}
+
+.nav-bar {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  margin: 1rem;
+  box-shadow: 0 0 0px 1px white;
 }

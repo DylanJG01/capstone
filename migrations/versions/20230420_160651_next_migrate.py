@@ -8,6 +8,9 @@ Create Date: 2023-04-20 16:06:51.629033
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
 revision = 'c56d0f55df19'
@@ -22,6 +25,8 @@ def upgrade():
         batch_op.add_column(sa.Column('published', sa.Boolean(), nullable=True))
         batch_op.add_column(sa.Column('mature', sa.Boolean(), nullable=True))
 
+    if environment == "production":
+        op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
@@ -31,4 +36,6 @@ def downgrade():
         batch_op.drop_column('mature')
         batch_op.drop_column('published')
 
+    if environment == "production":
+        op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###

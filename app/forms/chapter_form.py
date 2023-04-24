@@ -6,4 +6,5 @@ from app.models import User
 class ChapterForm(FlaskForm):
     body = StringField('body')
     cost = IntegerField('cost')
-    story_id = IntegerField('story_id', DataRequired())
+    title = StringField('title')
+    story_id = IntegerField('story_id', [DataRequired()])
