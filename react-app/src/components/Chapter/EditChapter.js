@@ -43,29 +43,37 @@ export default function EditChapter (){
 	return (
         <>
         <button onClick={() => history.push(`/myworks/${params.storyId}`)}>Back</button>
-        <form onSubmit={handleSubmit}>
-            <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-            Title
-            <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Untitled Story"
-            />
-            </label>
-            <label>
-            body
-            <input
+        <div className='chapter-form-div'>
+            <form onSubmit={handleSubmit} className='chapter-form'>
+                <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+                <label>
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Untitled Story"
+                    className='chapter-title'
+                />
+                </label>
+                <label className='the-body'>
+                {/* <input
+                    type="text"
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                /> */}
+                <textarea
                 type="text"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
-            />
-            </label>
-            <button type="submit">Save</button>
-        </form>
+                placeholder='Your story here...'
+                className='chapter-body'
+                />
+                </label>
+                <button type="submit">Save</button>
+            </form>
+        </div>
     </>
 	);
 }

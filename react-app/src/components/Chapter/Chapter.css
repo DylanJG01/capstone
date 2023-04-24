@@ -12,4 +12,40 @@
 .chapter-title {
     font-size: 2rem;
     font-weight: bold;
+    text-align: center;
+    border: none;
+    background: rgb(133, 124, 124);
+}
+
+.chapter-form-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.chapter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.the-body {
+    width: 70vw;
+    max-width: 50rem;
+
+}
+
+.the-body textarea {
+    width: 100%;
+    height: auto;
+    background: rgb(133, 124, 124);
+    /* border: none; */
+
+    min-height: 500px;
+    /* padding-bottom: 500px; */
+    font-size: 18px;
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 24px;
+}
+
+.chapter-body::placeholder {
+    color: white;
 }

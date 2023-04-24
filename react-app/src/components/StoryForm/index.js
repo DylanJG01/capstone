@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPostStory } from "../../store/story";
 import { useHistory } from "react-router-dom/";
 import { titleToSword } from "../_helpers";
+import './StoryForm.css'
 
 
 export default function StoryFormPage() {
@@ -12,6 +13,7 @@ export default function StoryFormPage() {
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [mature, setMature] = useState("")
+  const [cover, setCover] = useState("")
   const [errors, setErrors] = useState([]);
   const history = useHistory()
   const handleSubmit = async (e) => {
@@ -28,39 +30,57 @@ export default function StoryFormPage() {
   }
 
   return (
-    <>
+    <div className="story-form-div">
       <h2>Story Details</h2>
-      <form onSubmit={handleSubmit}>
+      <div className="form-div">
+      <form onSubmit={handleSubmit} className="new-story-form">
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
-          Title
+        <label className="label">
+          <div>Title</div>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Untitled Story"
+            placeholder="Title"
           />
         </label>
-        <label>
-          Description
-          <input
-            type="text"
+        <label className="label">
+        <div>Description</div>
+          {/* <input
+            type="textarea"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+          /> */}
+          <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          rows={10}
           />
         </label>
-        <label>
-          Tags
+        <label className="label">
+        <div>Tags</div>
           <input
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
+            placeholder="Tags"
           />
         </label>
-        <label>
-          mature
+        <label className="label">
+        <div>Cover</div>
+          <input
+            type="text"
+            value={cover}
+            onChange={(e) => setTags(e.target.value)}
+            placeholder="Cover Image Url"
+          />
+        </label>
+        <label className="label mature">
+          Mature Content:
           <input
             type="checkbox"
             value={mature}
@@ -69,6 +89,7 @@ export default function StoryFormPage() {
         </label>
         <button type="submit">Post Story</button>
       </form>
-    </>
+      </div>
+    </div>
   );
 }
