@@ -10,12 +10,6 @@ export default function StoryCard({story}){
         // await dispatch(fetchSingleStory(id))
         history.push(`/myworks/${id}-${titleToSword(title)}`)
     }
-    console.log(story)
-    console.log(story)
-    console.log(story)
-    console.log(story)
-    console.log(story)
-    console.log(story)
 
     const deleteStory = (storyId) => {
         dispatch(fetchDeleteStory(storyId))

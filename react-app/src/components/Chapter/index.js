@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams } from 'react-router-dom'
+import './Chapter.css'
 
 export default function Chapter(){
 	const [user, story, chapter] = useSelector(state => [state.session.user, state.stories.singleStory, state.chapters.singleChapter]);
@@ -24,8 +25,11 @@ export default function Chapter(){
     console.log((chapter))
 
 	return (
-        <>
-        {chapter.body}
-        </>
+        <div className='chapter-page'>
+            <div className='chapter-content-div'>
+                <div className='chapter-title'>{chapter.title}</div>
+                <div className='chapter-body'>{chapter.body}</div>
+            </div>
+        </div>
 	);
 }

@@ -1,0 +1,15 @@
+.chapter-content-div {
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70vw;
+}
+.chapter-page{
+    display: flex;
+    justify-content: center;
+}
+.chapter-title {
+    font-size: 2rem;
+    font-weight: bold;
+}

@@ -43,7 +43,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button onClick={openMenu} className="user-profile-button">
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -51,9 +51,9 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
-            <li><button onClick={() => history.push(`/user/${user.username}`)}>User Profile</button></li>
+            <li><button classname={'to-user-profile'} onClick={() => history.push(`/user/${user.username}`)}>User Profile</button></li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button id='logout-button' onClick={handleLogout}>Log Out</button>
             </li>
           </>
         ) : (

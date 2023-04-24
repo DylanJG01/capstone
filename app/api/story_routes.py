@@ -24,6 +24,7 @@ def recommended_stories():
             for story in stories:
                 new_story = story.to_dict()
                 new_story['firstChapterId'] = story.chapters[0].id
+                new_story['numChapters'] = len(story.chapters)
                 return_item[tag_name].append(new_story)
         return  return_item, 200
 
@@ -38,6 +39,7 @@ def recommended_stories():
         for story in stories:
             new_story = story.to_dict()
             new_story['firstChapterId'] = story.chapters[0].id
+            new_story['numChapters'] = len(story.chapters)
             return_item[tag.name].append(new_story)
     return return_item, 200
 

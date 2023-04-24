@@ -40,8 +40,8 @@ export default function WriteButton() {
   }
   return (
     <>
-      <button onClick={openMenu}>
-        Write!
+      <button className="write-button" onClick={openMenu}>
+        Write
       </button>
       <ul className={ulClassName} ref={ulRef}>
           <>

@@ -11,11 +11,22 @@ export default function StoryModal({story, closeModal}) {
         history.push(`/stories/${story.id}/chapter/${story.firstChapterId}`)
         closeModal()
     }
-    console.log("!!!!!!!",story)
-    return (<>
-    <button onClick={() => toTheStory()}>Click me baby, one more time</button>
-    {story.title}
-    {story.description}
-
-    </>)
+    const toStoryDetails = () => {
+        history.push(`/story/${story.id}`)
+        closeModal()
+    }
+    // console.log("!!!!!!!",story)
+    return (
+    <div className="story-details-modal">
+    <div className="cover-img-div">
+        <img className="cover-img" src={story.cover}/>
+    </div>
+    <div className="info-modal-div">
+        <div>{story.title}</div>
+        <div>{story.numChapters} Parts</div>
+        <div><button onClick={() => toTheStory()}>Start Reading</button></div>
+        <div>{story.description} </div>
+        {/* <div onClick={() => toStoryDetails()}>More Details </div> */}
+    </div>
+    </div>)
 }

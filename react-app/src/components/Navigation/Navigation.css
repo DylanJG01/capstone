@@ -6,15 +6,40 @@ body {
   padding: 0;
   margin: 0;
 }
+ul {
+  list-style-type:none;
+}
+
 .profile-dropdown {
   position: absolute;
+  right: 1rem;
+  padding: .5rem;
+  background-color: pink;
+}
+
+.profile-dropdown button {
+ background: none;
+ border: none;
+}
+.profile-dropdown li {
+  margin-bottom: .25rem;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-dropdown button:hover {
+  color: green;
+  cursor: pointer;
+}
+#logout-button:hover {
+  color: red;
 }
 
 .wordwraiths-home {
   text-decoration: none;
   color: white;
   background-color: black;
-  box-shadow: 0 0 10px 20px rgb(0, 0, 0);
+  box-shadow: 0 0 10px 10px rgb(0, 0, 0);
 }
 
 .wordwraiths-home:hover {
@@ -33,7 +58,48 @@ body {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
+  padding-bottom: .5rem;
   margin: 1rem;
-  box-shadow: 0 0 0px 1px white;
+  /* box-shadow: 0 0 0px 1px white; */
+  border-bottom: 1px solid white;
+}
+
+.fa-user-circle {
+  /* margin: 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.user-profile-button {
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.3rem;
+  border-radius: 10px;
+}
+.user-profile-button:hover {
+  /* background-color: green; */
+  color: green;
+  cursor: pointer;
+}
+.profile-li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 5rem;
+  /* box-shadow: 0 0 0px 1px white; */
+}
+
+.write-button {
+  font-weight: bold;
+  font-size: 1rem;
+  background: rgb(133, 124, 124);
+  border: none;
+}
+
+.write-button:hover {
+  cursor: pointer;
+  color:green;
 }

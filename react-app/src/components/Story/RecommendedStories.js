@@ -23,7 +23,7 @@ export default function RecommendedStories(){
     }
 
 	return (
-        <>
+        <div className='recommended-div'>
 		<>{Object.entries(stories).map(([genre, stories]) => (
             <div className='recommended'>
                 <div key={genre}>
@@ -36,12 +36,11 @@ export default function RecommendedStories(){
                             key={story.id}
                             onClick={() => theModal(story)}
                             />
-
                         </li>
                     ))}</ul>
                 </div>
             </div>
         ))}</>
-        </>
+        </div>
 	);
 }
