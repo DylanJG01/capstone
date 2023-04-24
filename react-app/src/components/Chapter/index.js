@@ -1,11 +1,12 @@
 import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChapter } from '../../store/story';
+// import { fetchChapter } from '../../store/story';
+import { fetchSingleChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams } from 'react-router-dom'
 
 export default function Chapter(){
-	const [user, story] = useSelector(state => [state.session.user, state.stories.singleStory]);
+	const [user, story, chapter] = useSelector(state => [state.session.user, state.stories.singleStory, state.chapters.singleChapter]);
     const dispatch = useDispatch()
     const params = useParams()
 
@@ -14,16 +15,17 @@ export default function Chapter(){
     console.log(params)
 
     useEffect(() => {
-        dispatch(fetchChapter( params.chapterId, params.storyId,))
+        dispatch(fetchSingleChapter( params.chapterId))
+
     },[dispatch, user, params.chapterId, params.storyId])
     console.log("STORIES", story)
-    if (!story) return null
+    if (!chapter) return null
 
-    console.log((story))
+    console.log((chapter))
 
 	return (
         <>
-        {story.singleChapter?.body}
+        {chapter.body}
         </>
 	);
 }
