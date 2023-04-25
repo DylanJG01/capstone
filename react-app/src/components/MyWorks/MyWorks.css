@@ -1,0 +1,18 @@
+.story-card-div {
+
+}
+.myworks-div h2 {
+    text-align: center;
+}
+.myworks-div ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.story-card-li {
+    height: 2rem;
+    width: 20rem;
+    box-shadow: 0 0 0px 1px white;
+}

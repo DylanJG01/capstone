@@ -41,15 +41,9 @@ def chapter(id):
 @chapter_routes.route('/new', methods=['POST'])
 def new_chapter():
     print(request.get_json())
-    print(request.get_json())
-    print(request.get_json())
-    print(request.get_json())
+
     form = ChapterForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
-    print(form.data)
-    print(form.data)
-    print(form.data)
     print(form.data)
     if form.validate_on_submit():
 

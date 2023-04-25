@@ -17,10 +17,13 @@ export default function MyWorks(){
     if (!stories) return <h2>You ain't got none stories, friend. So we got nothin' to sho ya</h2>
 
 	return (
-        <>
+        <div className='myworks-div'>
+            <h2>My Stories</h2>
+        <ul>
 		{Object.values(stories).map(story => (
         <li className='story-card-li'><StoryCard story={story}/></li>
        ))}
-        </>
+       </ul>
+        </div>
 	);
 }

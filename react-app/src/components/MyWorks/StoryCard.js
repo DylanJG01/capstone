@@ -15,7 +15,7 @@ export default function StoryCard({story}){
         dispatch(fetchDeleteStory(storyId))
     }
     return (
-    <div key={story.id}>
+    <div className='story-card-div' key={story.id}>
         {story.title}
         <button class="btn" onClick={() => editTheStory(story.id, story.title)}>Edit</button>
         <button class="btn" onClick={() => deleteStory(story.id)}>Delete</button>
