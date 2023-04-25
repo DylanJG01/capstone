@@ -61,10 +61,6 @@ export const fetchPostChapter = chapterData => async dispatch => {
 }
 
 export const fetchPutChapter = (chapterData, chapterId) => async dispatch => {
-    console.log(chapterData)
-    console.log(chapterData)
-    console.log(chapterData)
-    console.log(chapterData)
     const res = await fetch(`/api/chapters/${chapterId}`, {
         method : "PUT",
         headers: {"Content-Type": "application/json"},

@@ -7,7 +7,8 @@
 }
 .chapter-page{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .chapter-title {
     font-size: 2rem;

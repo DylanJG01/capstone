@@ -26,7 +26,7 @@ export default function RecommendedStories(){
 	return (
         <div>
         <div className='welcome'>
-        {/* <h2>Welcome to Word Wraiths, {user.username}</h2> */}
+        <h2>Welcome to Word Wraiths {user?.username &&<>, {user.username}</>}</h2>
         <p>Phooey to your suggestions, show me
         <button onClick={() => history.push('/all')}>All Stories</button>
         </p>

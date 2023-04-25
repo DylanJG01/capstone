@@ -21,6 +21,7 @@ ul {
 .profile-dropdown button {
  background: none;
  border: none;
+ display: flex;
 }
 .profile-dropdown li {
   margin-bottom: .25rem;

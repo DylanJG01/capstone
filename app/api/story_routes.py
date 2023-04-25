@@ -51,8 +51,11 @@ def story(id):
     story = Story.query.get(id)
     return_obj = story.to_dict()
     return_obj['allChapters'] = {}
+    index = 1
     for chapter in story.chapters:
         return_obj['allChapters'][chapter.id] = chapter.to_dict()
+        return_obj['allChapters'][chapter.id]['index'] = index
+        index += 1
     return return_obj, 200
 
 @story_routes.route('/<int:sid>/chapter/<int:cid>')
