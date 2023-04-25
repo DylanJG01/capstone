@@ -28,3 +28,55 @@ textarea
     display: flex;
     align-items: center;
 }
+
+.details-contents {
+    display: flex;
+    justify-content: center;
+}
+
+.details-contents span {
+    font-size: 1.25rem;
+    margin: .5rem;
+
+    border-top: 1px solid white;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    padding: .5rem;
+}
+
+.details-contents span:hover {
+    background-color: rgb(49, 47, 47);
+    color: white;
+    cursor: pointer;
+}
+
+.chapter-li {
+    display: flex;
+    align-items: center;
+    /* box-shadow: 0 0 0px 1px white; */
+    list-style-type:none;
+    height: 5em;
+}
+.chapter-li button {
+    height: 2rem;
+    margin-left: 1rem;
+}
+.chapter-li button:hover {
+    box-shadow: 0 0 5px 1px rgba(138, 128, 128, 0.966);
+    cursor: pointer;
+}
+.table-of-contents-div {
+    display: flex;
+    justify-content: center;
+
+}
+.table-of-contents {
+    width: 70vw;
+    /* border: 1px solid rgb(62, 29, 212); */
+}
+
+.table-of-contents > button {
+    padding: 1rem;
+    background-color: orange;
+    color: black;
+}

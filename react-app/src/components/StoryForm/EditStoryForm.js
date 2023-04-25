@@ -4,6 +4,7 @@ import {fetchPutStory, fetchSingleStory,fetchUsersStories } from "../../store/st
 import { useParams, useHistory } from "react-router-dom";
 import { titleToSword } from "../_helpers";
 import { fetchDeleteChapter, fetchPostChapter } from "../../store/chapter";
+import './StoryForm.css'
 
 export default function EditStoryForm() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export default function EditStoryForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(fetchPutStory({title, description, tags, 'user_id': user.id, mature}, storyId))
+    dispatch(fetchPutStory({title, description, tags, 'user_id': user.id, mature, cover}, storyId))
     history.push(`/myworks/${story.id}-${titleToSword(title)}`)
     dispatch(fetchUsersStories(user.username))
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
@@ -62,77 +63,97 @@ export default function EditStoryForm() {
   if (!loaded) return <h2>Loading...</h2>
   if (!story || !story.allChapters) return <h2>Loading...</h2>
 
+  const changeRating = () => {
+    mature ? setMature(false) : setMature(true)
+  }
 
   return (
     <>
         <div>
             <button onClick={() => history.push('/myworks')}>Back</button>
         </div>
-        <div>
-            <button onClick={() =>  setTab('details')}>Story Details</button>
-            <button onClick={() =>  setTab('contents')}>Table of Contents</button>
+        <div className="details-contents">
+          <div>
+              <span onClick={() =>  setTab('details')}>Story Details</span>
+              <span onClick={() =>  setTab('contents')}>Table of Contents</span>
+          </div>
         </div>
          {tab === "details" && (<>
-        <h3>Story Details</h3>
-        <form onSubmit={handleSubmit}>
-            <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-            Title
-            <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Untitled Story"
-            />
-            </label>
-            <label>
-            Description
-            <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
-            </label>
-            <label>
-            Tags
-            <input
-                type="text"
-                value={tags}
-                onChange={(e) => setTags(e.target.value)}
-            />
-            </label>
-            <label>
-            Mature
-            <input
-                type="checkbox"
-                value={mature}
-                checked={mature}
-                onChange={() => {setMature(!mature)}}
-            />
-            </label>
-            <label>
-            Cover
-            <input
-                type="text"
-                value={cover}
-                onChange={(e) => setCover(e.target.value)}
-            />
-            </label>
-            <button type="submit">Save</button>
-        </form>
+          <div className="story-form-div">
+      <div className="form-div">
+      <form onSubmit={handleSubmit} className="new-story-form">
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <label className="label">
+          <div>Title</div>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Title"
+          />
+        </label>
+        <label className="label">
+        <div>Description</div>
+          {/* <input
+            type="textarea"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+          /> */}
+          <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          rows={10}
+          />
+        </label>
+        <label className="label">
+        <div>Tags</div>
+          <input
+            type="text"
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
+            placeholder="Tags"
+          />
+        </label>
+        <label className="label">
+        <div>Cover</div>
+          <input
+            type="text"
+            value={cover}
+            onChange={(e) => setTags(e.target.value)}
+            placeholder="Cover Image Url"
+          />
+        </label>
+        <label className="label mature">
+          Mature Content:
+          <input
+            type="checkbox"
+            value={mature}
+            onChange={() => changeRating()}
+          />
+        </label>
+        <button type="submit">Save</button>
+      </form>
+      </div>
+    </div>
         </>)}
-
         { tab === "contents" ? (<>
-            <button onClick={() => postChapter()}>New Part</button>
-            {story.allChapters && Object.values(story?.allChapters).map(chapter => (
-                <li className="chapter-li">
-                    <h3>{chapter.title}</h3>
-                    <button onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}>Edit Chapter</button>
-                    <button onClick={() => deleteChapter(chapter.id)}>Delete Chapter</button>
-                </li>
-            ))}
+
+            <div className="table-of-contents-div">
+              <div className="table-of-contents">
+              <button onClick={() => postChapter()}>New Part</button>
+                {story.allChapters && Object.values(story?.allChapters).map(chapter => (
+                    <li className="chapter-li">
+                        <h3>{chapter.title}</h3>
+                        <button onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}>Edit Chapter</button>
+                        <button onClick={() => deleteChapter(chapter.id)}>Delete Chapter</button>
+                    </li>
+                ))}
+              </div>
+            </div>
         </>) : null
         }
     </>

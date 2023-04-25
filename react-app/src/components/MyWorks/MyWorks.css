@@ -1,5 +1,6 @@
 .story-card-div {
-
+    /* height: 100px; */
+    display: flex;
 }
 .myworks-div h2 {
     text-align: center;
@@ -12,7 +13,22 @@
 }
 
 .story-card-li {
-    height: 2rem;
-    width: 20rem;
+    /* height: 2rem; */
+    width: 30rem;
     box-shadow: 0 0 0px 1px white;
+    display: flex;
+}
+
+.img-div {
+    height: 100px;
+    width: 100px;
+}
+
+.img-div img {
+    height: 100%;
+}
+
+.title {
+    font-weight: bold;
+    margin-top: 1rem;
 }

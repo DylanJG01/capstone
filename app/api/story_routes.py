@@ -139,4 +139,7 @@ def stories():
     Query for all stories and returns them in a list of story dictionaries
     """
     stories = Story.query.all()
-    return {"stories" : [story.to_dict() for story in stories]}
+    return_obj = {}
+    for story in stories:
+        return_obj[story.id] = story.to_dict()
+    return return_obj, 200

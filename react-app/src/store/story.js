@@ -1,4 +1,5 @@
 // constants
+const ALL_STORIES = "stories/ALL_STORIES"
 const GET_STORY = "stories/GET_STORY";
 const GET_STORIES_BY_USER_TAG = "stories/GET_STORIES_FOR_USER"
 const GET_USERS_STORIES = "stories/GET_USERS_STORIES"
@@ -7,6 +8,10 @@ const POST_STORY = "stories/POST_STORY"
 const DELETE_STORY = "stories/DELETE_STORY"
 const PUT_STORY = "stories/PUT_STORY"
 
+export const allStories = stories => ({
+    type: ALL_STORIES,
+    stories
+})
 export const putStory = story => ({
     type: PUT_STORY,
     story
@@ -50,6 +55,13 @@ export const usersStories = stories => {
     }
 }
 
+export const fetchAllStories = () => async dispatch => {
+    const res = await fetch(`/api/stories/`)
+    if (res.ok) {
+        const stories = await res.json()
+        dispatch(allStories(stories))
+    }
+}
 export const fetchChapter = (chapterId, storyId ) => async dispatch => {
     const res = await fetch(`/api/stories/${storyId}/chapter/${chapterId}`)
     if(res.ok){
@@ -120,7 +132,7 @@ export const fetchDeleteStory = (storyId) => async dispatch => {
     }
 }
 
-export const initialState = { storiesForUser: { }, storiesByUser: {}, singleStory: { allChapters: {}, singleChapter: {} } };
+export const initialState = { allStories: { }, storiesForUser: { }, storiesByUser: {}, singleStory: { allChapters: {}, singleChapter: {} } };
 
 export default function reducer(state = initialState, action) {
     const newState = {...state}
@@ -128,6 +140,7 @@ export default function reducer(state = initialState, action) {
         case GET_STORY : {
             return {
                 ...state,
+                allStories: {...state.allStories},
                 singleStory: action.story,
                 storiesByUser: {...state.storiesByUser}
             }
@@ -138,12 +151,14 @@ export default function reducer(state = initialState, action) {
             singleStory.allChapters = {...state.singleStory.allChapters}
             singleStory.singleChapter = {...state.singleStory.singleChapter}
             newState.singleStory = {...singleStory}
+            newState.allStories = {...state.allStories}
             return {...newState}
         }
         case GET_USERS_STORIES: {
             newState.storiesByUser = action.stories
             return {
                 ...state,
+                allStories: {...state.allStories},
                 singleStory: {...state.singleStory},
                 storiesByUser: action.stories
             }
@@ -159,11 +174,13 @@ export default function reducer(state = initialState, action) {
             newState.storiesByUser = {...state.storiesByUser}
             return {
                 ...state,
+                allStories: {...state.allStories},
                 singleStory: {...action.story},
                 storiesByUser: {...state.storiesByUser}
             }
         }
         case DELETE_STORY : {
+            newState.allStories = {...state.allStories}
             newState.storiesByUser = {...state.storiesByUser}
             newState.singleStory = {...state.singleStory}
             delete newState.storiesByUser[action.story]
@@ -172,9 +189,18 @@ export default function reducer(state = initialState, action) {
             }
         }
         case PUT_STORY : {
+            newState.allStories = {...state.allStories}
             newState.singleStory = action.story
             newState.storiesByUser = {...state.storiesByUser}
             return {...newState}
+        }
+        case ALL_STORIES : {
+            return {
+                ...state,
+                storiesByUser : {...state.storiesByUser},
+                singleStory : {...state.singleStory},
+                allStories : action.stories
+            }
         }
 		default:
 			return state;

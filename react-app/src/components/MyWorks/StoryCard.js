@@ -16,8 +16,17 @@ export default function StoryCard({story}){
     }
     return (
     <div className='story-card-div' key={story.id}>
+        <div class="img-div">
+            <img src={story.cover}/>
+        </div>
+        <div>
+        <div className='title'>
         {story.title}
+        </div>
+        <div className='the-buttons'>
         <button class="btn" onClick={() => editTheStory(story.id, story.title)}>Edit</button>
         <button class="btn" onClick={() => deleteStory(story.id)}>Delete</button>
+        </div>
+        </div>
     </div>)
 }

@@ -13,7 +13,7 @@ def chapters():
     Query for all stories and returns them in a list of chapter dictionaries
     """
     chapters = Chapter.query.all()
-    return {"chapters" : [chapter.to_dict() for chapter in chapters]}
+    return {"chapters" : [chapter.to_dict() for chapter in chapters]}, 200
 
 @chapter_routes.route('/<int:id>', methods=["GET","PUT","DELETE"])
 def chapter(id):
@@ -26,7 +26,6 @@ def chapter(id):
     if request.method == "PUT":
         form = ChapterForm()
         form['csrf_token'].data = request.cookies['csrf_token']
-        print (form.data)
         if form.validate_on_submit():
             chapter_to_edit = Chapter.query.get(id)
             form.populate_obj(chapter_to_edit)
@@ -40,13 +39,9 @@ def chapter(id):
 
 @chapter_routes.route('/new', methods=['POST'])
 def new_chapter():
-    print(request.get_json())
-
     form = ChapterForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
     if form.validate_on_submit():
-
         del form['csrf_token']
         new_chapter = Chapter(**form.data)
         db.session.add(new_chapter)

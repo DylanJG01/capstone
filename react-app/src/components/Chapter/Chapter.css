@@ -1,5 +1,5 @@
 .chapter-content-div {
-    background-color: green;
+    /* background-color: green; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,7 +45,14 @@
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
     line-height: 24px;
 }
+.chapter-body {
+    border-top: 2px solid white;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    margin-left: 1rem;
 
+    margin-bottom: 1rem;
+}
 .chapter-body::placeholder {
     color: white;
 }

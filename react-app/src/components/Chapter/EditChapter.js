@@ -4,6 +4,7 @@ import { fetchChapter } from '../../store/story';
 import { fetchSingleChapter, fetchPutChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
+import './Chapter.css'
 
 export default function EditChapter (){
 	const [user, story, chapter] = useSelector(state => [state.session.user, state.stories.singleStory, state.chapters.singleChapter]);
@@ -39,6 +40,7 @@ export default function EditChapter (){
     const handleSubmit = async e => {
         e.preventDefault()
         dispatch(fetchPutChapter({title, body, story_id: parseInt(params.storyId)}, parseInt(params.chapterId)))
+        return alert("Saved! Prettier notification coming soon...")
     }
 	return (
         <>

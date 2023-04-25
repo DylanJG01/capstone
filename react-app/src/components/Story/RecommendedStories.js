@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchStoriesForUser } from '../../store/story';
 import StoryModal from './StoryModal';
 import { useModal } from '../../context/Modal';
+import { useHistory } from 'react-router-dom/';
 
 import './Story.css'
 
 export default function RecommendedStories(){
 	const [user, stories] = useSelector(state => [state.session.user, state.stories.storiesForUser]);
+    const history = useHistory()
     const dispatch = useDispatch()
     const { setModalContent, closeModal } = useModal();
     useEffect(() => {
@@ -23,6 +25,14 @@ export default function RecommendedStories(){
     }
 
 	return (
+        <div>
+        <div className='welcome'>
+        <h2>Welcome to Word Wraiths, {user.username}</h2>
+        <p>Phooey to your suggestions, show me
+        <button onClick={() => history.push('/all')}>All Stories</button>
+        </p>
+
+        </div>
         <div className='recommended-div'>
 		<>{Object.entries(stories).map(([genre, stories]) => (
             <div className='recommended'>
@@ -41,6 +51,7 @@ export default function RecommendedStories(){
                 </div>
             </div>
         ))}</>
+        </div>
         </div>
 	);
 }

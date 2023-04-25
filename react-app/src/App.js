@@ -13,6 +13,8 @@ import UserProfile from "./components/UserProfile";
 import MyWorks from './components/MyWorks'
 import EditStoryForm from "./components/StoryForm/EditStoryForm";
 import EditChapter from "./components/Chapter/EditChapter"
+import AllStories from "./components/AllStories";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,6 +29,9 @@ function App() {
         <Switch>
           <Route path='/' exact={true}>
             <RecommendedStories />
+          </Route>
+          <Route path='/all' exact={true}>
+            <AllStories />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
@@ -52,9 +57,9 @@ function App() {
           <Route path='/myworks' exact={true}>
             <MyWorks />
           </Route>
-          <Route path='/user/:username'>
+          {/* <Route path='/user/:username'>
             <UserProfile />
-          </Route>
+          </Route> */}
         </Switch>
       )}
     </>
