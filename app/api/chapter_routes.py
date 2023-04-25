@@ -7,12 +7,16 @@ from ..models.db import db
 chapter_routes = Blueprint('chapters', __name__)
 
 
-@chapter_routes.route('/', )
+@chapter_routes.route('/')
 def chapters():
     """
-    Query for all stories and returns them in a list of chapter dictionaries
+    Query for all chapters and returns them in a list of chapter dictionaries
     """
     chapters = Chapter.query.all()
+    return_obj = {}
+    for chapter in chapters:
+        # return_obj['chapters']:
+        pass
     return {"chapters" : [chapter.to_dict() for chapter in chapters]}, 200
 
 @chapter_routes.route('/<int:id>', methods=["GET","PUT","DELETE"])

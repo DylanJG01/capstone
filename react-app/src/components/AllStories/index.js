@@ -40,7 +40,7 @@ export default function AllStories(){
             {story.title}
            <div> {story.numChapters === 0 ? <>No Parts</>
                     : story.numChapters === 1 ? <>1 Part</>
-                    : <>{stories.numChapters} Parts</>}
+                    : <>{story.numChapters} Parts</>}
            </div>
         </div>
         </li>

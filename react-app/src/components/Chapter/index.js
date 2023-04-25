@@ -12,27 +12,28 @@ export default function Chapter(){
     const dispatch = useDispatch()
     const params = useParams()
     const history = useHistory()
-    const [toChapter, setToChapter] = useState( chapter?.index || 1)
+    const [toChapter, setToChapter] = useState(1)
     // const { setModalContent, setOnModalClose, closeModal } = useModal();
 
-    console.log(params)
+    // console.log(params)
 
     useEffect(() => {
-        dispatch(fetchSingleChapter( params.chapterId))
         dispatch(fetchSingleStory(params.storyId))
-    },[dispatch, user, params.chapterId, params.storyId])
+        dispatch(fetchSingleChapter(params.chapterId))
+    },[dispatch, user, params.chapterId, params.storyId, toChapter])
     // console.log("STORIES", story)
 
     if (!chapter || !story) return null
-
-
+    const chapterArr = Object.values(story.allChapters)
 
     if (story){
-        Object.values(story.allChapters).forEach(el => {
-            if (el.id === chapter.id){
-                chapter.index = el.index
+        for (let i = 0; i < chapterArr.length; i++){
+            if (chapterArr[i].id === chapter.id){
+                // console.log("!!!!")
+                chapter.index = chapterArr[i].index
+                chapter.nextChapterId = chapterArr[i].nextChapterId
             }
-        })
+        }
     }
 
     const options = []
@@ -41,33 +42,37 @@ export default function Chapter(){
     }
 
     const aFunc = () => {
-        // const theChapter = Object.values(story.allChapters).filter(el => el.index === toChapter)
-        // console.log(theChapter)
-        // if (theChapter) return history.push(`/stories/${story.id}/chapter/${theChapter[0].id}`)
-
-        const x = Object.values(story.allChapters)
-        const y = x.filter(el =>{
-            console.log(typeof el.index)
-            console.log(typeof toChapter)
-            return parseInt(el.index) === parseInt(toChapter)
-        })
-        if (y) return history.push(`/stories/${story.id}/chapter/${y[0].id}`)
+        const chapter = chapterArr.filter(el =>{
+                console.log(parseInt(el.index) === parseInt(toChapter))
+                if(parseInt(el.index) === parseInt(toChapter)) {
+                    return el
+                }
+            })[0]
+        return history.push(`/stories/${story.id}/chapter/${chapter.id}`)
     }
 
+    const toNext = () => {
+        setToChapter(toChapter + 1)
+        history.push(`/stories/${story.id}/chapter/${chapter.nextChapterId}`)
+
+    }
 	return (
         <div className='chapter-page'>
-            <select value={toChapter} onChange={e => setToChapter(e.target.value)}>
+            <div>
+            <span>Select Chapter: </span>
+            <select value={toChapter} onChange={e => {
+                setToChapter(e.target.value)}}>
             {options.map(i => (
                 <option value={i}>{i}</option>
             ))}
             </select>
-            <button onClick={() => aFunc()}>Let'sAGo</button>
-
+            <button onClick={() => aFunc()}> Go!</button>
+            </div>
             <div className='chapter-content-div'>
                 <div className='chapter-title'>{chapter.title}</div>
                 <div className='chapter-body'>{chapter.body}</div>
             </div>
-            <div>What?</div>
+            {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
         </div>
 	);
 }

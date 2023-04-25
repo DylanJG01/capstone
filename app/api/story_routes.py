@@ -55,6 +55,11 @@ def story(id):
     for chapter in story.chapters:
         return_obj['allChapters'][chapter.id] = chapter.to_dict()
         return_obj['allChapters'][chapter.id]['index'] = index
+        try:
+            return_obj['allChapters'][chapter.id]['nextChapterId'] = story.chapters[index].id
+        except IndexError:
+            return_obj['allChapters'][chapter.id]['nextChapterId'] = None
+
         index += 1
     return return_obj, 200
 
