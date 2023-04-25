@@ -4,7 +4,6 @@ import { fetchStoriesForUser } from '../../store/story';
 import StoryModal from './StoryModal';
 import { useModal } from '../../context/Modal';
 import { useHistory } from 'react-router-dom/';
-
 import './Story.css'
 
 export default function RecommendedStories(){
@@ -18,7 +17,7 @@ export default function RecommendedStories(){
     console.log("STORIES", stories)
     if (!stories) return null
 
-    console.log((stories))
+    // console.log((stories))
 
     const theModal = (story) => {
         setModalContent(<StoryModal story={story} closeModal={closeModal}/>)

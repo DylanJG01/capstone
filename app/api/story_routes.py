@@ -142,4 +142,7 @@ def stories():
     return_obj = {}
     for story in stories:
         return_obj[story.id] = story.to_dict()
+        return_obj[story.id]['firstChapterId'] = story.chapters[0].id
+        return_obj[story.id]['numChapters'] = len(story.chapters)
+
     return return_obj, 200
