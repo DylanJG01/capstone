@@ -105,3 +105,22 @@ ul {
   cursor: pointer;
   color:green;
 }
+
+.demo-button-div {
+  margin-top: 1rem;
+  border-top: 1px solid rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  padding: .25rem;
+}
+
+textarea {
+  padding: .5rem;
+}
+.demo-user-button:hover {
+  background: rgb(163, 39, 153);
+  color: white;
+}

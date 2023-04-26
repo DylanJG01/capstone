@@ -32,3 +32,23 @@
     font-weight: bold;
     margin-top: 1rem;
 }
+.btn {
+    padding: .33rem;
+}
+
+.delete:hover {
+    background-color: red;
+}
+
+.tag-selection-div {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+}
+.tag-selector{
+    margin-top: 1rem;
+}
+
+.tag-selection-div h5 {
+    text-align: center;
+}

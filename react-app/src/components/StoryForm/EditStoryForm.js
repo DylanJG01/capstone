@@ -11,7 +11,7 @@ export default function EditStoryForm() {
   const [user, story] = useSelector((state) => [state.session.user, state.stories.singleStory]);
   const [title, setTitle] = useState(story?.title || "");
   const [description, setDescription] = useState(story?.description || "");
-  const [tags, setTags] = useState(story?.tags || "");
+  // const [tags, setTags] = useState(story?.tags || "");
   const [mature, setMature] = useState(story?.mature ?? false)
   const [cover, setCover] = useState(story?.cover || '')
   const [errors, setErrors] = useState([]);
@@ -35,7 +35,7 @@ export default function EditStoryForm() {
     if (loaded) {
         setTitle(story.title)
         setDescription(story.description)
-        setTags(story.tags)
+        // setTags(story.tags)
         setMature(story.mature)
         setCover(story.cover)
     }
@@ -43,7 +43,7 @@ export default function EditStoryForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(fetchPutStory({title, description, tags, 'user_id': user.id, mature, cover}, storyId))
+    dispatch(fetchPutStory({title, description, 'user_id': user.id, mature, cover}, storyId))
     history.push(`/myworks/${story.id}-${titleToSword(title)}`)
     dispatch(fetchUsersStories(user.username))
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
@@ -110,20 +110,20 @@ export default function EditStoryForm() {
           />
         </label>
         <label className="label">
-        <div>Tags</div>
+        {/* <div>Tags</div>
           <input
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
             placeholder="Tags"
-          />
+          /> */}
         </label>
         <label className="label">
         <div>Cover</div>
           <input
             type="text"
             value={cover}
-            onChange={(e) => setTags(e.target.value)}
+            onChange={(e) => setCover(e.target.value)}
             placeholder="Cover Image Url"
           />
         </label>

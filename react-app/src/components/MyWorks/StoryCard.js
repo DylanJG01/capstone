@@ -13,6 +13,7 @@ export default function StoryCard({story}){
 
     const deleteStory = (storyId) => {
         dispatch(fetchDeleteStory(storyId))
+        return alert("This is to remind the devloper to put an 'are you sure?' modal in here for final production")
     }
     return (
     <div className='story-card-div' key={story.id}>
@@ -24,8 +25,8 @@ export default function StoryCard({story}){
         {story.title}
         </div>
         <div className='the-buttons'>
-        <button class="btn" onClick={() => editTheStory(story.id, story.title)}>Edit</button>
-        <button class="btn" onClick={() => deleteStory(story.id)}>Delete</button>
+        <button class="btn" onClick={() => editTheStory(story.id, story.title)}><i class="fa-solid fa-pen-to-square"></i></button>
+        <button class="btn delete" onClick={() => deleteStory(story.id)}><i class="fa-solid fa-trash"></i></button>
         </div>
         </div>
     </div>)

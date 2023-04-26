@@ -37,13 +37,13 @@
 .the-body textarea {
     width: 100%;
     height: auto;
-    background: rgb(133, 124, 124);
-    /* border: none; */
-
+    background: rgb(182 154 154);
+    border: none;
+    box-shadow: 0 0 5px 5px rgba(182, 154, 154, 0.404);
     min-height: 500px;
     /* padding-bottom: 500px; */
     font-size: 18px;
-    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    /* font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif; */
     line-height: 24px;
 }
 .chapter-body {

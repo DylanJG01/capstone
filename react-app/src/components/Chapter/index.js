@@ -48,11 +48,15 @@ export default function Chapter(){
                     return el
                 }
             })[0]
+
+        console.log(story.id)
+        console.log(chapterArr)
+        console.log(toChapter)
         return history.push(`/stories/${story.id}/chapter/${chapter.id}`)
     }
 
     const toNext = () => {
-        setToChapter(toChapter + 1)
+        setToChapter(parseInt(toChapter) + 1)
         history.push(`/stories/${story.id}/chapter/${chapter.nextChapterId}`)
 
     }

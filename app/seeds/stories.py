@@ -85,8 +85,6 @@ def seed_stories():
     tags = Tag.query.all()
 
     story1.tags.append(tags[0])
-    story1.tags.append(tags[1])
-    story2.tags.append(tags[0])
     story2.tags.append(tags[1])
 
     stories[0].tags.append(tags[1])

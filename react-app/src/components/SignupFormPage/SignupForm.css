@@ -1,0 +1,33 @@
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-form-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 2.5rem;
+}
+
+.signup-form label {
+    margin: .5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.signup-form button {
+    padding: .25rem;
+    align-self: center;
+    width: 5rem;
+    margin-top: 1rem;
+}
+.signup-form button:hover{
+    cursor: pointer;
+}
+
+.signup:hover {
+    /* background: rgb(8, 216, 8); */
+}
