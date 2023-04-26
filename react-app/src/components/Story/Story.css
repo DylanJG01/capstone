@@ -27,7 +27,12 @@
     display: flex;
     align-items: center;
 }
-
+.start {
+    background-color: rgb(230, 144, 144);
+}
+.start:hover {
+    cursor: pointer;
+}
 .story-details-modal {
     height: 25rem;
     width: 40rem;

@@ -24,7 +24,7 @@ export default function StoryModal({story, closeModal}) {
     <div className="info-modal-div">
         <div>{story.title}</div>
         <div>{story.numChapters} Parts</div>
-        <div><button onClick={() => toTheStory()}>Start Reading</button></div>
+        <div><button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button></div>
         <div>{story.description} </div>
         {/* <div onClick={() => toStoryDetails()}>More Details </div> */}
     </div>

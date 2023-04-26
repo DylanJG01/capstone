@@ -29,7 +29,10 @@ function SignupFormModal() {
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, email, password, tag1, tag2, tag3));
 			if (data) {
-				setErrors(data);
+				if (data.includes('email : Email address is already in use.')) {
+					setErrors(["Email in use"])
+				}
+				console.log(data)
 			} else {
 				closeModal();
 			}
