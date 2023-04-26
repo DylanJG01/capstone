@@ -25,7 +25,7 @@ export default function StoryCard({story}){
         {story.title}
         </div>
         <div className='the-buttons'>
-        <button class="btn" onClick={() => editTheStory(story.id, story.title)}><i class="fa-solid fa-pen-to-square"></i></button>
+        <button class="btn edit" onClick={() => editTheStory(story.id, story.title)}><i class="fa-solid fa-pen-to-square"></i></button>
         <button class="btn delete" onClick={() => deleteStory(story.id)}><i class="fa-solid fa-trash"></i></button>
         </div>
         </div>

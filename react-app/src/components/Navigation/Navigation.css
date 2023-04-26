@@ -124,3 +124,15 @@ textarea {
   background: rgb(163, 39, 153);
   color: white;
 }
+
+.btn {
+  padding: .33rem;
+}
+
+.delete:hover {
+  background-color: red;
+}
+
+.edit:hover {
+  background-color: blue;
+}

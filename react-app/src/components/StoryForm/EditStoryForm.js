@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {fetchPutStory, fetchSingleStory,fetchUsersStories } from "../../store/story";
 import { useParams, useHistory } from "react-router-dom";
-import { titleToSword } from "../_helpers";
+import { titleToSword, options, titleValidator, urlChecka} from "../_helpers";
 import { fetchDeleteChapter, fetchPostChapter } from "../../store/chapter";
 import './StoryForm.css'
 
@@ -12,17 +12,19 @@ export default function EditStoryForm() {
   const [title, setTitle] = useState(story?.title || "");
   const [description, setDescription] = useState(story?.description || "");
   // const [tags, setTags] = useState(story?.tags || "");
+  const [tag1, setTag1] = useState("None")
   const [mature, setMature] = useState(story?.mature ?? false)
   const [cover, setCover] = useState(story?.cover || '')
   const [errors, setErrors] = useState([]);
 
   const [tab, setTab] = useState('details')
   const [loaded, setLoaded] = useState(false)
+
+  const [submitted, setSubmitted] = useState(false)
   const params = useParams()
   const history = useHistory()
 
   const storyId = parseInt(params.storyId)
-
 
   useEffect(() => {
     // console.log(parseInt(params.storyId.slice(0, 2)))
@@ -35,14 +37,25 @@ export default function EditStoryForm() {
     if (loaded) {
         setTitle(story.title)
         setDescription(story.description)
-        // setTags(story.tags)
+        setTag1(story.tags)
         setMature(story.mature)
         setCover(story.cover)
     }
   },[story, loaded])
 
+  useEffect(() => {
+    const ve = [] //Validation Errors
+    setErrors([])
+    if(titleValidator(title)) ve.push(titleValidator(title))
+    if(cover && urlChecka(cover)) ve.push(urlChecka(cover))
+    if(ve.length) setErrors(ve)
+  },[title, description, cover, tag1])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (errors.length){
+      return
+    }
     dispatch(fetchPutStory({title, description, 'user_id': user.id, mature, cover}, storyId))
     history.push(`/myworks/${story.id}-${titleToSword(title)}`)
     dispatch(fetchUsersStories(user.username))
@@ -96,27 +109,12 @@ export default function EditStoryForm() {
         </label>
         <label className="label">
         <div>Description</div>
-          {/* <input
-            type="textarea"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Description"
-          /> */}
           <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
           rows={10}
           />
-        </label>
-        <label className="label">
-        {/* <div>Tags</div>
-          <input
-            type="text"
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
-            placeholder="Tags"
-          /> */}
         </label>
         <label className="label">
         <div>Cover</div>
@@ -135,21 +133,26 @@ export default function EditStoryForm() {
             onChange={() => changeRating()}
           />
         </label>
-        <button type="submit">Save</button>
+        {/* <div className="story-tag-selection-div">
+					<h5>Which tag best fits your story?</h5>
+					<select className="story-tag-selector" value={tag1} onChange={(e) => setTag1(e.target.value)}>
+						{options.map(option => <option>{option}</option>)}
+					</select>
+        </div> */}
+        <button className="submit-story-button btn log-in" type="submit">Save</button>
       </form>
       </div>
     </div>
         </>)}
         { tab === "contents" ? (<>
-
             <div className="table-of-contents-div">
               <div className="table-of-contents">
               <button onClick={() => postChapter()}>New Part</button>
                 {story.allChapters && Object.values(story?.allChapters).map(chapter => (
                     <li className="chapter-li">
                         <h3>{chapter.title}</h3>
-                        <button onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}>Edit Chapter</button>
-                        <button onClick={() => deleteChapter(chapter.id)}>Delete Chapter</button>
+                        <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button className="btn delete" onClick={() => deleteChapter(chapter.id)}><i class="fa-solid fa-trash"></i></button>
                     </li>
                 ))}
               </div>

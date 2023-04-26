@@ -5,36 +5,14 @@ import { signUp } from "../../store/session";
 import { login } from "../../store/session";
 import "./SignupForm.css";
 import { _usernameValidator, _emailValidator, _passwordValidator } from "../_helpers";
-
-const options = [
-	"None",
-	"Romance",
-	"Fantasy",
-	"Mystery",
-	// "Contemporary",
-	// "Action",
-	// "Adventure",
-	// "Angst",
-	// "Horror",
-	// "Drama",
-	// "Fairy Tale",
-	// "Ficton",
-	// "Humor",
-	// "Comedy",
-	// "Mythology",
-	// "Short Story",
-	// "Poetry",
-	// "Legend",
-	// "Historical Fiction",
-	// "Nonfiction",
-]
+import { options } from '../_helpers'
 
 function SignupFormModal() {
 	const dispatch = useDispatch();
-	const [email, setEmail] = useState("dummyinfo@gmail.com");
-	const [username, setUsername] = useState("dummy");
-	const [password, setPassword] = useState("password");
-	const [confirmPassword, setConfirmPassword] = useState("password");
+	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
 	const [tag1, setTag1] = useState("None")
 	const [tag2, setTag2] = useState("None")
 	const [tag3, setTag3] = useState("None")
@@ -64,17 +42,8 @@ function SignupFormModal() {
 
 	useEffect(() => {
 		const validatonErrors = []
-		// if (_emailValidator(email)) validatonErrors.push('Invalid Email')
-		// if (_usernameValidator(username)){
-		// 	_usernameValidator(username).forEach(e => validatonErrors.push(e))
-		// }
-		// if (_passwordValidator([password, confirmPassword])){
-		// 	_passwordValidator([password, confirmPassword]).forEach(e => validatonErrors.push(e))
-		// }
-
 		if (_emailValidator(email)) validatonErrors.push('Invalid Email')
 		if (_usernameValidator(username)) {
-			console.log(_usernameValidator(username))
 			validatonErrors.push(_usernameValidator(username))
 		}
 		if (_passwordValidator([password, confirmPassword])){
@@ -83,7 +52,6 @@ function SignupFormModal() {
 				x.forEach(i => validatonErrors.push(i))
 			}
 		}
-
 		if (validatonErrors.length){
 			setErrors(validatonErrors)
 		} else {

@@ -2,11 +2,14 @@ import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsersStories } from '../../store/story';
 import StoryCard from './StoryCard'
+import { useHistory } from 'react-router-dom';
 import './MyWorks.css'
+
 
 export default function MyWorks(){
 	const [user, stories] = useSelector(state => [state.session.user, state.stories.storiesByUser]);
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         if (!user) return
@@ -19,10 +22,15 @@ export default function MyWorks(){
 	return (
         <div className='myworks-div'>
             <h2>My Stories</h2>
+            <div className='new-story-button-div'>
+            <button className='new-story-button' onClick={() => history.push('/myworks/new')}>New Story</button>
+            </div>
         <ul>
-		{Object.values(stories).map(story => (
+		{Object.values(stories).length ?Object.values(stories).map(story => (
         <li className='story-card-li'><StoryCard story={story}/></li>
-       ))}
+       )) :
+       <h3>You must venture forth and write some stoires to have stories to look upon, delete, and edit.</h3>
+       }
        </ul>
         </div>
 	);

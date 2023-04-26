@@ -25,6 +25,7 @@ export default function AllStories(){
 	return (
         <div className='myworks-div'>
             <h2>All Stories</h2>
+            <h2>Don't worry, the devloper intends to apply some real CSS to the page before deployment on 5/1</h2>
         <ul>
 		{Object.values(stories).map(story => (
         <li className='story-card-li'>

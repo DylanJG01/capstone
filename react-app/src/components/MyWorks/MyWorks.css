@@ -32,13 +32,6 @@
     font-weight: bold;
     margin-top: 1rem;
 }
-.btn {
-    padding: .33rem;
-}
-
-.delete:hover {
-    background-color: red;
-}
 
 .tag-selection-div {
     /* border: 1px solid red; */
@@ -51,4 +44,23 @@
 
 .tag-selection-div h5 {
     text-align: center;
+}
+
+.new-story-button-div {
+    display: flex;
+    justify-content: center;
+}
+.new-story-button {
+    border: 1px solid black;
+    padding: .33rem;
+    margin: 1rem;
+    background-color: black;
+    color: white;
+    box-shadow: 0 0 5px 5px black;
+}
+
+.new-story-button:hover {
+    cursor: pointer;
+    /* background-color: grey; */
+    color: rgb(9, 255, 0);
 }

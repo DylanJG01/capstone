@@ -9,3 +9,6 @@
 .all-story-cover-img {
     height: 100px;
 }
+.all-story-cover-img:hover{
+    cursor: pointer;
+}

@@ -90,9 +90,17 @@ def create_story():
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             del form['csrf_token']
-            new_story = Story(**form.data)
+            new_story = Story()
+            form.populate_obj(new_story)
             db.session.add(new_story)
             db.session.flush()
+
+            tags_obj = request.get_json()
+            for tag in tags_obj['tags']:
+                tag = Tag.query.filter(Tag.name == tag).first()
+                if tag:
+                    new_story.tags.append(tag)
+
             new_chapter = Chapter(story_id=new_story.id)
             db.session.add(new_chapter)
             db.session.commit()
@@ -118,9 +126,16 @@ def delete_edit_story(id):
         if form.validate_on_submit():
             story_to_edit = Story.query.get(id)
             form.populate_obj(story_to_edit)
-            db.session.commit()
 
+            # tags_obj = request.get_json()
+            # for tag in tags_obj['tags']:
+            #     tag = Tag.query.filter(Tag.name == tag).all()
+            #     if tag:
+            #         story_to_edit.tags.append(tag)
+            db.session.commit()
             return_obj = story_to_edit.to_dict()
+            # return_obj['tags'] = story_to_edit.tags[-1].name
+
             return_obj['allChapters'] = {}
             for chapter in story_to_edit.chapters:
                 return_obj['allChapters'][chapter.id] = chapter.to_dict()

@@ -1,7 +1,11 @@
 .new-story-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
+    margin-top: 3rem;
+    border: 1px solid red;
+    /* padding: 1rem; */
+    /* width: 400px; */
 }
 
 .form-div {
@@ -51,9 +55,10 @@ textarea
 }
 
 .chapter-li {
+    width: 100%;
     display: flex;
     align-items: center;
-    /* box-shadow: 0 0 0px 1px white; */
+    box-shadow: 0 0 0px 1px white;
     list-style-type:none;
     height: 5em;
 }
@@ -73,10 +78,32 @@ textarea
 .table-of-contents {
     width: 70vw;
     /* border: 1px solid rgb(62, 29, 212); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
 }
 
 .table-of-contents > button {
     padding: 1rem;
     background-color: orange;
     color: black;
+}
+
+.submit-story-button {
+    align-self: center;
+}
+
+.story-tag-selection-div {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.story-tag-selection-div h5 {
+    margin: 1rem 0;
+}
+.story-tag-selector {
+
 }
