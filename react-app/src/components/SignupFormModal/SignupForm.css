@@ -10,6 +10,7 @@
     align-items: center;
     padding: 1rem;
     border-radius: 2.5rem;
+    width: 16rem;
 }
 
 .signup-form label {
@@ -32,6 +33,7 @@
     background: rgb(141, 52, 134);
     color: white;
 }
+
 
 .error{
     color: rgb(0, 0, 0);

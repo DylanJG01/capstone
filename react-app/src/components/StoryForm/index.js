@@ -34,7 +34,7 @@ export default function StoryFormPage() {
   useEffect(() => {
     const ve = [] //Validation Errors
     setErrors([])
-    if(title && titleValidator(title)) ve.push(titleValidator(title))
+    if(titleValidator(title)) ve.push(titleValidator(title))
     if(cover && urlChecka(cover)) ve.push(urlChecka(cover))
     if(ve.length) setErrors(ve)
     console.log("!!")

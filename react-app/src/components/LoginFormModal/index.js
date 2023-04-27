@@ -16,7 +16,7 @@ function LoginFormModal() {
     const data = await dispatch(login(email, password));
     if (data) {
       // setErrors(data);
-      setErrors('Invalid Credientials')
+      setErrors(['Invalid Credientials'])
     } else {
         closeModal()
     }

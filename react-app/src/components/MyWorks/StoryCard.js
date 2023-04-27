@@ -22,7 +22,7 @@ export default function StoryCard({story}){
         </div>
         <div>
         <div className='title'>
-        {story.title}
+        <p>{story.title}</p>
         </div>
         <div className='the-buttons'>
         <button class="btn edit" onClick={() => editTheStory(story.id, story.title)}><i class="fa-solid fa-pen-to-square"></i></button>

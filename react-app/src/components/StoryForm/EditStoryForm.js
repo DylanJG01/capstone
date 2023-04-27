@@ -23,7 +23,6 @@ export default function EditStoryForm() {
   const [submitted, setSubmitted] = useState(false)
   const params = useParams()
   const history = useHistory()
-
   const storyId = parseInt(params.storyId)
 
   useEffect(() => {
@@ -54,6 +53,7 @@ export default function EditStoryForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (errors.length){
+      setSubmitted(true)
       return
     }
     dispatch(fetchPutStory({title, description, 'user_id': user.id, mature, cover}, storyId))
