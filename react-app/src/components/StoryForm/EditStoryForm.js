@@ -79,7 +79,7 @@ export default function EditStoryForm() {
   const changeRating = () => {
     mature ? setMature(false) : setMature(true)
   }
-
+  console.log(errors)
   return (
     <>
         <div>
@@ -95,11 +95,15 @@ export default function EditStoryForm() {
           <div className="story-form-div">
       <div className="form-div">
       <form onSubmit={handleSubmit} className="new-story-form">
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
+        {/* <ul>
+          {submitted && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul> */}
         <label className="label">
-          <div>Title</div>
+          <div>Title
+            {console.log(errors.includes())}
+            {submitted && errors.includes('title-short') && (<span className="error">Title must be over 0 characters</span>)}
+            {submitted && errors.includes('title-long') && (<span className="error">Title must be under 100 characters</span>)}
+          </div>
           <input
             type="text"
             value={title}
@@ -117,7 +121,12 @@ export default function EditStoryForm() {
           />
         </label>
         <label className="label">
-        <div>Cover</div>
+        <div>Cover
+        {submitted && errors.includes('url') && (<span className="error">Invalid Url</span>)}
+        {submitted && errors.includes('img-type') && (<span className="error">Must End in jpg, jpeg, or img</span>)}
+
+
+        </div>
           <input
             type="text"
             value={cover}

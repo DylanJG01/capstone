@@ -50,7 +50,7 @@ export default function StoryFormPage() {
       <div className="form-div"></div>
       <div className="form-div">
       <form onSubmit={handleSubmit} className="new-story-form">
-        <ul>
+        <ul >
           {submitted && errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label className="label">

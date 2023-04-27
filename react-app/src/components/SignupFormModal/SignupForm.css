@@ -14,9 +14,10 @@
 }
 
 .signup-form label {
-    margin: .5rem 0;
+    margin-top: 1.25rem;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .signup-form button {
@@ -34,8 +35,15 @@
     color: white;
 }
 
-
+label {
+    position: relative;
+}
 .error{
     color: rgb(0, 0, 0);
     padding-top: 5px;
+}
+
+.zzz {
+    position: absolute;
+    bottom: 23px;
 }

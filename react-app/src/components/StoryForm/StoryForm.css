@@ -4,8 +4,9 @@
     /* align-items: center; */
     margin-top: 3rem;
     border: 1px solid red;
-    /* padding: 1rem; */
-    /* width: 400px; */
+    padding: 1rem;
+    width: 500px;
+    background: lightpink;
 }
 
 .form-div {

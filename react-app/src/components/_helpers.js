@@ -4,8 +4,8 @@ export function titleToSword (title){
 }
 
 export function _usernameValidator(username) {
-    if(username.length < 3) return ("Username too short")
-    if(username.length > 40 ) return ("Username too long")
+    if(username.length < 3) return "un-short"//"Username too short"
+    if(username.length > 40 ) return "un-long"//"Username too long"
     return false
 }
 
@@ -20,26 +20,26 @@ export function _passwordValidator(passwords){
     const errors = [];
     passwords.forEach((el, i )=> {
         if(el.length < 6) {
-            if (i === 1) errors.push(`confirm password is too short!`)
-            else errors.push(`password is too short!`)
+            if (i === 1) errors.push(`cpass`)
+            else errors.push(`pass`)
         }
     })
-    if(passwords[0] !== passwords[1]) errors.push('Passwords must match')
+    if(passwords[0] !== passwords[1]) errors.push('pmatch')
     if(errors.length) return errors
     return false
 }
 
 export const urlChecka = url => {
     const pattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
-    if (!pattern.test(url)) return "Not Valid Url"
-    if (!["img","jpg","jpeg"].includes(url.split(".").pop())) return "We only currently accept jpg, jpeg, and img"
+    if (!pattern.test(url)) return "url"//"Not Valid Url"
+    if (!["img","jpg","jpeg"].includes(url.split(".").pop())) return "img-type"//"We only currently accept jpg, jpeg, and img"
     return false
 }
 
 export const titleValidator = title => {
     console.log(title)
-    if (!title) return "Title must more than 0 charaters"
-    if (title.length > 100) return "Title must less than 100 charaters"
+    if (!title) return "title-short"
+    if (title.length > 100) return "title-long"
     return false
 }
 

@@ -73,11 +73,12 @@ function SignupFormModal() {
 			<h1>Sign Up</h1>
 			<form className="signup-form" onSubmit={handleSubmit}>
 				<ul>
-					{submitted && errors.map((error, idx) => (
+					{/* {submitted && errors.map((error, idx) => (
 						<li className='error' key={idx}>{error}</li>
-					))}
+					))} */}
 				</ul>
 				<label>
+					{submitted && errors.includes('Invalid Email') && <span className="zzz">Invalid Email</span>}
 					<input
 						type="text"
 						value={email}
@@ -87,6 +88,8 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
+					{submitted && errors.includes('un-short') && <span className="zzz">Username too short</span>}
+					{submitted && errors.includes('un-long') && <span className="zzz">Username too long</span>}
 					<input
 						type="text"
 						value={username}
@@ -96,6 +99,12 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
+					{submitted && errors.includes('pass') && <span className="zzz">Password too short</span>}
+					{submitted &&
+					!errors.includes('pass') &&
+					!errors.includes('cpass') &&
+					errors.includes('pmatch') &&
+					<span className="zzz">Passwords must match</span>}
 					<input
 						type="password"
 						value={password}
@@ -105,6 +114,12 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
+					{submitted && errors.includes('cpass') && <span className="zzz">Password too short</span>}
+					{submitted &&
+					!errors.includes('pass') &&
+					!errors.includes('cpass') &&
+					errors.includes('pmatch') &&
+					<span className="zzz">Passwords must match</span>}
 					<input
 						type="password"
 						value={confirmPassword}

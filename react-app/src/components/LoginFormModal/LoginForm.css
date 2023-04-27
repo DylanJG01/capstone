@@ -34,3 +34,9 @@
     background: rgb(163, 39, 153);
     color: white;
 }
+
+.login-errors {
+    border: 1px solid black;
+    height: 1rem;
+    /* width: 100px; */
+}
