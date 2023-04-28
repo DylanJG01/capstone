@@ -47,3 +47,12 @@ label {
     position: absolute;
     bottom: 23px;
 }
+
+.back {
+    margin-left: 2rem;
+    padding: .75rem;
+}
+.back:hover {
+    background-color: rgb(141, 52, 134);
+    cursor: pointer;
+}

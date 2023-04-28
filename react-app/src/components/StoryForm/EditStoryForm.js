@@ -83,7 +83,7 @@ export default function EditStoryForm() {
   return (
     <>
         <div>
-            <button onClick={() => history.push('/myworks')}>Back</button>
+            <button className='back' onClick={() => history.push('/myworks')}>Back</button>
         </div>
         <div className="details-contents">
           <div>
@@ -159,7 +159,7 @@ export default function EditStoryForm() {
               <button onClick={() => postChapter()}>New Part</button>
                 {story.allChapters && Object.values(story?.allChapters).map(chapter => (
                     <li className="chapter-li">
-                        <h3>{chapter.title}</h3>
+                        <h3 className="the-h3">{chapter.title}</h3>
                         <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i class="fa-solid fa-pen-to-square"></i></button>
                         <button className="btn delete" onClick={() => deleteChapter(chapter.id)}><i class="fa-solid fa-trash"></i></button>
                     </li>

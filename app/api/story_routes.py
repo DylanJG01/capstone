@@ -48,20 +48,28 @@ def story(id):
     """
     Query for a story by id and returns that story in a dictionary
     """
+    print(id)
+    print(id)
+    print(id)
+    print(id)
+    print(id)
+    print(id)
     story = Story.query.get(id)
-    return_obj = story.to_dict()
-    return_obj['allChapters'] = {}
-    index = 1
-    for chapter in story.chapters:
-        return_obj['allChapters'][chapter.id] = chapter.to_dict()
-        return_obj['allChapters'][chapter.id]['index'] = index
-        try:
-            return_obj['allChapters'][chapter.id]['nextChapterId'] = story.chapters[index].id
-        except IndexError:
-            return_obj['allChapters'][chapter.id]['nextChapterId'] = None
+    if story:
+        return_obj = story.to_dict()
+        return_obj['allChapters'] = {}
+        index = 1
+        for chapter in story.chapters:
+            return_obj['allChapters'][chapter.id] = chapter.to_dict()
+            return_obj['allChapters'][chapter.id]['index'] = index
+            try:
+                return_obj['allChapters'][chapter.id]['nextChapterId'] = story.chapters[index].id
+            except IndexError:
+                return_obj['allChapters'][chapter.id]['nextChapterId'] = None
 
-        index += 1
-    return return_obj, 200
+            index += 1
+        return return_obj, 200
+    return {}, 404
 
 @story_routes.route('/<int:sid>/chapter/<int:cid>')
 def story_and_chapter(sid, cid):
@@ -89,7 +97,6 @@ def create_story():
         form = StoryForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            del form['csrf_token']
             new_story = Story()
             form.populate_obj(new_story)
             db.session.add(new_story)
@@ -148,7 +155,22 @@ def get_stories_by_user(username):
     """
     Get all of a user's stories.
     """
+    print(username)
+    print(username)
+    print(username)
+    print(username)
+    print(username)
+    print(username)
+
     user = User.query.filter_by(username=username).first()
+    print(user)
+    print(user)
+    print(user)
+    print(user)
+    print(user)
+
+    if not user:
+        return {"Message": "No Story Found"}, 404
     another_obj = {}
     for story in user.stories:
         another_obj[story.id] = story.to_dict()

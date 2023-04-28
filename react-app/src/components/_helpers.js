@@ -11,7 +11,7 @@ export function _usernameValidator(username) {
 
 export function _emailValidator(email) {
     const regex = /^\S+@\S+\.\S+$/
-    console.log(!regex.test(email))
+    // console.log(!regex.test(email))
     if (!regex.test(email)) return true
     return false
 }

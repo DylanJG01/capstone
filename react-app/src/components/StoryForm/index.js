@@ -94,7 +94,7 @@ export default function StoryFormPage() {
 						{options.map(option => <option>{option}</option>)}
 					</select>
         </div>
-        <button className="submit-story-button btn log-in" type="submit">Save</button>
+        <button className="submit-story-button btn log-in" type="submit">Submit</button>
       </form>
       </div>
     </div>

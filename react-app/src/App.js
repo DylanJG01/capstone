@@ -14,6 +14,7 @@ import MyWorks from './components/MyWorks'
 import EditStoryForm from "./components/StoryForm/EditStoryForm";
 import EditChapter from "./components/Chapter/EditChapter"
 import AllStories from "./components/AllStories";
+import FourOhFour from "./components/FourOhFour";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,18 +34,18 @@ function App() {
           <Route path='/all' exact={true}>
             <AllStories />
           </Route>
-          <Route path="/login" >
+          <Route path="/login" exact={true} >
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route path="/signup" exact={true}>
             <SignupFormPage />
           </Route>
           <Route path='/stories/:storyId/chapter/:chapterId' exact={true}>
             <Chapter />
           </Route>
-          <Route path='/stories/:storyId' exact={true}>
+          {/* <Route path='/stories/:storyId' exact={true}>
             <SingleStory />
-          </Route>
+          </Route> */}
           <Route path='/myworks/new' exact={true}>
             <StoryFormPage />
           </Route>
@@ -60,6 +61,9 @@ function App() {
           {/* <Route path='/user/:username'>
             <UserProfile />
           </Route> */}
+          <Route path='/' >
+            <FourOhFour />
+          </Route>
         </Switch>
       )}
     </>

@@ -36,7 +36,7 @@
 }
 
 .login-errors {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 1rem;
     /* width: 100px; */
 }
