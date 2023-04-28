@@ -50,11 +50,11 @@ export default function StoryFormPage() {
       <div className="form-div"></div>
       <div className="form-div">
       <form onSubmit={handleSubmit} className="new-story-form">
-        <ul >
-          {submitted && errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
         <label className="label">
-          <div>Title</div>
+          <div>Title
+            {submitted && errors.includes("title-short") && (<span className="error red">Title must a least 1 character.</span >)}
+            {submitted && errors.includes("title-long") && (<span className="error red">Title must a less than 100 character.</span >)}
+          </div>
           <input
             type="text"
             value={title}
@@ -72,7 +72,10 @@ export default function StoryFormPage() {
           />
         </label>
         <label className="label">
-        <div>Cover</div>
+          <div>Cover
+            {submitted && errors.includes("url") && (<span className="error red">Must be valid url (https://www.whatever.img)</span >)}
+            {submitted && errors.includes("img-type") && (<span className="error red">Url must end in file type 'img', 'jpg', or 'jpeg'.</span >)}
+          </div>
           <input
             type="text"
             value={cover}
