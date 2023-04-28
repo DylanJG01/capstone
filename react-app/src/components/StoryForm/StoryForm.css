@@ -13,6 +13,9 @@
 .red {
     color: rgb(255, 255, 255);
 }
+.ctr {
+    text-align: center;
+}
 .form-div {
     display: flex;
     flex-direction: column;
@@ -20,8 +23,17 @@
 }
 .story-form-div {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
+    justify-content: center;
+}
+.story-form-img {
+    margin-right: 1rem;
+    border: 2px solid black;
+    width: 300px;
+    margin-top: 4rem;
+    height: 390px;
+    border-radius: 5px;
 }
 
 .label {
@@ -65,7 +77,7 @@ textarea
     width: 70%;
     display: flex;
     align-items: center;
-    box-shadow: 0 0 0px 1px white;
+    box-shadow: 0 0 10px 5px rgb(0, 0, 0);
     list-style-type:none;
     height: 5em;
     margin-top: 1rem;
@@ -73,7 +85,8 @@ textarea
 }
 .chapter-li button {
     height: 2rem;
-    margin-left: 1rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
 }
 .chapter-li button:hover {
     box-shadow: 0 0 5px 1px rgba(138, 128, 128, 0.966);

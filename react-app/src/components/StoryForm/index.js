@@ -45,63 +45,66 @@ export default function StoryFormPage() {
   }
 
   return (
-    <div className="story-form-div">
-      <h2>Story Details</h2>
-      <div className="form-div"></div>
-      <div className="form-div">
-      <form onSubmit={handleSubmit} className="new-story-form">
-        <label className="label">
-          <div>Title
-            {submitted && errors.includes("title-short") && (<span className="error red">Title must a least 1 character.</span >)}
-            {submitted && errors.includes("title-long") && (<span className="error red">Title must a less than 100 character.</span >)}
-          </div>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Title"
-          />
-        </label>
-        <label className="label">
-        <div>Description</div>
-          <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
-          rows={10}
-          />
-        </label>
-        <label className="label">
-          <div>Cover
-            {submitted && errors.includes("url") && (<span className="error red">Must be valid url (https://www.whatever.img)</span >)}
-            {submitted && errors.includes("img-type") && (<span className="error red">Url must end in file type 'img', 'jpg', or 'jpeg'.</span >)}
-          </div>
-          <input
-            type="text"
-            value={cover}
-            onChange={(e) => setCover(e.target.value)}
-            placeholder="Cover Image Url"
-          />
-        </label>
-        <label className="label mature">
-          Mature Content:
-          <input
-            type="checkbox"
-            value={mature}
-            onChange={() => changeRating()}
-          />
-        </label>
-        <div className="story-tag-selection-div">
-					<h5>Which tag best fits your story?</h5>
-					<select className="story-tag-selector" value={tag1} onChange={(e) => setTag1(e.target.value)}>
-						{options.map(option => <option>{option}</option>)}
-					</select>
+    <div>
+      <h2 className="ctr">Story Details</h2>
+      <div className="story-form-div">
+
+        <div className="cover-div">
         </div>
-        <button className="submit-story-button btn log-in" type="submit">Submit</button>
-      </form>
+        <div className="form-div">
+        <form onSubmit={handleSubmit} className="new-story-form">
+          <label className="label">
+            <div>Title
+              {submitted && errors.includes("title-short") && (<span className="error red">Title must a least 1 character.</span >)}
+              {submitted && errors.includes("title-long") && (<span className="error red">Title must a less than 100 character.</span >)}
+            </div>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Title"
+            />
+          </label>
+          <label className="label">
+          <div>Description</div>
+            <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+            rows={10}
+            />
+          </label>
+          <label className="label">
+            <div>Cover
+              {submitted && errors.includes("url") && (<span className="error red">Must be valid url (https://www.whatever.img)</span >)}
+              {submitted && errors.includes("img-type") && (<span className="error red">Url must end in file type 'img', 'jpg', or 'jpeg'.</span >)}
+            </div>
+            <input
+              type="text"
+              value={cover}
+              onChange={(e) => setCover(e.target.value)}
+              placeholder="Cover Image Url"
+            />
+          </label>
+          <label className="label mature">
+            Mature Content:
+            <input
+              type="checkbox"
+              value={mature}
+              onChange={() => changeRating()}
+            />
+          </label>
+          <div className="story-tag-selection-div">
+            <h5>Which tag best fits your story?</h5>
+            <select className="story-tag-selector" value={tag1} onChange={(e) => setTag1(e.target.value)}>
+              {options.map(option => <option>{option}</option>)}
+            </select>
+          </div>
+          <button className="submit-story-button btn log-in" type="submit">Submit</button>
+        </form>
+        </div>
       </div>
     </div>
-
     // <div className="story-form-div">
     //   <h2>Story Details</h2>
     //   <div className="form-div">

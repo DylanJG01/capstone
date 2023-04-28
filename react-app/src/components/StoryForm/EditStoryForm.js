@@ -15,6 +15,7 @@ export default function EditStoryForm() {
   const [tag1, setTag1] = useState("None")
   const [mature, setMature] = useState(story?.mature ?? false)
   const [cover, setCover] = useState(story?.cover || '')
+  const [theCover, setTheCover] = useState(story?.cover || '')
   const [errors, setErrors] = useState([]);
 
   const [tab, setTab] = useState('details')
@@ -38,7 +39,7 @@ export default function EditStoryForm() {
         setDescription(story.description)
         setTag1(story.tags)
         setMature(story.mature)
-        setCover(story.cover)
+        setTheCover(story.cover)
     }
   },[story, loaded])
 
@@ -91,67 +92,74 @@ export default function EditStoryForm() {
               <span onClick={() =>  setTab('contents')}>Table of Contents</span>
           </div>
         </div>
-         {tab === "details" && (<>
+        {tab === "details" && (<>
           <div className="story-form-div">
-      <div className="form-div">
-      <form onSubmit={handleSubmit} className="new-story-form">
-        {/* <ul>
-          {submitted && errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul> */}
-        <label className="label">
-          <div>Title
-            {console.log(errors.includes())}
-            {submitted && errors.includes('title-short') && (<span className="error">Title must be over 0 characters</span>)}
-            {submitted && errors.includes('title-long') && (<span className="error">Title must be under 100 characters</span>)}
+            <div className="cover-img-divz">
+              <img className="story-form-img"
+              src={theCover}
+              alt={`${title} cover`}
+              onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
+              />
+            </div>
+          <div className="form-div">
+          <form onSubmit={handleSubmit} className="new-story-form">
+          {/* <ul>
+            {submitted && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </ul> */}
+          <label className="label">
+            <div>Title
+              {console.log(errors.includes())}
+              {submitted && errors.includes('title-short') && (<span className="error">Title must be over 0 characters</span>)}
+              {submitted && errors.includes('title-long') && (<span className="error">Title must be under 100 characters</span>)}
+            </div>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Title"
+            />
+          </label>
+          <label className="label">
+          <div>Description</div>
+            <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+            rows={10}
+            />
+          </label>
+          <label className="label">
+          <div>Cover
+          {submitted && errors.includes('url') && (<span className="error">Invalid Url</span>)}
+          {submitted && errors.includes('img-type') && (<span className="error">Must End in jpg, jpeg, or img</span>)}
+
+
           </div>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Title"
-          />
-        </label>
-        <label className="label">
-        <div>Description</div>
-          <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
-          rows={10}
-          />
-        </label>
-        <label className="label">
-        <div>Cover
-        {submitted && errors.includes('url') && (<span className="error">Invalid Url</span>)}
-        {submitted && errors.includes('img-type') && (<span className="error">Must End in jpg, jpeg, or img</span>)}
-
-
+            <input
+              type="text"
+              value={cover}
+              onChange={(e) => setCover(e.target.value)}
+              placeholder="Cover Image Url"
+            />
+          </label>
+          <label className="label mature">
+            Mature Content:
+            <input
+              type="checkbox"
+              value={mature}
+              onChange={() => changeRating()}
+            />
+          </label>
+          {/* <div className="story-tag-selection-div">
+            <h5>Which tag best fits your story?</h5>
+            <select className="story-tag-selector" value={tag1} onChange={(e) => setTag1(e.target.value)}>
+              {options.map(option => <option>{option}</option>)}
+            </select>
+          </div> */}
+          <button className="submit-story-button btn log-in" type="submit">Save</button>
+        </form>
         </div>
-          <input
-            type="text"
-            value={cover}
-            onChange={(e) => setCover(e.target.value)}
-            placeholder="Cover Image Url"
-          />
-        </label>
-        <label className="label mature">
-          Mature Content:
-          <input
-            type="checkbox"
-            value={mature}
-            onChange={() => changeRating()}
-          />
-        </label>
-        {/* <div className="story-tag-selection-div">
-					<h5>Which tag best fits your story?</h5>
-					<select className="story-tag-selector" value={tag1} onChange={(e) => setTag1(e.target.value)}>
-						{options.map(option => <option>{option}</option>)}
-					</select>
-        </div> */}
-        <button className="submit-story-button btn log-in" type="submit">Save</button>
-      </form>
       </div>
-    </div>
         </>)}
         { tab === "contents" ? (<>
             <div className="table-of-contents-div">

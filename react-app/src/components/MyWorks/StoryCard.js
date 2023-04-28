@@ -18,7 +18,10 @@ export default function StoryCard({story}){
     return (
     <div className='story-card-div' key={story.id}>
         <div class="img-div">
-            <img src={story.cover}/>
+            <img src={story.cover}
+              alt={`${story.cover} title`}
+              onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
+            />
         </div>
         <div>
         <div className='title'>
