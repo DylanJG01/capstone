@@ -4,7 +4,7 @@ import { fetchChapter } from '../../store/story';
 import { fetchSingleChapter, fetchPostChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
-import { titleValidator } from '../_helpers';
+import { titleToSword, titleValidator } from '../_helpers';
 import './Chapter.css'
 
 export default function CreateChapter (){
@@ -48,7 +48,9 @@ export default function CreateChapter (){
             return
         }
         await dispatch(fetchPostChapter({title, body, story_id: parseInt(params.storyId)}))
-        return alert("Saved! Prettier notification coming soon...")
+        console.log(story)
+        console.log(chapter)
+        return history.push(`/myworks/${story.id}-${titleToSword(story.title)}`)
     }
 	return (
         <>

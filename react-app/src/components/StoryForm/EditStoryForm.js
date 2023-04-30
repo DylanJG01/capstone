@@ -71,9 +71,10 @@ export default function EditStoryForm() {
     dispatch(fetchSingleStory(storyId))
   }
   const postChapter = async () => {
-    let newChapter = await dispatch(fetchPostChapter({story_id: story.id}))
+    // let newChapter = await dispatch(fetchPostChapter({story_id: story.id}))
 
-    history.push(`/myworks/${story.id}-${titleToSword(story.title)}/${newChapter.id}-${titleToSword(newChapter.title)}`)
+    // history.push(`/myworks/${story.id}-${titleToSword(story.title)}/${newChapter.id}-${titleToSword(newChapter.title)}`)
+    history.push(`/myworks/${story.id}-${titleToSword(story.title)}/chapter/new`)
   }
 
   if (!loaded) return <h2>Loading...</h2>

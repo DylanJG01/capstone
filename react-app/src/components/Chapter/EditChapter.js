@@ -1,9 +1,10 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState, version} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchChapter } from '../../store/story';
 import { fetchSingleChapter, fetchPutChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
+import { titleValidator } from '../_helpers';
 import './Chapter.css'
 
 export default function EditChapter (){
@@ -15,6 +16,7 @@ export default function EditChapter (){
     const [title, setTitle] = useState(chapter?.title || "")
     const [body, setBody] = useState(chapter?.body || "")
     const [content, setContent] = useState(chapter?.body || "")
+    const [submitted, setSubmitted] = useState(false)
     const history = useHistory()
     // console.log(story)
 
@@ -32,13 +34,27 @@ export default function EditChapter (){
         setBody(chapter.body)
     }, [dispatch, chapter])
     console.log(params)
+
+    useEffect(() => {
+        const ve = [] //Validation Errors
+        setErrors([])
+        if(titleValidator(title)) ve.push(titleValidator(title))
+        if(!body) ve.push(("body-length"))
+        if(ve.length) setErrors(ve)
+        // console.log("!!")
+      },[title, body])
     // console.log("STORIES", story)
     if (!story) return null
 
     // console.log((story))
 
+
+
     const handleSubmit = async e => {
         e.preventDefault()
+        if(errors.length){
+
+        }
         dispatch(fetchPutChapter({title, body, story_id: parseInt(params.storyId)}, parseInt(params.chapterId)))
         return alert("Saved! Prettier notification coming soon...")
     }
@@ -69,7 +85,7 @@ export default function EditChapter (){
                 type="text"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
-                placeholder='Your story here...'
+                placeholder={submitted && errors.includes('body-length') ? "Please add some content, even if it's just a letter." : "Chapter content here..."}
                 className='chapter-body'
                 />
                 </label>
