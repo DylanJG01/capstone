@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {fetchPutStory, fetchSingleStory,fetchUsersStories } from "../../store/story";
 import { useParams, useHistory } from "react-router-dom";
-import { titleToSword, options, titleValidator, urlChecka} from "../_helpers";
+import { titleToSword, options, titleValidator, urlChecka, descriptionValidator} from "../_helpers";
 import { fetchDeleteChapter, fetchPostChapter } from "../../store/chapter";
 import './StoryForm.css'
 
@@ -48,6 +48,7 @@ export default function EditStoryForm() {
     setErrors([])
     if(titleValidator(title)) ve.push(titleValidator(title))
     if(cover && urlChecka(cover)) ve.push(urlChecka(cover))
+    if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
   },[title, description, cover, tag1])
 
@@ -58,6 +59,7 @@ export default function EditStoryForm() {
       return
     }
     dispatch(fetchPutStory({title, description, 'user_id': user.id, mature, cover}, storyId))
+    alert("Details Saved")
     history.push(`/myworks/${story.id}-${titleToSword(title)}`)
     dispatch(fetchUsersStories(user.username))
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
@@ -108,19 +110,21 @@ export default function EditStoryForm() {
           </ul> */}
           <label className="label">
             <div>Title
-              {console.log(errors.includes())}
               {submitted && errors.includes('title-short') && (<span className="error">Title must be over 0 characters</span>)}
               {submitted && errors.includes('title-long') && (<span className="error">Title must be under 100 characters</span>)}
             </div>
             <input
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setTitle((e.target.value).replace(/^\s+/, ''))}
               placeholder="Title"
             />
           </label>
           <label className="label">
-          <div>Description</div>
+          <div>Description
+          {submitted && errors.includes('des-long') && (<span className="error"> must be shorter than 2000 characters</span>)}
+
+          </div>
             <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -132,8 +136,6 @@ export default function EditStoryForm() {
           <div>Cover
           {submitted && errors.includes('url') && (<span className="error">Invalid Url</span>)}
           {submitted && errors.includes('img-type') && (<span className="error">Must End in jpg, jpeg, or img</span>)}
-
-
           </div>
             <input
               type="text"
@@ -167,9 +169,11 @@ export default function EditStoryForm() {
               <button onClick={() => postChapter()}>New Part</button>
                 {story.allChapters && Object.values(story?.allChapters).map(chapter => (
                     <li className="chapter-li">
-                        <h3 className="the-h3">{chapter.title}</h3>
+                        <p className="the-h3">{chapter.title}</p>
+                        <div className="button-container">
                         <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i class="fa-solid fa-pen-to-square"></i></button>
                         <button className="btn delete" onClick={() => deleteChapter(chapter.id)}><i class="fa-solid fa-trash"></i></button>
+                        </div>
                     </li>
                 ))}
               </div>

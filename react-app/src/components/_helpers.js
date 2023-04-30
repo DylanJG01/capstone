@@ -43,6 +43,8 @@ export const titleValidator = title => {
     return false
 }
 
+export const descriptionValidator = str => str.length > 2000 ? "des-long" : false
+
 export const options = [
 	"None",
 	"Romance",

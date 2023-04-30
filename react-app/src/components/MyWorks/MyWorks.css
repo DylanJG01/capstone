@@ -74,3 +74,9 @@ p{
     overflow:hidden;
     text-overflow:ellipsis;
   }
+
+  .my-story-card-li {
+    box-shadow:0 0 2px 2px coral;
+    margin: 1rem;
+    display: flex;
+  }

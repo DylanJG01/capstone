@@ -11,7 +11,7 @@ class Story(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), default="Untitled")
     cover = db.Column(db.String(255), default="")
-    description = db.Column(db.String(1000), default="")
+    description = db.Column(db.String(2000), default="")
     status = db.Column(db.Boolean, default=False)
     cost = db.Column(db.Integer, default=0)
     published = db.Column(db.Boolean, default=False)

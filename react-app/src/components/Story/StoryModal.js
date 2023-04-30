@@ -6,8 +6,9 @@ import { useHistory } from "react-router-dom"
 
 export default function StoryModal({story, closeModal}) {
     const history = useHistory()
-
+    console.log(story)
     const toTheStory = () => {
+        console.log(story.firstChapterId)
         history.push(`/stories/${story.id}/chapter/${story.firstChapterId}`)
         closeModal()
     }
@@ -19,13 +20,24 @@ export default function StoryModal({story, closeModal}) {
     return (
     <div className="story-details-modal">
     <div className="cover-img-div">
-        <img className="cover-img" src={story.cover}/>
+        <img className="cover-img" src={story.cover}
+        onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
+        />
     </div>
     <div className="info-modal-div">
-        <div>{story.title}</div>
-        <div>{story.numChapters} Parts</div>
-        <div><button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button></div>
-        <div>{story.description} </div>
+        <div className="story-title-modal-div">
+            <p>{story.title}</p>
+        </div>
+        <div className='parts'> {!story.numChapters ? <>No Parts</>
+                    : story.numChapters === 1 ? <>1 Part</>
+                    : <>{story.numChapters} Parts</>}
+        </div>
+        <div>
+            {story.numChapters ? (<button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button>)
+            : <div><p className="no-parts">No published content</p></div>}
+        </div>
+
+        <div><p className="description-p">{story.description}</p> </div>
         {/* <div onClick={() => toStoryDetails()}>More Details </div> */}
     </div>
     </div>)

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostStory } from "../../store/story";
 import { useHistory } from "react-router-dom/";
-import { titleToSword, options , titleValidator, urlChecka} from "../_helpers";
+import { titleToSword, options , titleValidator, urlChecka, descriptionValidator} from "../_helpers";
 
 import './StoryForm.css'
 
@@ -25,7 +25,8 @@ export default function StoryFormPage() {
       return
     }
     let newStory = await dispatch(fetchPostStory({title, description, tags: [tag1], 'user_id': user.id}))
-    history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/${newStory.singleChapter.id}-${titleToSword(newStory.singleChapter.title)}`)
+    // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/${newStory.singleChapter.id}-${titleToSword(newStory.singleChapter.title)}`)
+    history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/chapter/new`)
     console.log(newStory)
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
@@ -36,6 +37,7 @@ export default function StoryFormPage() {
     setErrors([])
     if(titleValidator(title)) ve.push(titleValidator(title))
     if(cover && urlChecka(cover)) ve.push(urlChecka(cover))
+    if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
     console.log("!!")
   },[title, description, cover, tag1])
@@ -61,12 +63,14 @@ export default function StoryFormPage() {
             <input
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setTitle((e.target.value).replace(/^\s+/, ''))}
               placeholder="Title"
             />
           </label>
           <label className="label">
-          <div>Description</div>
+          <div>Description
+          {submitted && errors.includes('des-long') && (<span className="error"> must be shorter than 2000 characters</span>)}
+          </div>
             <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}

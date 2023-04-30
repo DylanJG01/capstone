@@ -25,21 +25,20 @@ export default function AllStories(){
 	return (
         <div className='myworks-div'>
             <h2>All Stories</h2>
-            <h2>Don't worry, the devloper intends to apply some real CSS to the page before deployment on 5/1</h2>
         <ul>
 		{Object.values(stories).map(story => (
-        <li className='story-card-li'>
+        <li className='story-card-li' onClick={() => theModal(story)}>
             <div>
             <img className='all-story-cover-img'
             src={story.cover}
             alt={story.title}
             key={story.id}
-            onClick={() => theModal(story)}
+            onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
             />
             </div>
             <div className='all-story-info'>
-            {story.title}
-           <div> {story.numChapters === 0 ? <>No Parts</>
+            <p className='story-title-p'>{story.title}</p>
+           <div className='parts'> {!story.numChapters ? <>No Parts</>
                     : story.numChapters === 1 ? <>1 Part</>
                     : <>{story.numChapters} Parts</>}
            </div>

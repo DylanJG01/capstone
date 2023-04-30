@@ -108,11 +108,11 @@ def create_story():
                 if tag:
                     new_story.tags.append(tag)
 
-            new_chapter = Chapter(story_id=new_story.id)
-            db.session.add(new_chapter)
+            # new_chapter = Chapter(story_id=new_story.id)
+            # db.session.add(new_chapter)
             db.session.commit()
             return_obj = new_story.to_dict()
-            return_obj['singleChapter'] = new_chapter.to_dict()
+            # return_obj['singleChapter'] = new_chapter.to_dict()
             return return_obj, 200
         return {}, 500
 
@@ -155,20 +155,7 @@ def get_stories_by_user(username):
     """
     Get all of a user's stories.
     """
-    print(username)
-    print(username)
-    print(username)
-    print(username)
-    print(username)
-    print(username)
-
     user = User.query.filter_by(username=username).first()
-    print(user)
-    print(user)
-    print(user)
-    print(user)
-    print(user)
-
     if not user:
         return {"Message": "No Story Found"}, 404
     another_obj = {}
@@ -187,7 +174,8 @@ def stories():
     return_obj = {}
     for story in stories:
         return_obj[story.id] = story.to_dict()
-        return_obj[story.id]['firstChapterId'] = story.chapters[0].id
-        return_obj[story.id]['numChapters'] = len(story.chapters)
+        if story.chapters:
+            return_obj[story.id]['firstChapterId'] = story.chapters[0].id
+            return_obj[story.id]['numChapters'] = len(story.chapters)
 
     return return_obj, 200

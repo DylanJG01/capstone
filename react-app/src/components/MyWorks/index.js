@@ -26,7 +26,7 @@ export default function MyWorks(){
             </div>
         <ul>
 		{Object.values(stories).length ?Object.values(stories).map(story => (
-        <li className='story-card-li'><StoryCard story={story}/></li>
+        <li className='my-story-card-li'><StoryCard story={story}/></li>
        )) :
        <h3>You must venture forth and write some stoires to have stories to look upon, delete, and edit.</h3>
        }

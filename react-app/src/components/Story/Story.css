@@ -4,10 +4,16 @@
     width: 10rem;
     text-decoration: none;
 }
-
-.story-cover-img {
-    /* height: 100px;
-    width: 100px; */
+.story-img-li:hover{
+    /* box-shadow: 0 0 10px 10px coral; */
+    /* cursor: pointer; */
+}
+.story-cover-img{
+    width: 100px;
+}
+.story-cover-img:hover {
+    box-shadow: 0 0 10px 10px coral;
+    cursor: pointer;
 }
 
 .recommended-ul {
@@ -56,6 +62,7 @@
 
 .info-modal-div {
     margin-left: 1rem;
+    width: 50%;
 }
 
 .info-modal-div div {
@@ -108,5 +115,14 @@ text-align: center;
     background: none;
 }
 .all-stories-button:hover{
-    box-shadow: 1px 1px 1px 1px rgb(48, 48, 48);
+    background-color: coral;
+}
+
+.no-parts {
+    /* border: 1px solid black; */
+    margin-left: .2rem;
+}
+
+.description-p {
+    margin-left: .2rem;
 }
