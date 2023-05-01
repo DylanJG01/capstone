@@ -35,7 +35,7 @@
     align-items: center;
 }
 .start {
-    background-color: #7B586B;
+    background-color: #bd88a5;
 }
 .start:hover {
     cursor: pointer;
@@ -129,4 +129,10 @@ text-align: center;
 
 .description-p {
     margin-left: .2rem;
+    /* height: 315px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 20;
 }

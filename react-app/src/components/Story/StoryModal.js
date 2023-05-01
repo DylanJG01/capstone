@@ -28,7 +28,7 @@ export default function StoryModal({story, closeModal}) {
         <div className="story-title-modal-div">
             <p>{story.title}</p>
         </div>
-        <div className='parts'> {!story.numChapters ? <>No Parts</>
+        <div className=''> {!story.numChapters ? <>No Parts</>
                     : story.numChapters === 1 ? <>1 Part</>
                     : <>{story.numChapters} Parts</>}
         </div>
@@ -37,7 +37,7 @@ export default function StoryModal({story, closeModal}) {
             : <div><p className="no-parts">No published content</p></div>}
         </div>
 
-        <div><p className="description-p">{story.description}</p> </div>
+        <div className="description-p">{story.description}</div>
         {/* <div onClick={() => toStoryDetails()}>More Details </div> */}
     </div>
     </div>)
