@@ -1,6 +1,6 @@
 body {
-  background: rgb(133, 124, 124);
-
+  background-image: linear-gradient(to right, #1d0f0f, #453c41);
+  color: white;
 }
 * {
   padding: 0;
@@ -10,12 +10,16 @@ body {
 ul {
   list-style-type:none;
 }
+p {
+}
 
 .profile-dropdown {
+  border-radius: 0.5rem;
   position: absolute;
+  border: 1px solid black;
   right: 1rem;
-  padding: .5rem;
-  background-color: pink;
+  padding: 0.5rem;
+  background-color: #917fb3
 }
 
 .profile-dropdown button {
@@ -30,7 +34,7 @@ ul {
 }
 
 .profile-dropdown button:hover {
-  color: green;
+  color: #D4DBE2;
   cursor: pointer;
 }
 #logout-button:hover {
@@ -39,13 +43,13 @@ ul {
 
 .wordwraiths-home {
   text-decoration: none;
-  color: white;
+  color: #7B586B;
   background-color: black;
   box-shadow: 0 0 10px 10px rgb(0, 0, 0);
 }
 
 .wordwraiths-home:hover {
-  color: red;
+  color: white;
 }
 
 .home-li {
@@ -80,10 +84,11 @@ ul {
   width: 2rem;
   font-size: 1.3rem;
   border-radius: 10px;
+  /* margin-right: 10rem; */
 }
 .user-profile-button:hover {
   /* background-color: green; */
-  color: green;
+  color: #7B586B;
   cursor: pointer;
 }
 .profile-li {
@@ -97,13 +102,18 @@ ul {
 .write-button {
   font-weight: bold;
   font-size: 1rem;
-  background: rgb(133, 124, 124);
+  background: black;
+  box-shadow: 0 0 5px 5px black;
   border: none;
+  margin-right: .5rem;
+  color: #7B586B;
 }
 
 .write-button:hover {
   cursor: pointer;
-  color:green;
+  /* color: #D4DBE2; */
+  color: white;
+  /* background-color: #D4DBE2; */
 }
 
 .demo-button-div {
@@ -125,7 +135,7 @@ textarea {
   width: 100%;
 }
 .demo-user-button:hover {
-  background: rgb(163, 39, 153);
+  background: #7B586B;
   color: white;
 }
 
@@ -138,9 +148,11 @@ textarea {
 }
 
 .edit:hover {
-  background-color: blue;
+  background-color: #7B586B;
 }
-
+.edit {
+  margin-right:1rem;
+}
 .error {
   color: rgb(0, 0, 0);
   /* position: absolute; */

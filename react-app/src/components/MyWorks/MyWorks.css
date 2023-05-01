@@ -26,6 +26,7 @@
 
 .img-div img {
     height: 100%;
+    width: 70px;
 }
 
 .title {
@@ -56,14 +57,15 @@
     padding: .33rem;
     margin: 1rem;
     background-color: black;
-    color: white;
-    box-shadow: 0 0 5px 5px black;
+    color: #D4DBE2;
+    box-shadow: 0 0 2px 2px black;
 }
 
 .new-story-button:hover {
     cursor: pointer;
     /* background-color: grey; */
-    color: rgb(9, 255, 0);
+    color: white;
+    box-shadow: 0 0 2px 2px #7B586B;
 }
 
 p{
@@ -76,7 +78,7 @@ p{
   }
 
   .my-story-card-li {
-    box-shadow:0 0 2px 2px coral;
+    box-shadow:0 0 2px 2px #7B586B;
     margin: 1rem;
     display: flex;
   }

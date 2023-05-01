@@ -66,7 +66,7 @@ export default function CreateChapter (){
                     value={title}
                     onChange={(e) => setTitle((e.target.value).replace(/^\s+/, ''))}
                     placeholder={submitted && errors.includes('title-short') ? "Title too short" : "Untitled..."}
-                    className='chapter-title'
+                    className={submitted && errors.includes('title-short') ? "chapter-title red" : "chapter-title"}
                 />
                 </label>
                 <label className='the-body'>
@@ -80,7 +80,7 @@ export default function CreateChapter (){
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 placeholder={submitted && errors.includes('body-length') ? "Please add some content, even if it's just a letter." : "Chapter content here..."}
-                className='chapter-body'
+                className={submitted && errors.includes('body-length') ? "chapter-body red" : "chapter-body"}
                 />
                 </label>
                 <button type="submit">Submit</button>

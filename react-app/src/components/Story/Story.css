@@ -12,7 +12,7 @@
     width: 100px;
 }
 .story-cover-img:hover {
-    box-shadow: 0 0 10px 10px coral;
+    box-shadow: 0 0 5px 5px #7B586B;
     cursor: pointer;
 }
 
@@ -21,12 +21,13 @@
 }
 
 .recommended-div {
-    box-shadow: 0 0 10px 1px rgb(70, 64, 64);
+    box-shadow: 0 0 10px 5px #7B586B;
     display: flex;
     flex-direction: column;
     /* align-items: center; */
     margin: 1rem 15%;
-    background: rgb(97, 91, 91)
+    background-image: linear-gradient(to left, #1d0f0f, #453c41);
+    border-radius: 1rem;
 }
 
 .home-li {
@@ -34,7 +35,7 @@
     align-items: center;
 }
 .start {
-    background-color: rgb(230, 144, 144);
+    background-color: #7B586B;
 }
 .start:hover {
     cursor: pointer;
@@ -77,20 +78,23 @@ text-align: center;
 }
 .welcome > p  > button {
     /* margin-left: 1rem; */
+    color: white;
     padding: .15rem;
+    background: #7B7C81;
 }
 .welcome > p  > button:hover{
     /* margin-left: 1rem; */
     cursor: pointer;
-
+    background-color: #7B586B;
 }
 
 .ghost-pic {
     border-radius: 50%;
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     align-self: center;
-    margin: 0 1rem;
+    margin: 0 5rem;
+    border: 1px solid black;
 }
 .ghost-pic-div {
     display: flex;
@@ -115,7 +119,7 @@ text-align: center;
     background: none;
 }
 .all-stories-button:hover{
-    background-color: coral;
+    /* background-color: coral; */
 }
 
 .no-parts {

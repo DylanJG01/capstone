@@ -79,8 +79,6 @@ def seed_stories():
             published = False,
             description="A testing description",
             title = "Do Androids Dream of Electric Sheep?"
-
-
         ), #8
         Story(
             user_id = 2,

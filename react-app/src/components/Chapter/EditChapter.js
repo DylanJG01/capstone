@@ -86,7 +86,7 @@ export default function EditChapter (){
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 placeholder={submitted && errors.includes('body-length') ? "Please add some content, even if it's just a letter." : "Chapter content here..."}
-                className='chapter-body'
+                className={submitted && errors.includes('body-length') ? "chapter-body" : "chapter-body red"}
                 />
                 </label>
                 <button type="submit">Save</button>

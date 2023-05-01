@@ -5,6 +5,9 @@
     align-items: center;
     width: 70vw;
 }
+.red {
+    color: red;
+}
 .chapter-page{
     display: flex;
     flex-direction: column;
@@ -15,7 +18,10 @@
     font-weight: bold;
     text-align: center;
     border: none;
-    background: rgb(133, 124, 124);
+    /* background: #453C41; */
+    border-radius: .5rem;
+    color: white;
+    margin: 1rem 0;
 }
 
 .chapter-form-div {
@@ -37,12 +43,13 @@
 .the-body textarea {
     width: 100%;
     height: auto;
-    background: rgb(182 154 154);
+    background: #453C41;
     border: none;
     box-shadow: 0 0 5px 5px rgba(182, 154, 154, 0.404);
     min-height: 500px;
     /* padding-bottom: 500px; */
     font-size: 18px;
+    color: white;
     /* font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif; */
     line-height: 24px;
 }

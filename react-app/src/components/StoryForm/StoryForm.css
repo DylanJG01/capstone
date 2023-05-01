@@ -5,13 +5,14 @@
     padding: 1rem;
     width: 500px;
     border-radius: 2rem;
-    background-color: rgba(112, 77, 77, 0.521);
+    box-shadow: 0 0 10px 5px #7B586B;
+    /* background-color: rgba(112, 77, 77, 0.521); */
     /* background: rgb(0, 0, 0); */
     /* box-shadow: 0 0 5px 5px black; */
     /* color: white; */
 }
-.red {
-    color: rgb(255, 255, 255);
+.red::placeholder{
+    color: rgb(255, 0, 0, .7);
 }
 .ctr {
     text-align: center;
@@ -68,7 +69,7 @@ textarea
 }
 
 .details-contents span:hover {
-    background-color: rgb(49, 47, 47);
+    background-color: #7B586B;
     color: white;
     cursor: pointer;
 }
@@ -77,7 +78,7 @@ textarea
     width: 70%;
     display: flex;
     align-items: center;
-    box-shadow: 0 0 10px 5px rgb(0, 0, 0);
+    box-shadow: 0 0 2px 2px #7B586B;
     list-style-type:none;
     height: 5em;
     margin-top: 1rem;
@@ -89,7 +90,7 @@ textarea
     margin-right: .5rem;
 }
 .chapter-li button:hover {
-    box-shadow: 0 0 5px 1px rgba(138, 128, 128, 0.966);
+    box-shadow: 0 0 5px 1px #7B586B;
     cursor: pointer;
 }
 .table-of-contents-div {
@@ -109,10 +110,14 @@ textarea
 .table-of-contents > button {
     padding: 1rem;
     /* background-color: orange; */
-    color: black;
+    color: white;
+    background-color: black;
+    box-shadow: none;
+    border-radius: 1rem;
 }
 .table-of-contents > button:hover{
-    background: rgb(141, 52, 134);
+    background: #7B586B;
+    cursor: pointer;
 }
 .the-h3 {
     overflow: hidden;
@@ -120,7 +125,17 @@ textarea
     width: 100%;
     margin-left: 1rem;
 }
-
+.back{
+    padding: 1rem;
+    /* background-color: orange; */
+    color: white;
+    background-color: black;
+    box-shadow: none;
+    border-radius: 1rem;
+}
+.back:hover{
+    background-color: #7B586B;
+}
 .submit-story-button {
     align-self: center;
 }
