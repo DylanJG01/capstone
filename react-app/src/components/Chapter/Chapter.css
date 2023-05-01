@@ -18,12 +18,18 @@
     font-weight: bold;
     text-align: center;
     border: none;
-    /* background: #453C41; */
+    background: #453C41;
     border-radius: .5rem;
     color: white;
     margin: 1rem 0;
 }
+.unique-classname {
+    margin-left: 2rem;
 
+}
+.save-submit {
+    margin-bottom: 2rem;
+}
 .chapter-form-div {
     display: flex;
     flex-direction: column;

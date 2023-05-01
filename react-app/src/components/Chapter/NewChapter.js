@@ -54,7 +54,7 @@ export default function CreateChapter (){
     }
 	return (
         <>
-        <button onClick={() => history.push(`/myworks/${params.storyId}`)}>Back</button>
+        <button className='btn log-in unique-classname' onClick={() => history.push(`/myworks/${params.storyId}`)}>Back</button>
         <div className='chapter-form-div'>
             <form onSubmit={handleSubmit} className='chapter-form'>
                 <ul>
@@ -83,7 +83,7 @@ export default function CreateChapter (){
                 className={submitted && errors.includes('body-length') ? "chapter-body red" : "chapter-body"}
                 />
                 </label>
-                <button type="submit">Submit</button>
+                <button className='btn log-in save-submit' type="submit">Submit</button>
             </form>
         </div>
     </>

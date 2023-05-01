@@ -89,7 +89,7 @@ export default function EditChapter (){
                 className={submitted && errors.includes('body-length') ? "chapter-body" : "chapter-body red"}
                 />
                 </label>
-                <button type="submit">Save</button>
+                <button className='btn log-in save-submit' type="submit">Save</button>
             </form>
         </div>
     </>
