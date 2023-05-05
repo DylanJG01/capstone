@@ -1,8 +1,8 @@
-"""flop
+"""migration-nation
 
-Revision ID: ad1cd9bd25a2
+Revision ID: 6bd19170f3b6
 Revises: 
-Create Date: 2023-05-04 21:19:58.580262
+Create Date: 2023-05-05 08:48:15.001146
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ad1cd9bd25a2'
+revision = '6bd19170f3b6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -77,7 +77,8 @@ def upgrade():
     )
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('stars', sa.Integer(), nullable=True),
+    sa.Column('stars', sa.Integer(), nullable=False),
+    sa.Column('content', sa.String(length=300), nullable=True),
     sa.Column('chapter_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['chapter_id'], ['chapters.id'], ),
     sa.PrimaryKeyConstraint('id')
