@@ -9,5 +9,10 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     stars = db.Column(db.Integer)
 
-    chapter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('chapter.id')))
+    chapter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('chapters.id')))
     chapter = db.relationship('Chapter', back_populates="reviews")
+
+    def to_dict(self):
+        return {
+            'stars': self.stars
+        }
