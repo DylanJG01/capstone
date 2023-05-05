@@ -38,6 +38,4 @@ def downgrade():
                existing_type=sa.INTEGER(),
                nullable=True)
 
-    if environment == "production":
-        op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###

@@ -36,6 +36,4 @@ def downgrade():
         batch_op.drop_column('mature')
         batch_op.drop_column('published')
 
-    if environment == "production":
-        op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###

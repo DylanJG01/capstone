@@ -34,6 +34,4 @@ def downgrade():
     with op.batch_alter_table('chapters', schema=None) as batch_op:
         batch_op.drop_column('title')
 
-    if environment == "production":
-        op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
