@@ -27,7 +27,6 @@ export default function StoryFormPage() {
     let newStory = await dispatch(fetchPostStory({title, description, tags: [tag1], 'user_id': user.id}))
     // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/${newStory.singleChapter.id}-${titleToSword(newStory.singleChapter.title)}`)
     history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/chapter/new`)
-    console.log(newStory)
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
     }
@@ -39,7 +38,6 @@ export default function StoryFormPage() {
     if(cover && urlChecka(cover)) ve.push(urlChecka(cover))
     if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
-    console.log("!!")
   },[title, description, cover, tag1])
 
   const changeRating = () => {

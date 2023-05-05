@@ -18,7 +18,7 @@ export default function CreateChapter (){
     const [content, setContent] = useState("")
     const [submitted, setSubmitted] = useState(false)
     const history = useHistory()
-    // console.log(story)
+
 
     // useEffect(() => {
     //     // dispatch(fetchChapter( parseInt(params.chapterId), parseInt(params.
@@ -33,14 +33,14 @@ export default function CreateChapter (){
         if(titleValidator(title)) ve.push(titleValidator(title))
         if(!body) ve.push(("body-length"))
         if(ve.length) setErrors(ve)
-        // console.log("!!")
+
       },[title, body])
 
-    console.log(params)
-    // console.log("STORIES", story)
+
+
     if (!story) return null
 
-    // console.log((story))
+
     const handleSubmit = async e => {
         e.preventDefault()
         if (errors.length > 0){
@@ -48,8 +48,7 @@ export default function CreateChapter (){
             return
         }
         await dispatch(fetchPostChapter({title, body, story_id: parseInt(params.storyId)}))
-        console.log(story)
-        console.log(chapter)
+
         return history.push(`/myworks/${story.id}-${titleToSword(story.title)}`)
     }
 	return (

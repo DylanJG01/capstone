@@ -66,7 +66,6 @@ export const fetchChapter = (chapterId, storyId ) => async dispatch => {
     const res = await fetch(`/api/stories/${storyId}/chapter/${chapterId}`)
     if(res.ok){
         const story = await res.json()
-        console.log(story)
         dispatch(storyWithChapter(story))
     }
 }
@@ -96,7 +95,6 @@ export const fetchPostStory = (data) => async dispatch => {
     })
     if (res.ok){
         const newStory = await res.json()
-        console.log("HIT ME!!!")
         dispatch(postStory(newStory))
         return newStory
     }

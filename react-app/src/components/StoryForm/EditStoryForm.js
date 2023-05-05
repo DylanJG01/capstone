@@ -27,7 +27,6 @@ export default function EditStoryForm() {
   const storyId = parseInt(params.storyId)
 
   useEffect(() => {
-    // console.log(parseInt(params.storyId.slice(0, 2)))
     dispatch(fetchSingleStory(storyId))
     setLoaded(true)
     // if (!story) return
@@ -83,7 +82,6 @@ export default function EditStoryForm() {
   const changeRating = () => {
     mature ? setMature(false) : setMature(true)
   }
-  console.log(errors)
   return (
     <>
         <div>

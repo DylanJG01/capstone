@@ -18,7 +18,6 @@ export default function EditChapter (){
     const [content, setContent] = useState(chapter?.body || "")
     const [submitted, setSubmitted] = useState(false)
     const history = useHistory()
-    // console.log(story)
 
     useEffect(() => {
         // dispatch(fetchChapter( parseInt(params.chapterId), parseInt(params.
@@ -33,7 +32,6 @@ export default function EditChapter (){
         setTitle(chapter.title)
         setBody(chapter.body)
     }, [dispatch, chapter])
-    console.log(params)
 
     useEffect(() => {
         const ve = [] //Validation Errors
@@ -41,12 +39,12 @@ export default function EditChapter (){
         if(titleValidator(title)) ve.push(titleValidator(title))
         if(!body) ve.push(("body-length"))
         if(ve.length) setErrors(ve)
-        // console.log("!!")
+
       },[title, body])
-    // console.log("STORIES", story)
+
     if (!story) return null
 
-    // console.log((story))
+
 
 
 

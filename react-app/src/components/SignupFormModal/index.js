@@ -32,7 +32,6 @@ function SignupFormModal() {
 				if (data.includes('email : Email address is already in use.')) {
 					setErrors(["Email in use"])
 				}
-				console.log(data)
 			} else {
 				closeModal();
 			}
@@ -60,7 +59,6 @@ function SignupFormModal() {
 		} else {
 			setErrors([])
 		}
-		console.log(validatonErrors)
 	},[email, username, password, confirmPassword])
 
 	const demoUser = async (e) => {

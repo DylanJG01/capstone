@@ -6,9 +6,9 @@ import { useHistory } from "react-router-dom"
 
 export default function StoryModal({story, closeModal}) {
     const history = useHistory()
-    console.log(story)
+
     const toTheStory = () => {
-        console.log(story.firstChapterId)
+
         history.push(`/stories/${story.id}/chapter/${story.firstChapterId}`)
         closeModal()
     }
@@ -16,7 +16,7 @@ export default function StoryModal({story, closeModal}) {
         history.push(`/story/${story.id}`)
         closeModal()
     }
-    // console.log("!!!!!!!",story)
+
     return (
     <div className="story-details-modal">
     <div className="cover-img-div">
