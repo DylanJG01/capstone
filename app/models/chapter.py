@@ -14,8 +14,8 @@ class Chapter(db.Model):
     stories = db.relationship("Story", back_populates="chapters")
     # story = db.relationship('Story', backref='chapters')
 
-    reviews = db.relationship('Review', back_populates='chapters')
-    comments = db.relationship('Comment', back_populates='chapters')
+    reviews = db.relationship('Review', back_populates='chapter')
+    comments = db.relationship('Comment', back_populates='chapter')
 
     def to_dict(self):
         return {
