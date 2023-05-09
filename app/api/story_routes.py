@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Story, User, Tag, story_tags, Chapter
 from app.forms.story_form import StoryForm
 from ..models.db import db
+from ._AWS_helpers import upload_file_to_AWS, get_unique_filename
 
 story_routes = Blueprint('stories', __name__)
 
@@ -23,8 +24,9 @@ def recommended_stories():
             return_item[tag_name] = []
             for story in stories:
                 new_story = story.to_dict()
-                new_story['firstChapterId'] = story.chapters[0].id
                 new_story['numChapters'] = len(story.chapters)
+                if new_story['numChapters'] > 0:
+                    new_story['firstChapterId'] = story.chapters[0].id
                 return_item[tag_name].append(new_story)
         return  return_item, 200
 
@@ -38,8 +40,9 @@ def recommended_stories():
         return_item[tag.name] = []
         for story in stories:
             new_story = story.to_dict()
-            new_story['firstChapterId'] = story.chapters[0].id
             new_story['numChapters'] = len(story.chapters)
+            if new_story['numChapters'] > 0:
+                new_story['firstChapterId'] = story.chapters[0].id
             return_item[tag.name].append(new_story)
     return return_item, 200
 
@@ -48,12 +51,6 @@ def story(id):
     """
     Query for a story by id and returns that story in a dictionary
     """
-    print(id)
-    print(id)
-    print(id)
-    print(id)
-    print(id)
-    print(id)
     story = Story.query.get(id)
     if story:
         return_obj = story.to_dict()
@@ -99,15 +96,18 @@ def create_story():
         if form.validate_on_submit():
             new_story = Story()
             form.populate_obj(new_story)
+            print (form.data)
+            image = form.data["the_cover"]
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_AWS(image)
+            new_story.cover = upload["url"]
             db.session.add(new_story)
             db.session.flush()
-
-            tags_obj = request.get_json()
-            for tag in tags_obj['tags']:
-                tag = Tag.query.filter(Tag.name == tag).first()
-                if tag:
-                    new_story.tags.append(tag)
-
+            # tags_obj = request.get_json()
+            # for tag in tags_obj['tag']:
+            tag = Tag.query.filter(Tag.name == form.data['tag']).first()
+            if tag:
+                new_story.tags.append(tag)
             # new_chapter = Chapter(story_id=new_story.id)
             # db.session.add(new_chapter)
             db.session.commit()

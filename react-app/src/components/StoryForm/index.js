@@ -13,7 +13,8 @@ export default function StoryFormPage() {
   const [description, setDescription] = useState("");
   const [tag1, setTag1] = useState("");
   const [mature, setMature] = useState("")
-  const [cover, setCover] = useState("")
+  const [cover, setCover] = useState(null)
+  const [coverLoading, setCoverLoading] = useState(false)
   const [errors, setErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false)
   const history = useHistory()
@@ -21,12 +22,40 @@ export default function StoryFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (errors.length){
+      console.log("Okay")
       setSubmitted(true);
       return
     }
-    let newStory = await dispatch(fetchPostStory({title, description, tags: [tag1], 'user_id': user.id}))
+    console.log("Okay")
+    // let newStory = await dispatch(fetchPostStory({title, description, cover: cover, tags: [tag1], 'user_id': user.id}))
+
+    const formData = new FormData();
+
+    const theObj = {
+      title,
+      description,
+      cover,
+      tag: tag1,
+      user_id: user.id
+    }
+    for (const i in theObj){
+      if (i !== 'cover'){
+        console.log("!!")
+        formData.append(`${i}`, theObj[i])
+      } else {
+        formData.append('the_cover', cover)
+      }
+    }
+    // for(let [name, value] of formData) {
+    //   alert(`${name} = ${value}`); // key1 = value1, then key2 = value2
+    //   console.log(name, typeof value)
+    // }
+
+    await dispatch(fetchPostStory(formData))
+    // formData.append("user_id", user.id)
+
     // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/${newStory.singleChapter.id}-${titleToSword(newStory.singleChapter.title)}`)
-    history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/chapter/new`)
+    // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/chapter/new`)
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
     }
@@ -35,7 +64,6 @@ export default function StoryFormPage() {
     const ve = [] //Validation Errors
     setErrors([])
     if(titleValidator(title)) ve.push(titleValidator(title))
-    if(cover && urlChecka(cover)) ve.push(urlChecka(cover))
     if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
   },[title, description, cover, tag1])
@@ -52,7 +80,7 @@ export default function StoryFormPage() {
         <div className="cover-div">
         </div>
         <div className="form-div">
-        <form onSubmit={handleSubmit} className="new-story-form">
+        <form className="new-story-form" onSubmit={handleSubmit} encType="multipart/form-data" >
           <label className="label">
             <div>Title
               {submitted && errors.includes("title-short") && (<span className="error red">Title must a least 1 character.</span >)}
@@ -76,7 +104,7 @@ export default function StoryFormPage() {
             rows={10}
             />
           </label>
-          <label className="label">
+          {/* <label className="label">
             <div>Cover
               {submitted && errors.includes("url") && (<span className="error red">Must be valid url (https://www.whatever.img)</span >)}
               {submitted && errors.includes("img-type") && (<span className="error red">Url must end in file type 'img', 'jpg', or 'jpeg'.</span >)}
@@ -86,6 +114,15 @@ export default function StoryFormPage() {
               value={cover}
               onChange={(e) => setCover(e.target.value)}
               placeholder="Cover Image Url"
+            />
+          </label>
+           */}
+          <label className="label">
+            <div>Cover</div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setCover(e.target.files[0])}
             />
           </label>
           <label className="label mature">
