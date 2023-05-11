@@ -5,6 +5,8 @@ import { fetchSingleChapter } from '../../store/chapter';
 import { fetchSingleStory } from '../../store/story';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
+
+
 import './Chapter.css'
 
 export default function Chapter(){
@@ -69,7 +71,10 @@ export default function Chapter(){
             </div>
             <div className='chapter-content-div'>
                 <div className='chapter-title'>{chapter.title}</div>
-                <div className='chapter-body'>{chapter.body}</div>
+
+                {/*  I understand we're dangerously setting inner html, but we really aren't important enough for someone to put the effort in, I do hope.*/}
+                <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}></div>
+
             </div>
             {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
         </div>

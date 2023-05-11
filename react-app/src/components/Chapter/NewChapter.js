@@ -5,6 +5,10 @@ import { fetchSingleChapter, fetchPostChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
 import { titleToSword, titleValidator } from '../_helpers';
+
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
+
 import './Chapter.css'
 
 export default function CreateChapter (){
@@ -45,6 +49,7 @@ export default function CreateChapter (){
         e.preventDefault()
         if (errors.length > 0){
             setSubmitted(true)
+            console.log(errors)
             return
         }
         await dispatch(fetchPostChapter({title, body, story_id: parseInt(params.storyId)}))
@@ -74,13 +79,15 @@ export default function CreateChapter (){
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                 /> */}
-                <textarea
+                {/* <textarea
                 type="text"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 placeholder={submitted && errors.includes('body-length') ? "Please add some content, even if it's just a letter." : "Chapter content here..."}
                 className={submitted && errors.includes('body-length') ? "chapter-body red" : "chapter-body"}
-                />
+                /> */}
+                <ReactQuill theme="snow" value={body} onChange={setBody} />
+
                 </label>
                 <button className='btn log-in save-submit' type="submit">Submit</button>
             </form>

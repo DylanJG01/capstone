@@ -22,6 +22,7 @@ export default function EditStoryForm() {
   const [loaded, setLoaded] = useState(false)
 
   const [submitted, setSubmitted] = useState(false)
+  const [active, setActive] = useState(true)
   const params = useParams()
   const history = useHistory()
   const storyId = parseInt(params.storyId)
@@ -88,9 +89,9 @@ export default function EditStoryForm() {
             <button className='back' onClick={() => history.push('/myworks')}>Back</button>
         </div>
         <div className="details-contents">
-          <div>
-              <span onClick={() =>  setTab('details')}>Story Details</span>
-              <span onClick={() =>  setTab('contents')}>Table of Contents</span>
+          <div className="tab-selector">
+              <span className={tab === 'details' ? "active-tab" : ""} onClick={() => setTab('details')}>Story Details</span>
+              <span className={tab === 'details' ? "" : "active-tab"} onClick={() => setTab('contents')}>Table of Contents</span>
           </div>
         </div>
         {tab === "details" && (<>

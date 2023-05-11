@@ -130,9 +130,18 @@ text-align: center;
 .description-p {
     margin-left: .2rem;
     /* height: 315px; */
+    word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 20;
+    -webkit-line-clamp: 15;
+}
+
+.tab-selector{
+    border-bottom: 1px solid white;
+    padding-bottom: 0.5rem;
+}
+.active-tab{
+    background-color: rgb(139, 66, 66);
 }
