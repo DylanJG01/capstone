@@ -11,6 +11,8 @@ class Chapter(db.Model):
     body = db.Column(db.Text(), default="")
     cost = db.Column(db.Integer, default=0)
     story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('stories.id')), nullable=False)
+    published = db.Column(db.Boolean, default=False)
+
     stories = db.relationship("Story", back_populates="chapters")
     # story = db.relationship('Story', backref='chapters')
 

@@ -88,16 +88,9 @@ export const fetchStoriesForUser = () => async dispatch => {
 }
 
 export const fetchPostStory = (data) => async dispatch => {
-    for(let [name, value] of data) {
-        alert(`${name} = ${value}`); // key1 = value1, then key2 = value2
-        console.log(name, value)
-      }
     const res = await fetch('/api/stories/', {
         method : "POST",
-        // headers: {"Content-Type": "application/json"},
-        // headers: {'Content-Type': 'multipart/form-data'},
         body: data
-        // body: data
     })
     if (res.ok){
         const newStory = await res.json()

@@ -98,9 +98,10 @@ def create_story():
             form.populate_obj(new_story)
             print (form.data)
             image = form.data["the_cover"]
-            image.filename = get_unique_filename(image.filename)
-            upload = upload_file_to_AWS(image)
-            new_story.cover = upload["url"]
+            if image:
+                image.filename = get_unique_filename(image.filename)
+                upload = upload_file_to_AWS(image)
+                new_story.cover = upload["url"]
             db.session.add(new_story)
             db.session.flush()
             # tags_obj = request.get_json()

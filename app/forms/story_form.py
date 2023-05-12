@@ -10,7 +10,6 @@ class StoryForm(FlaskForm):
     cover = StringField('cover')
     the_cover = FileField("Cover Image File", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     description = StringField('description')
-    status = BooleanField('status')
     cost = IntegerField('cost')
     published = BooleanField('published')
     user_id = IntegerField('user_id', [DataRequired()])

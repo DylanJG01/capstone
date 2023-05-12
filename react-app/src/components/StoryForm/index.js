@@ -22,11 +22,9 @@ export default function StoryFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (errors.length){
-      console.log("Okay")
       setSubmitted(true);
       return
     }
-    console.log("Okay")
     // let newStory = await dispatch(fetchPostStory({title, description, cover: cover, tags: [tag1], 'user_id': user.id}))
 
     const formData = new FormData();
@@ -40,21 +38,16 @@ export default function StoryFormPage() {
     }
     for (const i in theObj){
       if (i !== 'cover'){
-        console.log("!!")
         formData.append(`${i}`, theObj[i])
       } else {
         formData.append('the_cover', cover)
       }
     }
-    // for(let [name, value] of formData) {
-    //   alert(`${name} = ${value}`); // key1 = value1, then key2 = value2
-    //   console.log(name, typeof value)
-    // }
 
-    await dispatch(fetchPostStory(formData))
+    const newStory = await dispatch(fetchPostStory(formData))
     // formData.append("user_id", user.id)
 
-    // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/${newStory.singleChapter.id}-${titleToSword(newStory.singleChapter.title)}`)
+    history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}`)
     // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/chapter/new`)
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.

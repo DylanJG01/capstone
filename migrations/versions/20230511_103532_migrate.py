@@ -1,8 +1,8 @@
 """migrate
 
-Revision ID: 4642f3d9f79e
+Revision ID: d79925259876
 Revises:
-Create Date: 2023-04-19 09:17:51.211618
+Create Date: 2023-05-11 10:35:32.014828
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '4642f3d9f79e'
+revision = 'd79925259876'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,6 @@ def upgrade():
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
 
@@ -39,7 +38,6 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -47,14 +45,15 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=True),
     sa.Column('cover', sa.String(length=255), nullable=True),
-    sa.Column('description', sa.String(length=1000), nullable=True),
+    sa.Column('description', sa.String(length=2000), nullable=True),
     sa.Column('status', sa.Boolean(), nullable=True),
     sa.Column('cost', sa.Integer(), nullable=True),
+    sa.Column('published', sa.Boolean(), nullable=True),
+    sa.Column('mature', sa.Boolean(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE stories SET SCHEMA {SCHEMA};")
 
@@ -65,19 +64,19 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'tag_id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE user_tags SET SCHEMA {SCHEMA};")
 
     op.create_table('chapters',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=100), nullable=True),
     sa.Column('body', sa.Text(), nullable=True),
     sa.Column('cost', sa.Integer(), nullable=True),
-    sa.Column('story_id', sa.Integer(), nullable=True),
+    sa.Column('story_id', sa.Integer(), nullable=False),
+    sa.Column('published', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['story_id'], ['stories.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE chapters SET SCHEMA {SCHEMA};")
 
@@ -88,9 +87,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['tag_id'], ['tags.id'], ),
     sa.PrimaryKeyConstraint('story_id', 'tag_id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE story_tags SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 

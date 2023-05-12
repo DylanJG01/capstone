@@ -5,11 +5,13 @@ from sqlalchemy.sql import text
 def seed_chapters():
     chapter1 = Chapter(
         body="Testing test",
-        story_id=1
+        story_id=1,
+        published=True
     )
     chapter2 = Chapter(
         body="Testing test",
-        story_id=1
+        story_id=1,
+        published=True
     )
     chapter3 = Chapter(
         body="""
@@ -18,63 +20,75 @@ def seed_chapters():
         TEST
         TEST
         """,
-        story_id=2
+        story_id=2,
+        published=True
     )
     chapters = [
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=3,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=4,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=5,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=6,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=7,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=8,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=9,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=10,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=11,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=12,
+        published=True
         ),
         Chapter(
         title="untitled",
         body="once there was a twice and then there were a many and then none. Huzzah.",
         story_id=13,
+        published=True
         )
     ]
 

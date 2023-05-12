@@ -74,7 +74,6 @@ export default function Chapter(){
 
                 {/*  I understand we're dangerously setting inner html, but we really aren't important enough for someone to put the effort in, I do hope.*/}
                 <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}></div>
-
             </div>
             {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
         </div>
