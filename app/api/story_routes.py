@@ -75,7 +75,7 @@ def story_and_chapter(sid, cid):
     return the cid (chapter_id) in that list.
     """
 
-    story = Story.query.get(sid) # Get me dat stori
+    story = Story.query.get(sid)
     return_object = story.to_dict()
 
     for chapter in story.chapters:
@@ -96,7 +96,6 @@ def create_story():
         if form.validate_on_submit():
             new_story = Story()
             form.populate_obj(new_story)
-            print (form.data)
             image = form.data["the_cover"]
             if image:
                 image.filename = get_unique_filename(image.filename)
