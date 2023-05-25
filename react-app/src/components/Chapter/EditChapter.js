@@ -5,6 +5,10 @@ import { fetchSingleChapter, fetchPutChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
 import { titleValidator } from '../_helpers';
+
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
+
 import './Chapter.css'
 
 export default function EditChapter (){
@@ -18,7 +22,6 @@ export default function EditChapter (){
     const [content, setContent] = useState(chapter?.body || "")
     const [submitted, setSubmitted] = useState(false)
     const history = useHistory()
-    // console.log(story)
 
     useEffect(() => {
         // dispatch(fetchChapter( parseInt(params.chapterId), parseInt(params.
@@ -33,7 +36,6 @@ export default function EditChapter (){
         setTitle(chapter.title)
         setBody(chapter.body)
     }, [dispatch, chapter])
-    console.log(params)
 
     useEffect(() => {
         const ve = [] //Validation Errors
@@ -41,12 +43,12 @@ export default function EditChapter (){
         if(titleValidator(title)) ve.push(titleValidator(title))
         if(!body) ve.push(("body-length"))
         if(ve.length) setErrors(ve)
-        // console.log("!!")
+
       },[title, body])
-    // console.log("STORIES", story)
+
     if (!story) return null
 
-    // console.log((story))
+
 
 
 
@@ -81,13 +83,15 @@ export default function EditChapter (){
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                 /> */}
-                <textarea
+                {/* <textarea
                 type="text"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 placeholder={submitted && errors.includes('body-length') ? "Please add some content, even if it's just a letter." : "Chapter content here..."}
                 className={submitted && errors.includes('body-length') ? "chapter-body" : "chapter-body red"}
-                />
+                /> */}
+                <ReactQuill theme="snow" value={body} onChange={setBody} />
+
                 </label>
                 <button className='btn log-in save-submit' type="submit">Save</button>
             </form>

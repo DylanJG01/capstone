@@ -33,7 +33,6 @@ export const fetchSingleChapter = chapterId => async dispatch => {
     const res = await fetch(`/api/chapters/${chapterId}`)
     if (res.ok) {
         const chapter = await res.json()
-        console.log(chapter)
         dispatch(getChapter(chapter))
     }
 }
@@ -55,7 +54,6 @@ export const fetchPostChapter = chapterData => async dispatch => {
     if (res.ok){
         const newChapter = await res.json()
         dispatch(postChapter(newChapter))
-        console.log(newChapter)
         return newChapter
     }
 }
@@ -89,10 +87,6 @@ export const initialState = { singleChapter: {}, allChapters: {}}
 export default function reducer(state = initialState, action) {
     switch (action.type){
         case GET_CHAPTER: {
-            console.log(action)
-            console.log(action)
-            console.log(action)
-            console.log(action)
             return {
                 ...state,
                 allChapters: {...state.allChapters},

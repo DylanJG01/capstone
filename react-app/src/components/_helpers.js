@@ -11,7 +11,6 @@ export function _usernameValidator(username) {
 
 export function _emailValidator(email) {
     const regex = /^\S+@\S+\.\S+$/
-    // console.log(!regex.test(email))
     if (!regex.test(email)) return true
     return false
 }
@@ -37,7 +36,6 @@ export const urlChecka = url => {
 }
 
 export const titleValidator = title => {
-    console.log(title)
     if (!title) return "title-short"
     if (title.length > 100) return "title-long"
     return false

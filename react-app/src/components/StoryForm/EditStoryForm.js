@@ -22,12 +22,12 @@ export default function EditStoryForm() {
   const [loaded, setLoaded] = useState(false)
 
   const [submitted, setSubmitted] = useState(false)
+  const [active, setActive] = useState(true)
   const params = useParams()
   const history = useHistory()
   const storyId = parseInt(params.storyId)
 
   useEffect(() => {
-    // console.log(parseInt(params.storyId.slice(0, 2)))
     dispatch(fetchSingleStory(storyId))
     setLoaded(true)
     // if (!story) return
@@ -83,16 +83,15 @@ export default function EditStoryForm() {
   const changeRating = () => {
     mature ? setMature(false) : setMature(true)
   }
-  console.log(errors)
   return (
     <>
         <div>
             <button className='back' onClick={() => history.push('/myworks')}>Back</button>
         </div>
         <div className="details-contents">
-          <div>
-              <span onClick={() =>  setTab('details')}>Story Details</span>
-              <span onClick={() =>  setTab('contents')}>Table of Contents</span>
+          <div className="tab-selector">
+              <span className={tab === 'details' ? "active-tab" : ""} onClick={() => setTab('details')}>Story Details</span>
+              <span className={tab === 'details' ? "" : "active-tab"} onClick={() => setTab('contents')}>Table of Contents</span>
           </div>
         </div>
         {tab === "details" && (<>

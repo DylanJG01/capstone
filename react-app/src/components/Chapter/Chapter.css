@@ -1,9 +1,9 @@
 .chapter-content-div {
     /* background-color: green; */
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 70vw;
+    align-items: center; */
+    width: 600px;
 }
 .red {
     color: red;
@@ -69,4 +69,20 @@
 }
 .chapter-body::placeholder {
     color: white;
+}
+
+.ql-editor > p {
+    white-space: pre-wrap;
+}
+.ql-snow .ql-picker.ql-header{
+    display: none;
+}
+
+.ql-toolbar.ql-snow {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.quill {
+
 }

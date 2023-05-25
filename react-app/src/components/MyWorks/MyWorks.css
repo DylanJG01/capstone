@@ -72,9 +72,10 @@ p{
     /* width:100%; */
 
     /**Major Properties**/
-    white-space:nowrap;
+    /* white-space:nowrap;
     overflow:hidden;
-    text-overflow:ellipsis;
+    text-overflow:ellipsis; */
+    word-wrap: break-word;
   }
 
   .my-story-card-li {

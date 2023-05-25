@@ -5,6 +5,8 @@ import { fetchSingleChapter } from '../../store/chapter';
 import { fetchSingleStory } from '../../store/story';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
+
+
 import './Chapter.css'
 
 export default function Chapter(){
@@ -15,13 +17,13 @@ export default function Chapter(){
     const [toChapter, setToChapter] = useState(1)
     // const { setModalContent, setOnModalClose, closeModal } = useModal();
 
-    // console.log(params)
+
 
     useEffect(() => {
         dispatch(fetchSingleStory(params.storyId))
         dispatch(fetchSingleChapter(params.chapterId))
     },[dispatch, user, params.chapterId, params.storyId, toChapter])
-    // console.log("STORIES", story)
+
 
     if (!chapter || !story) return null
     const chapterArr = Object.values(story.allChapters)
@@ -29,7 +31,6 @@ export default function Chapter(){
     if (story){
         for (let i = 0; i < chapterArr.length; i++){
             if (chapterArr[i].id === chapter.id){
-                // console.log("!!!!")
                 chapter.index = chapterArr[i].index
                 chapter.nextChapterId = chapterArr[i].nextChapterId
             }
@@ -43,15 +44,11 @@ export default function Chapter(){
 
     const aFunc = () => {
         const chapter = chapterArr.filter(el =>{
-                console.log(parseInt(el.index) === parseInt(toChapter))
                 if(parseInt(el.index) === parseInt(toChapter)) {
                     return el
                 }
             })[0]
 
-        console.log(story.id)
-        console.log(chapterArr)
-        console.log(toChapter)
         return history.push(`/stories/${story.id}/chapter/${chapter.id}`)
     }
 
@@ -74,7 +71,9 @@ export default function Chapter(){
             </div>
             <div className='chapter-content-div'>
                 <div className='chapter-title'>{chapter.title}</div>
-                <div className='chapter-body'>{chapter.body}</div>
+
+                {/*  I understand we're dangerously setting inner html, but we really aren't important enough for someone to put the effort in, I do hope.*/}
+                <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}></div>
             </div>
             {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
         </div>

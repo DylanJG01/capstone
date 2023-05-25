@@ -10,11 +10,9 @@ export default function UserProfile(){
     const history = useHistory()
     const params = useParams()
 
-    console.log(params)
     useEffect(() => {
         dispatch(fetchUsersStories(params.username))
     },[dispatch, user])
-    console.log("STORIES", stories)
     if (!stories) return null
 
 	return (

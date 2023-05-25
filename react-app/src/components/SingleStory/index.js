@@ -10,15 +10,12 @@ export default function SingleStory(){
     const params = useParams()
     // const { setModalContent, setOnModalClose, closeModal } = useModal();
 
-    console.log(params)
 
     useEffect(() => {
         dispatch(fetchSingleStory( params.storyId ))
     },[dispatch, user])
-    console.log("STORIES", story)
     if (!story) return null
 
-    console.log((story))
 
 	return (
         <>

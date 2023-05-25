@@ -14,10 +14,8 @@ export default function RecommendedStories(){
     useEffect(() => {
         dispatch(fetchStoriesForUser())
     },[dispatch, user])
-    console.log("STORIES", stories)
     if (!stories) return null
 
-    // console.log((stories))
 
     const theModal = (story) => {
         setModalContent(<StoryModal story={story} closeModal={closeModal}/>)

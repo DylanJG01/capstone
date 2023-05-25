@@ -15,7 +15,6 @@ export default function MyWorks(){
         if (!user) return
         dispatch(fetchUsersStories(user.username))
     },[dispatch, user])
-    // console.log("STORIES", stories)
     if (!user) return <h2>You are not logged in! Without knowing who you are, we cannot find your stories!</h2>
 
 	return (
