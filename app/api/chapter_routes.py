@@ -6,7 +6,6 @@ from ..models.db import db
 
 chapter_routes = Blueprint('chapters', __name__)
 
-
 @chapter_routes.route('/')
 def chapters():
     """
@@ -25,8 +24,15 @@ def chapter(id):
     Query for a chapter by id and returns that chapter in a dictionary
     """
     chapter = Chapter.query.get(id)
+
     if request.method == "GET":
-        return chapter.to_dict(), 200
+        return_obj = chapter.to_dict()
+        if chapter.reviews:
+            return_obj['avg'] = 0
+            for review in chapter.reviews:
+                return_obj['avg'] += review.stars
+            return_obj['avg'] /= len(chapter.reviews)
+        return return_obj, 200
     if request.method == "PUT":
         form = ChapterForm()
         form['csrf_token'].data = request.cookies['csrf_token']
@@ -35,7 +41,6 @@ def chapter(id):
             form.populate_obj(chapter_to_edit)
             db.session.commit()
             return chapter_to_edit.to_dict(), 201
-        print (form.errors.items())
     if request.method == "DELETE":
         db.session.delete(chapter)
         db.session.commit()

@@ -25,8 +25,17 @@ def recommended_stories():
             for story in stories:
                 new_story = story.to_dict()
                 new_story['numChapters'] = len(story.chapters)
-                if new_story['numChapters'] > 0:
+                new_story['avg'] = 0
+                new_story['count'] = 0
+                if story.chapters:
                     new_story['firstChapterId'] = story.chapters[0].id
+                    for chapter in story.chapters:
+                        for review in chapter.reviews:
+                            new_story['avg'] += review.stars
+                            new_story['count'] += 1
+                    if new_story['avg']:
+                        new_story['avg'] /= new_story['count']
+
                 return_item[tag_name].append(new_story)
         return  return_item, 200
 
@@ -63,7 +72,6 @@ def story(id):
                 return_obj['allChapters'][chapter.id]['nextChapterId'] = story.chapters[index].id
             except IndexError:
                 return_obj['allChapters'][chapter.id]['nextChapterId'] = None
-
             index += 1
         return return_obj, 200
     return {}, 404

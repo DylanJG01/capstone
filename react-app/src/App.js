@@ -6,10 +6,8 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import RecommendedStories from "./components/Story/RecommendedStories";
-import SingleStory from './components/SingleStory'
 import Chapter from './components/Chapter'
 import StoryFormPage from "./components/StoryForm";
-import UserProfile from "./components/UserProfile";
 import MyWorks from './components/MyWorks'
 import EditStoryForm from "./components/StoryForm/EditStoryForm";
 import EditChapter from "./components/Chapter/EditChapter"

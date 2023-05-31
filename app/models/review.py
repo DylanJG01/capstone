@@ -15,5 +15,6 @@ class Review(db.Model):
 
     def to_dict(self):
         return {
-            'stars': self.stars
+            'stars': self.stars,
+            'content': self.content
         }

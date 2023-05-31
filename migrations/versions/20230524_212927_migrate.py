@@ -1,14 +1,8 @@
-"""migration-nation
+"""migrate
 
-<<<<<<< HEAD:migrations/versions/20230505_084815_migration_nation.py
-Revision ID: 6bd19170f3b6
+Revision ID: dbc77edd35aa
 Revises: 
-Create Date: 2023-05-05 08:48:15.001146
-=======
-Revision ID: d79925259876
-Revises:
-Create Date: 2023-05-11 10:35:32.014828
->>>>>>> dev:migrations/versions/20230511_103532_migrate.py
+Create Date: 2023-05-24 21:29:27.675496
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<< HEAD:migrations/versions/20230505_084815_migration_nation.py
-revision = '6bd19170f3b6'
-=======
-revision = 'd79925259876'
->>>>>>> dev:migrations/versions/20230511_103532_migrate.py
+revision = 'dbc77edd35aa'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,12 +23,6 @@ def upgrade():
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<< HEAD:migrations/versions/20230505_084815_migration_nation.py
-=======
-    if environment == "production":
-        op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
-
->>>>>>> dev:migrations/versions/20230511_103532_migrate.py
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
@@ -48,12 +32,6 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-<<<<<<< HEAD:migrations/versions/20230505_084815_migration_nation.py
-=======
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
->>>>>>> dev:migrations/versions/20230511_103532_migrate.py
     op.create_table('stories',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=True),
@@ -67,12 +45,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<< HEAD:migrations/versions/20230505_084815_migration_nation.py
-=======
-    if environment == "production":
-        op.execute(f"ALTER TABLE stories SET SCHEMA {SCHEMA};")
-
->>>>>>> dev:migrations/versions/20230511_103532_migrate.py
     op.create_table('user_tags',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('tag_id', sa.Integer(), nullable=False),
@@ -80,31 +52,16 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'tag_id')
     )
-<<<<<<< HEAD:migrations/versions/20230505_084815_migration_nation.py
-=======
-    if environment == "production":
-        op.execute(f"ALTER TABLE user_tags SET SCHEMA {SCHEMA};")
-
->>>>>>> dev:migrations/versions/20230511_103532_migrate.py
     op.create_table('chapters',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=True),
     sa.Column('body', sa.Text(), nullable=True),
     sa.Column('cost', sa.Integer(), nullable=True),
     sa.Column('story_id', sa.Integer(), nullable=False),
-<<<<<<< HEAD:migrations/versions/20230505_084815_migration_nation.py
-    sa.ForeignKeyConstraint(['story_id'], ['stories.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-=======
     sa.Column('published', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['story_id'], ['stories.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE chapters SET SCHEMA {SCHEMA};")
-
->>>>>>> dev:migrations/versions/20230511_103532_migrate.py
     op.create_table('story_tags',
     sa.Column('story_id', sa.Integer(), nullable=False),
     sa.Column('tag_id', sa.Integer(), nullable=False),
@@ -112,7 +69,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['tag_id'], ['tags.id'], ),
     sa.PrimaryKeyConstraint('story_id', 'tag_id')
     )
-<<<<<<< HEAD:migrations/versions/20230505_084815_migration_nation.py
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('comment', sa.String(length=500), nullable=True),
@@ -128,11 +84,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['chapter_id'], ['chapters.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-=======
-    if environment == "production":
-        op.execute(f"ALTER TABLE story_tags SET SCHEMA {SCHEMA};")
-
->>>>>>> dev:migrations/versions/20230511_103532_migrate.py
     # ### end Alembic commands ###
 
 
