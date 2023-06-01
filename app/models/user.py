@@ -18,6 +18,9 @@ class User(db.Model, UserMixin):
     tags = db.relationship('Tag', secondary=user_tags, backref='users', lazy=True)
     # stories = db.relationship('Story', backref='users', cascade='all, delete-orphan')
     stories = db.relationship("Story", back_populates="user", cascade="all, delete-orphan")
+    reviews = db.relationship("Review", back_populates="user", cascade="all, delete-orphan")
+
+
     @property
     def password(self):
         return self.hashed_password

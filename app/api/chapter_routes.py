@@ -27,11 +27,6 @@ def chapter(id):
 
     if request.method == "GET":
         return_obj = chapter.to_dict()
-        if chapter.reviews:
-            return_obj['avg'] = 0
-            for review in chapter.reviews:
-                return_obj['avg'] += review.stars
-            return_obj['avg'] /= len(chapter.reviews)
         return return_obj, 200
     if request.method == "PUT":
         form = ChapterForm()

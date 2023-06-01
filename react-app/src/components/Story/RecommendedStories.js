@@ -16,7 +16,6 @@ export default function RecommendedStories(){
     },[dispatch, user])
     if (!stories) return null
 
-
     const theModal = (story) => {
         setModalContent(<StoryModal story={story} closeModal={closeModal}/>)
     }

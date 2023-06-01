@@ -8,25 +8,17 @@ review_routes = Blueprint('reviews', __name__)
 
 @review_routes.route('/chapter/<int:id>')
 def reviews(id):
-    """
-    Query for all reviews and returns them in a list of review dictionaries
-    """
     reviews = Review.query.filter(Review.chapter_id == id)
 
-    return_obj = {"avg" : 0, 'len': 0}
+    return_obj = {}
     for review in reviews:
-        return_obj[str(review.id)] = review.to_dict()
-        return_obj['avg'] += review.stars
-        return_obj['len'] += 1
-    if return_obj['avg'] > 0 :
-        return_obj['avg'] /= return_obj['len']
+        return_obj[review.id] = review.to_dict()
+        return_obj[review.id]['user'] = review.user.to_dict()
+
     return return_obj , 200
 
 @review_routes.route('/<int:id>', methods=["GET", "PUT", "DELETE"])
 def review(id):
-    """
-    Query for a review by id and returns that review in a dictionary
-    """
     review = Review.query.get(id)
     if request.method == "GET":
         return review.to_dict(), 200
@@ -34,10 +26,10 @@ def review(id):
         form = ReviewForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            review_to_edit = Review.query.get(id)
-            form.populate_obj(review_to_edit)
+            edited_review = Review.query.get(id)
+            form.populate_obj(edited_review)
             db.session.commit()
-            return review_to_edit.to_dict(), 201
+            return edited_review.to_dict(), 201
     if request.method == "DELETE":
         db.session.delete(review)
         db.session.commit()

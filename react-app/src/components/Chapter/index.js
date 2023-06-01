@@ -6,27 +6,47 @@ import { fetchSingleStory } from '../../store/story';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
 import Reviews from '../Review'
-
 import './Chapter.css'
+import { fetchAllChapterReviews } from '../../store/review';
+import PostReview from '../Review/PostReview';
+import { useModal } from '../../context/Modal';
 
 export default function Chapter(){
-	const [user, story, chapter] = useSelector(state => [state.session.user, state.stories.singleStory, state.chapters.singleChapter]);
+	const [user, story, chapter, reviews] = useSelector(state => [state.session.user, state.stories.singleStory, state.chapters.singleChapter, state.reviews.allReviews]);
     const dispatch = useDispatch()
     const params = useParams()
     const history = useHistory()
     const [toChapter, setToChapter] = useState(1)
+    const [myReviewId, setMyReviewId] = useState(0)
     const [loaded, setLoaded] = useState(false)
-    // const { setModalContent, setOnModalClose, closeModal } = useModal();
+
+    const { setModalContent, closeModal } = useModal()
+
+    const reviewModal = () => {
+         setModalContent(<PostReview
+                        userId={user.id}
+                        chapterId={chapter.id}
+                        closeModal={closeModal}/>
+                        )
+    }
 
     useEffect(() => {
         const load = async () => {
             await dispatch(fetchSingleStory(params.storyId))
             await dispatch(fetchSingleChapter(params.chapterId))
+            await dispatch(fetchAllChapterReviews(params.chapterId))
+
             setLoaded(true)
         }
         load();
     },[dispatch, user, params.chapterId, params.storyId, toChapter])
 
+    useEffect(() => {
+        if (user && reviews){
+
+        setMyReviewId(Object.values(reviews).filter(review => review.userId === user.id)[0]?.id)
+        }
+    }, [reviews])
 
     if (!chapter || !story) return null
     const chapterArr = Object.values(story.allChapters)
@@ -82,7 +102,8 @@ export default function Chapter(){
                 <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}/>
             </div>
             {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
-            <Reviews chapterId={chapter.id}/>
+            { !myReviewId && <button onClick={() => reviewModal("post")}>Review</button>}
+            <Reviews reviews={reviews} myReviewId={myReviewId}/>
         </div>
 	);
 }

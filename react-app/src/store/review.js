@@ -45,7 +45,7 @@ export const fetchAllChapterReviews = chapterId => async dispatch => {
   }
 };
 
-export const fetchPostReview = reviewData => async dispatch => {
+export const fetchPostReview = (reviewData) => async dispatch => {
   const res = await fetch('/api/reviews/new', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -54,15 +54,16 @@ export const fetchPostReview = reviewData => async dispatch => {
   if (res.ok) {
     const newReview = await res.json();
     dispatch(postReview(newReview));
-    return newReview;
+    return newReview.id;
   }
 };
 
-export const fetchPutReview = (reviewData, reviewId) => async dispatch => {
-  const res = await fetch(`/api/reviews/${reviewId}`, {
+export const fetchPutReview = (review) => async dispatch => {
+  console.log(review)
+  const res = await fetch(`/api/reviews/${review.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(reviewData)
+    body: JSON.stringify(review)
   });
   if (res.ok) {
     const updatedReview = await res.json();
@@ -104,13 +105,16 @@ export default function reducer(state = initialState, action) {
       };
     }
     case POST_REVIEW: {
+      const reviews = {...state.allReviews}
+      reviews[action.review.id] = action.review
       return {
         ...state,
-        allReviews: { ...state.allReviews },
+        allReviews: { ...reviews },
         singleReview: action.review
       };
     }
     case EDIT_REVIEW: {
+        state.allReviews[action.review.id] = action.review
       return {
         ...state,
         allReviews: { ...state.allReviews },

@@ -38,6 +38,7 @@ export default function StoryModal({story, closeModal}) {
         </div>
 
         <div className="description-p">{story.description}</div>
+        <div className="avg-rating">Avg rating {story.avg}</div>
         {/* <div onClick={() => toStoryDetails()}>More Details </div> */}
     </div>
     </div>)

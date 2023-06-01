@@ -4,4 +4,6 @@ from wtforms.validators import DataRequired
 
 class ReviewForm(FlaskForm):
     content = StringField('content')
-    chapter_id = IntegerField('story_id', [DataRequired()])
+    stars = IntegerField('stars')
+    chapter_id = IntegerField('chapter_id', [DataRequired()])
+    user_id = IntegerField('user_id', [DataRequired()])

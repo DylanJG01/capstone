@@ -35,7 +35,6 @@ def recommended_stories():
                             new_story['count'] += 1
                     if new_story['avg']:
                         new_story['avg'] /= new_story['count']
-
                 return_item[tag_name].append(new_story)
         return  return_item, 200
 
@@ -50,8 +49,16 @@ def recommended_stories():
         for story in stories:
             new_story = story.to_dict()
             new_story['numChapters'] = len(story.chapters)
-            if new_story['numChapters'] > 0:
+            new_story['avg'] = 0
+            new_story['count'] = 0
+            if story.chapters:
                 new_story['firstChapterId'] = story.chapters[0].id
+                for chapter in story.chapters:
+                    for review in chapter.reviews:
+                        new_story['avg'] += review.stars
+                        new_story['count'] += 1
+                if new_story['avg']:
+                    new_story['avg'] /= new_story['count']
             return_item[tag.name].append(new_story)
     return return_item, 200
 
@@ -64,6 +71,8 @@ def story(id):
     if story:
         return_obj = story.to_dict()
         return_obj['allChapters'] = {}
+        return_obj['avg'] = 0
+        return_obj['count'] = 0
         index = 1
         for chapter in story.chapters:
             return_obj['allChapters'][chapter.id] = chapter.to_dict()
@@ -73,6 +82,12 @@ def story(id):
             except IndexError:
                 return_obj['allChapters'][chapter.id]['nextChapterId'] = None
             index += 1
+
+            for review in chapter.reviews:
+                return_obj['avg'] += review.stars
+                return_obj['count'] += 1
+            if return_obj['avg']:
+                return_obj['avg'] /= return_obj['count']
         return return_obj, 200
     return {}, 404
 
@@ -182,8 +197,15 @@ def stories():
     return_obj = {}
     for story in stories:
         return_obj[story.id] = story.to_dict()
+        return_obj[story.id]['avg'] = 0
+        return_obj[story.id]['count'] = 0
         if story.chapters:
             return_obj[story.id]['firstChapterId'] = story.chapters[0].id
             return_obj[story.id]['numChapters'] = len(story.chapters)
-
+            for chapter in story.chapters:
+                for review in chapter.reviews:
+                    return_obj[story.id]['avg'] += review.stars
+                    return_obj[story.id]['count'] += 1
+            if return_obj[story.id]['count']:
+                    return_obj[story.id]['avg'] /= return_obj[story.id]['count']
     return return_obj, 200

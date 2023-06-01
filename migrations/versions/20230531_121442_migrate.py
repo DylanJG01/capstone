@@ -1,16 +1,19 @@
 """migrate
 
-Revision ID: dbc77edd35aa
-Revises: 
-Create Date: 2023-05-24 21:29:27.675496
+Revision ID: 61c609a20479
+Revises:
+Create Date: 2023-05-31 12:14:42.573626
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'dbc77edd35aa'
+revision = '61c609a20479'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +26,9 @@ def upgrade():
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
+
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
@@ -32,6 +38,9 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.create_table('stories',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=True),
@@ -45,6 +54,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE stories SET SCHEMA {SCHEMA};")
+
     op.create_table('user_tags',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('tag_id', sa.Integer(), nullable=False),
@@ -52,6 +64,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'tag_id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE user_tags SET SCHEMA {SCHEMA};")
+
     op.create_table('chapters',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=True),
@@ -62,6 +77,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['story_id'], ['stories.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE chapters SET SCHEMA {SCHEMA};")
+
     op.create_table('story_tags',
     sa.Column('story_id', sa.Integer(), nullable=False),
     sa.Column('tag_id', sa.Integer(), nullable=False),
@@ -69,6 +87,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['tag_id'], ['tags.id'], ),
     sa.PrimaryKeyConstraint('story_id', 'tag_id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE story_tags SET SCHEMA {SCHEMA};")
+
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('comment', sa.String(length=500), nullable=True),
@@ -76,14 +97,22 @@ def upgrade():
     sa.ForeignKeyConstraint(['chapter_id'], ['chapters.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('stars', sa.Integer(), nullable=False),
     sa.Column('content', sa.String(length=300), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('chapter_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['chapter_id'], ['chapters.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
