@@ -139,6 +139,27 @@ def create_story():
             return return_obj, 200
         return {}, 500
 
+# @story_routes.route('/<int:id>/publish', methods=['PUT'])
+# @login_required
+# def publish_story(id):
+
+#     form = StoryForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         story_to_edit = Story.query.get(id)
+#         form.populate_obj(story_to_edit)
+
+#         db.session.commit()
+#         return_obj = story_to_edit.to_dict()
+#         # return_obj['tags'] = story_to_edit.tags[-1].name
+
+#         return_obj['allChapters'] = {}
+#         for chapter in story_to_edit.chapters:
+#             return_obj['allChapters'][chapter.id] = chapter.to_dict()
+
+#         return return_obj, 200
+#     return {"falure" : "FAILURE"}
+
 @story_routes.route('/<int:id>', methods=['PUT', 'DELETE'])
 @login_required
 def delete_edit_story(id):
