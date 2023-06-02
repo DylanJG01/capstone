@@ -12,10 +12,10 @@ export default function EditStoryForm() {
   const [title, setTitle] = useState(story?.title || "");
   const [description, setDescription] = useState(story?.description || "");
   // const [tags, setTags] = useState(story?.tags || "");
-  const [tag1, setTag1] = useState("None")
-  const [mature, setMature] = useState(story?.mature ?? false)
-  const [cover, setCover] = useState(story?.cover || '')
-  const [theCover, setTheCover] = useState(story?.cover || '')
+  // const [tag1, setTag1] = useState("None")
+  const [mature, setMature] = useState(story?.mature || false)
+  const [cover, setCover] = useState(null)
+  // const [theCover, setTheCover] = useState(story?.cover || '')
   const [errors, setErrors] = useState([]);
 
   const [tab, setTab] = useState('details')
@@ -28,8 +28,11 @@ export default function EditStoryForm() {
   const storyId = parseInt(params.storyId)
 
   useEffect(() => {
-    dispatch(fetchSingleStory(storyId))
+    const load = async () => {
+    await dispatch(fetchSingleStory(storyId))
     setLoaded(true)
+  }
+    load()
     // if (!story) return
   },[dispatch, storyId])
 
@@ -37,9 +40,10 @@ export default function EditStoryForm() {
     if (loaded) {
         setTitle(story.title)
         setDescription(story.description)
-        setTag1(story.tags)
+        // setTag1(story.tags)
+        setCover(story.cover)
         setMature(story.mature)
-        setTheCover(story.cover)
+        // setTheCover(story.cover)
     }
   },[story, loaded])
 
@@ -47,21 +51,50 @@ export default function EditStoryForm() {
     const ve = [] //Validation Errors
     setErrors([])
     if(titleValidator(title)) ve.push(titleValidator(title))
-    if(cover && urlChecka(cover)) ve.push(urlChecka(cover))
     if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
-  },[title, description, cover, tag1])
+  },[title, description, /*tag1*/])
+
+  useEffect(() => {
+    console.log(cover)
+}, [cover])
+
 
   const handleSubmit = async (e) => {
+    console.log(cover)
     e.preventDefault();
     if (errors.length){
+      console.log("Oh")
+      console.log(errors)
       setSubmitted(true)
       return
     }
-    dispatch(fetchPutStory({title, description, 'user_id': user.id, mature, cover}, storyId))
+    const formData = new FormData();
+    const theObj = {
+      title,
+      description,
+      the_cover: cover,
+      // tag: tag1,
+      user_id: user.id
+    }
+    console.log(theObj.cover)
+
+    for (const i in theObj){
+      if( i !== 'the_cover'){
+        formData.append(`${i}`, theObj[i])
+      } else {
+        console.log(cover)
+        console.log(cover)
+        console.log(cover)
+        console.log(cover)
+        formData.append('the_cover', cover)
+      }
+    }
+    dispatch(fetchPutStory(formData, storyId))
     alert("Details Saved")
-    history.push(`/myworks/${story.id}-${titleToSword(title)}`)
-    dispatch(fetchUsersStories(user.username))
+
+    // history.push(`/myworks/${story.id}-${titleToSword(title)}`)
+    // dispatch(fetchUsersStories(user.username))
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
 
@@ -98,7 +131,7 @@ export default function EditStoryForm() {
           <div className="story-form-div">
             <div className="cover-img-divz">
               <img className="story-form-img"
-              src={theCover}
+              src={story.cover}
               alt={`${title} cover`}
               onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
               />
@@ -133,15 +166,11 @@ export default function EditStoryForm() {
             />
           </label>
           <label className="label">
-          <div>Cover
-          {submitted && errors.includes('url') && (<span className="error">Invalid Url</span>)}
-          {submitted && errors.includes('img-type') && (<span className="error">Must End in jpg, jpeg, or img</span>)}
-          </div>
+            <div>Cover</div>
             <input
-              type="text"
-              value={cover}
-              onChange={(e) => setCover(e.target.value)}
-              placeholder="Cover Image Url"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setCover(e.target.files[0])}
             />
           </label>
           <label className="label mature">
@@ -168,7 +197,7 @@ export default function EditStoryForm() {
               <div className="table-of-contents">
               <button onClick={() => postChapter()}>New Part</button>
                 {story.allChapters && Object.values(story?.allChapters).map(chapter => (
-                    <li className="chapter-li">
+                    <li className="chapter-li" key={`chapter${chapter.id}`}>
                         <p className="the-h3">{chapter.title}</p>
                         <div className="button-container">
                         <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i class="fa-solid fa-pen-to-square"></i></button>

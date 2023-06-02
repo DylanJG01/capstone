@@ -20,15 +20,14 @@ export default function StoryFormPage() {
   const history = useHistory()
 
   const handleSubmit = async (e) => {
+    console.log(cover)
     e.preventDefault();
     if (errors.length){
       setSubmitted(true);
       return
     }
     // let newStory = await dispatch(fetchPostStory({title, description, cover: cover, tags: [tag1], 'user_id': user.id}))
-
     const formData = new FormData();
-
     const theObj = {
       title,
       description,

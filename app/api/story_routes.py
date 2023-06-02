@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Story, User, Tag, story_tags, Chapter
 from app.forms.story_form import StoryForm
 from ..models.db import db
-from ._AWS_helpers import upload_file_to_AWS, get_unique_filename
+from ._AWS_helpers import upload_file_to_AWS, get_unique_filename, remove_file_from_s3
 
 story_routes = Blueprint('stories', __name__)
 
@@ -16,7 +16,7 @@ def recommended_stories():
         return_item = {}
         user_tags = ['Romance', 'Fantasy', 'Mystery']
         for tag_name in user_tags:
-            stories = Story.query\
+            stories = Story.query.filter(Story.published == True)\
             .join(Tag, Story.tags)\
             .filter((Tag.name == tag_name))\
             .limit(5)
@@ -41,7 +41,7 @@ def recommended_stories():
     user = User.query.get(current_user.id)
     return_item = {}
     for tag in user.tags:
-        stories = Story.query\
+        stories = Story.query.filter(Story.published == True)\
             .join(Tag, Story.tags)\
             .filter((Tag.name == tag.name))\
             .limit(5)
@@ -168,6 +168,7 @@ def delete_edit_story(id):
     """
     if request.method == "DELETE":
         story = Story.query.get(id)
+        remove_file_from_s3(story.cover)
         db.session.delete(story)
         db.session.commit()
         return {"message": "story deleted"}, 204
@@ -176,7 +177,15 @@ def delete_edit_story(id):
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             story_to_edit = Story.query.get(id)
+            image = form.data["the_cover"]
+
+            if image and story_to_edit.cover:
+                    remove_file_from_s3(story_to_edit.cover)
             form.populate_obj(story_to_edit)
+            if image:
+                image.filename = get_unique_filename(image.filename)
+                upload = upload_file_to_AWS(image)
+                story_to_edit.cover = upload["url"]
 
             # tags_obj = request.get_json()
             # for tag in tags_obj['tags']:

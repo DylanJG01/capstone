@@ -101,8 +101,7 @@ export const fetchPostStory = (data) => async dispatch => {
 export const fetchPutStory = (data, storyId) => async dispatch => {
     const res = await fetch(`/api/stories/${storyId}`, {
         method : "PUT",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
+        body: data
     })
     if (res.ok){
         const newStory = await res.json()
