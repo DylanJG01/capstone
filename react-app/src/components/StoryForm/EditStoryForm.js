@@ -199,6 +199,7 @@ export default function EditStoryForm() {
                 {story.allChapters && Object.values(story?.allChapters).map(chapter => (
                     <li className="chapter-li" key={`chapter${chapter.id}`}>
                         <p className="the-h3">{chapter.title}</p>
+                        <button>Set Cost</button>
                         <div className="button-container">
                         <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i class="fa-solid fa-pen-to-square"></i></button>
                         <button className="btn delete" onClick={() => deleteChapter(chapter.id)}><i class="fa-solid fa-trash"></i></button>

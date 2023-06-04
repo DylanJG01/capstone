@@ -5,6 +5,7 @@ from .stories import seed_stories, undo_stories
 from .chapters import seed_chapters, undo_chapters
 from .comments import seed_comments, undo_comments
 from .reviews import seed_reviews, undo_reviews
+from .authorized_readers import seed_authorized_readers, undo_authorized_readers
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -26,12 +27,14 @@ def seed():
         undo_chapters()
         undo_comments()
         undo_reviews()
+        undo_authorized_readers()
     seed_tags()
     seed_users()
     seed_stories()
     seed_chapters()
     seed_comments()
     seed_reviews()
+    seed_authorized_readers()
 
     # Add other seed functions here
 
@@ -45,4 +48,5 @@ def undo():
     undo_chapters()
     undo_comments()
     undo_reviews()
+    undo_authorized_readers()
     # Add other undo functions here

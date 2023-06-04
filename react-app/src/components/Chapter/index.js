@@ -23,11 +23,11 @@ export default function Chapter(){
     const { setModalContent, closeModal } = useModal()
 
     const reviewModal = () => {
-         setModalContent(<PostReview
-                        userId={user.id}
-                        chapterId={chapter.id}
-                        closeModal={closeModal}/>
-                        )
+            setModalContent(<PostReview
+                userId={user.id}
+                chapterId={chapter.id}
+                closeModal={closeModal}/>
+                )
     }
 
     useEffect(() => {
@@ -102,7 +102,7 @@ export default function Chapter(){
                 <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}/>
             </div>
             {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
-            { !myReviewId && <button onClick={() => reviewModal("post")}>Review</button>}
+            { user && !myReviewId && user?.id !== story?.user_id && <button onClick={() => reviewModal("post")}>Review</button>}
             <Reviews reviews={reviews} myReviewId={myReviewId}/>
         </div>
 	);

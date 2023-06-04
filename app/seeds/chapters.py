@@ -92,10 +92,11 @@ def seed_chapters():
         )
     ]
 
-    [db.session.add(chapter) for chapter in chapters]
     db.session.add(chapter1)
     db.session.add(chapter2)
     db.session.add(chapter3)
+    [db.session.add(chapter) for chapter in chapters]
+
     db.session.commit()
 
 
