@@ -29,7 +29,6 @@ export default function EditChapter (){
         dispatch(fetchSingleChapter(parseInt(params.chapterId)))
     },[dispatch, user, params.chapterId, params.storyId])
 
-
     useEffect (() => {
         if (!chapter) return null
         // setBody(chapter.body)
@@ -48,14 +47,9 @@ export default function EditChapter (){
 
     if (!story) return null
 
-
-
-
-
     const handleSubmit = async e => {
         e.preventDefault()
         if(errors.length){
-
         }
         dispatch(fetchPutChapter({title, body, story_id: parseInt(params.storyId)}, parseInt(params.chapterId)))
         return alert("Saved! Prettier notification coming soon...")
@@ -91,7 +85,6 @@ export default function EditChapter (){
                 className={submitted && errors.includes('body-length') ? "chapter-body" : "chapter-body red"}
                 /> */}
                 <ReactQuill theme="snow" value={body} onChange={setBody} />
-
                 </label>
                 <button className='btn log-in save-submit' type="submit">Save</button>
             </form>

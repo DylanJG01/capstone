@@ -178,15 +178,23 @@ def delete_edit_story(id):
         if form.validate_on_submit():
             story_to_edit = Story.query.get(id)
             image = form.data["the_cover"]
-
-            if image and story_to_edit.cover:
-                    remove_file_from_s3(story_to_edit.cover)
+            current_cover = story_to_edit.cover
+            print(form.data)
+            print(form.data)
+            print(form.data)
+            print(form.data)
+            print(form.data)
+            print(form.data)
             form.populate_obj(story_to_edit)
+
             if image:
+                if story_to_edit.cover:
+                    remove_file_from_s3(story_to_edit.cover)
                 image.filename = get_unique_filename(image.filename)
                 upload = upload_file_to_AWS(image)
                 story_to_edit.cover = upload["url"]
-
+            if not image and current_cover:
+                story_to_edit.cover = current_cover
             # tags_obj = request.get_json()
             # for tag in tags_obj['tags']:
             #     tag = Tag.query.filter(Tag.name == tag).all()

@@ -61,10 +61,10 @@ export default function EditStoryForm() {
 
 
   const handleSubmit = async (e) => {
+    console.log(story.cover)
     console.log(cover)
     e.preventDefault();
     if (errors.length){
-      console.log("Oh")
       console.log(errors)
       setSubmitted(true)
       return
@@ -83,10 +83,6 @@ export default function EditStoryForm() {
       if( i !== 'the_cover'){
         formData.append(`${i}`, theObj[i])
       } else {
-        console.log(cover)
-        console.log(cover)
-        console.log(cover)
-        console.log(cover)
         formData.append('the_cover', cover)
       }
     }
