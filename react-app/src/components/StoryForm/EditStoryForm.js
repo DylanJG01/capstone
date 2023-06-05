@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchPutStory, fetchSingleStory,fetchUsersStories } from "../../store/story";
+import {fetchPutStory, fetchSingleStory, } from "../../store/story";
 import { useParams, useHistory } from "react-router-dom";
-import { titleToSword, options, titleValidator, urlChecka, descriptionValidator} from "../_helpers";
-import { fetchDeleteChapter, fetchPostChapter } from "../../store/chapter";
+import { titleToSword, options, titleValidator, descriptionValidator} from "../_helpers";
+import { fetchAllChapters, fetchDeleteChapter } from "../../store/chapter";
+import SetCost from '../SetCostModal'
+
 import './StoryForm.css'
 
 export default function EditStoryForm() {
   const dispatch = useDispatch();
-  const [user, story] = useSelector((state) => [state.session.user, state.stories.singleStory]);
+  const [user, story, chapters] = useSelector((state) => [state.session.user, state.stories.singleStory, state.chapters.allChapters]);
   const [title, setTitle] = useState(story?.title || "");
   const [description, setDescription] = useState(story?.description || "");
   // const [tags, setTags] = useState(story?.tags || "");
@@ -30,6 +32,7 @@ export default function EditStoryForm() {
   useEffect(() => {
     const load = async () => {
     await dispatch(fetchSingleStory(storyId))
+    await dispatch(fetchAllChapters(storyId))
     setLoaded(true)
   }
     load()
@@ -192,10 +195,16 @@ export default function EditStoryForm() {
             <div className="table-of-contents-div">
               <div className="table-of-contents">
               <button onClick={() => postChapter()}>New Part</button>
-                {story.allChapters && Object.values(story?.allChapters).map(chapter => (
+                {chapters && Object.values(chapters).map((chapter, i )=> (
                     <li className="chapter-li" key={`chapter${chapter.id}`}>
                         <p className="the-h3">{chapter.title}</p>
-                        <button>Set Cost</button>
+                        {i ? <>
+                        <div>{chapter.cost}</div>
+                        <SetCost chapter={chapter}/>
+                        </> :
+                        <div> First chapter always free </div>
+                        }
+
                         <div className="button-container">
                         <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i class="fa-solid fa-pen-to-square"></i></button>
                         <button className="btn delete" onClick={() => deleteChapter(chapter.id)}><i class="fa-solid fa-trash"></i></button>

@@ -1,21 +1,22 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPutChapter } from '../../store/chapter';
+import EditCost from './EditCost'
 import { useModal } from '../../context/Modal';
+
 
 export default function SetCostModal({chapter}){
     const dispatch = useDispatch()
     const { setModalContent, closeModal } = useModal()
 
-    const editReview = () => {
-        setModalContent(<EditReview
-            review={reviews[myReviewId]}
-            closeModal={closeModal}/>
+    const editCost = () => {
+        setModalContent(<EditCost
+            closeModal={closeModal} chapter={chapter}/>
             )
     }
 	return (
-        <div className='review-container'>
-
-        </div>
+        <button className='set-cost' onClick={editCost}>
+            Edit Cost
+        </button>
 	);
 }

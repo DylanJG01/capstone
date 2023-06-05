@@ -1,12 +1,13 @@
-from app.models import db, authorized_readers, environment, SCHEMA
-from sqlalchemy.sql import text
+from app.models import db, purchased_chapters, environment, SCHEMA
+from sqlalchemy.sql import text, insert
 
 
-def seed_authorized_readers():
+def seed_purchased_chapters():
     readers = [
-        {'user_id': 1, 'chapter_id': 10}
+        {'user_id': 1, 'chapter_id': 10},
+        {'user_id': 1, 'chapter_id': 11},
         ]
-    stmt = authorized_readers.insert().values(readers)
+    stmt = db.insert(purchased_chapters).values(readers)
     db.session.execute(stmt)
     db.session.commit();
 
@@ -17,10 +18,10 @@ def seed_authorized_readers():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_authorized_readers():
+def undo_purchased_chapters():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.authorized_readers RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.purchased_chapters RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM authorized_readers"))
+        db.session.execute(text("DELETE FROM purchased_chapters"))
 
     db.session.commit()

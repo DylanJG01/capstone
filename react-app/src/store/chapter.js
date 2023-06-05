@@ -66,7 +66,7 @@ export const fetchPutChapter = (chapterData, chapterId) => async dispatch => {
     })
     if (res.ok){
         const newChapter = await res.json()
-        dispatch(postChapter(newChapter))
+        dispatch(editChapter(newChapter))
         return newChapter
     }
 }
@@ -108,9 +108,11 @@ export default function reducer(state = initialState, action) {
             }
         }
         case EDIT_CHAPTER: {
+            const theChapters = {...state.allChapters}
+            theChapters[action.chapter.id] = action.chapter
             return {
                 ...state,
-                allChapters: {...state.allChapters},
+                allChapters: theChapters,
                 singleChapter: action.chapter
             }
         }

@@ -13,13 +13,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    # wallet = db.Column(db.Integer())
+    coins = db.Column(db.Integer(), default=300)
 
     tags = db.relationship('Tag', secondary=user_tags, backref='users', lazy=True)
-    # stories = db.relationship('Story', backref='users', cascade='all, delete-orphan')
     stories = db.relationship("Story", back_populates="user", cascade="all, delete-orphan")
     reviews = db.relationship("Review", back_populates="user", cascade="all, delete-orphan")
-
 
     @property
     def password(self):
@@ -36,5 +34,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'coins': self.coins
         }

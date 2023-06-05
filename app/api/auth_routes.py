@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db, Tag
+from app.models import User, db, Tag, purchased_chapters
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from sqlalchemy import select
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -24,7 +25,16 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        return current_user.to_dict()
+
+        query = select(purchased_chapters.c.chapter_id).where(purchased_chapters.c.user_id == current_user.id)
+
+        # Execute the query and fetch all the results
+        results = db.session.execute(query).all()
+        user = current_user.to_dict()
+        user['purchased_chapters'] = {}
+        for result in results:
+            user['purchased_chapters'][result[0]] = True
+        return user
     return {'errors': ['Unauthorized']}
 
 

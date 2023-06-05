@@ -84,7 +84,9 @@ export default function Chapter(){
     if(!loaded) return (<>Loading</>)
 
 	return (
+
         <div className='chapter-page'>
+
             <div>
             <span>Select Chapter: </span>
             <select value={toChapter} onChange={e => {
@@ -95,11 +97,14 @@ export default function Chapter(){
             </select>
             <button onClick={() => aFunc()}> Go!</button>
             </div>
-            <div className='chapter-content-div'>
-                <div className='chapter-title'>{chapter.title}</div>
 
+            <div className='chapter-content-div'>
+
+                <div className='chapter-title'>{chapter.title}</div>
                 {/*  I understand we're dangerously setting inner html, but we really aren't important enough for someone to put the effort in, I do hope.*/}
-                <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}/>
+
+                {<div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}/>}
+
             </div>
             {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
             { user && !myReviewId && user?.id !== story?.user_id && <button onClick={() => reviewModal("post")}>Review</button>}

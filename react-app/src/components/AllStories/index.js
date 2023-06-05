@@ -35,6 +35,7 @@ export default function AllStories(){
             key={story.id}
             onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
             />
+            {story.cost ? (<div>$$</div>) : <></>}
             </div>
             <div className='all-story-info'>
             <p className='story-title-p'>{story.title}</p>

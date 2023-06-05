@@ -33,6 +33,8 @@ def recommended_stories():
                         for review in chapter.reviews:
                             new_story['avg'] += review.stars
                             new_story['count'] += 1
+                        if chapter.cost:
+                            new_story['cost'] = 1
                     if new_story['avg']:
                         new_story['avg'] /= new_story['count']
                 return_item[tag_name].append(new_story)
@@ -57,8 +59,11 @@ def recommended_stories():
                     for review in chapter.reviews:
                         new_story['avg'] += review.stars
                         new_story['count'] += 1
+                    if chapter.cost:
+                        new_story['cost'] = 1
                 if new_story['avg']:
                     new_story['avg'] /= new_story['count']
+                print(new_story['title'])
             return_item[tag.name].append(new_story)
     return return_item, 200
 
@@ -88,6 +93,7 @@ def story(id):
                 return_obj['count'] += 1
             if return_obj['avg']:
                 return_obj['avg'] /= return_obj['count']
+
         return return_obj, 200
     return {}, 404
 
@@ -177,19 +183,14 @@ def delete_edit_story(id):
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             story_to_edit = Story.query.get(id)
+            published = story_to_edit.published
             image = form.data["the_cover"]
             current_cover = story_to_edit.cover
-            print(form.data)
-            print(form.data)
-            print(form.data)
-            print(form.data)
-            print(form.data)
-            print(form.data)
             form.populate_obj(story_to_edit)
-
+            story_to_edit.published = published
             if image:
-                if story_to_edit.cover:
-                    remove_file_from_s3(story_to_edit.cover)
+                if current_cover:
+                    remove_file_from_s3(current_cover)
                 image.filename = get_unique_filename(image.filename)
                 upload = upload_file_to_AWS(image)
                 story_to_edit.cover = upload["url"]
@@ -241,9 +242,12 @@ def stories():
             return_obj[story.id]['firstChapterId'] = story.chapters[0].id
             return_obj[story.id]['numChapters'] = len(story.chapters)
             for chapter in story.chapters:
+                if chapter.cost:
+                    return_obj[story.id]['cost'] = 1
                 for review in chapter.reviews:
                     return_obj[story.id]['avg'] += review.stars
                     return_obj[story.id]['count'] += 1
             if return_obj[story.id]['count']:
                     return_obj[story.id]['avg'] /= return_obj[story.id]['count']
+
     return return_obj, 200

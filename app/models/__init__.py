@@ -5,5 +5,5 @@ from .story import Story
 from .tag import Tag
 from .review import Review
 from .comment import Comment
-from .authorized_readers import authorized_readers
+from .purchased_chapters import purchased_chapters
 from .db import environment, SCHEMA
