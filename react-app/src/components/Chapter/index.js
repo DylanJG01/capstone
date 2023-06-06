@@ -10,6 +10,7 @@ import './Chapter.css'
 import { fetchAllChapterReviews } from '../../store/review';
 import PostReview from '../Review/PostReview';
 import { useModal } from '../../context/Modal';
+import PurchaseChapter from '../PurchaseChapter'
 
 export default function Chapter(){
 	const [user, story, chapter, reviews] = useSelector(state => [state.session.user, state.stories.singleStory, state.chapters.singleChapter, state.reviews.allReviews]);
@@ -35,7 +36,6 @@ export default function Chapter(){
             await dispatch(fetchSingleStory(params.storyId))
             await dispatch(fetchSingleChapter(params.chapterId))
             await dispatch(fetchAllChapterReviews(params.chapterId))
-
             setLoaded(true)
         }
         load();
@@ -100,10 +100,13 @@ export default function Chapter(){
 
             <div className='chapter-content-div'>
 
-                <div className='chapter-title'>{chapter.title}</div>
+                <div className='chapter-title'>{chapter?.title}</div>
                 {/*  I understand we're dangerously setting inner html, but we really aren't important enough for someone to put the effort in, I do hope.*/}
-
-                {<div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}/>}
+                {(!chapter.cost || story.user_id === user?.id || (user && user.purchased_chapters && user.purchased_chapters[chapter.id]) ) ?
+                <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}/>
+                :
+                <PurchaseChapter userId={user?.id} chapterId={chapter?.id} cost={chapter?.cost} writerId={story.user_id}/>
+                }
 
             </div>
             {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}

@@ -97,23 +97,23 @@ def story(id):
         return return_obj, 200
     return {}, 404
 
-@story_routes.route('/<int:sid>/chapter/<int:cid>')
-def story_and_chapter(sid, cid):
-    """
-    Query for a story by id and/then all chapters associated with that story, and then
-    return the cid (chapter_id) in that list.
-    """
+# @story_routes.route('/<int:sid>/chapter/<int:cid>')
+# def story_and_chapter(sid, cid):
+#     """
+#     Query for a story by id and/then all chapters associated with that story, and then
+#     return the cid (chapter_id) in that list.
+#     """
 
-    story = Story.query.get(sid)
-    return_object = story.to_dict()
+#     story = Story.query.get(sid)
+#     return_object = story.to_dict()
 
-    for chapter in story.chapters:
-        if chapter.id == cid:
-            return_object['singleChapter'] = chapter.to_dict()
-            return return_object, 200
+#     for chapter in story.chapters:
+#         if chapter.id == cid:
+#             return_object['singleChapter'] = chapter.to_dict()
+#             return return_object, 200
 
-    return return_object, 200
-    return {}, 404
+#     return return_object, 200
+#     return {}, 404
 
 @story_routes.route('/', methods=['POST'])
 def create_story():

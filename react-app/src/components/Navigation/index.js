@@ -15,7 +15,9 @@ function Navigation({ isLoaded }){
 			</li>
 			{isLoaded && (
 				<>
+
 				<li className='profile-li'>
+					{sessionUser && <span>{sessionUser.coins}</span>}
 					{sessionUser && <span><WriteButton /></span>}
 					<span><ProfileButton user={sessionUser} /></span>
 				</li>

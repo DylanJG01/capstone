@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import User, purchased_chapters, db
+from sqlalchemy import select
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +24,36 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/purchase_chapter', methods=["POST"])
+@login_required
+def purchase_chapter():
+    """
+    Purchase a chapter. Adding to the list of readable chapters the user has
+    and deducting the cost of said chapter from their coins.
+    """
+    data = request.get_json()['data'];
+
+    user_id = data['user_id']
+    chapter_id = data['chapter_id']
+    cost = data['cost']
+    seller_id = data['writer_id']
+
+    new_purchased_chapter = { 'user_id' : user_id, 'chapter_id': chapter_id }
+    stmt = db.insert(purchased_chapters).values(new_purchased_chapter)
+    db.session.execute(stmt)
+
+    selling_user = User.query.get(seller_id)
+
+    current_user = User.query.get(user_id)
+    current_user.coins -= cost
+    selling_user. coins += cost
+    db.session.commit()
+
+    query = select(purchased_chapters.c.chapter_id).where(purchased_chapters.c.user_id == current_user.id)
+    results = db.session.execute(query).all()
+    user = current_user.to_dict()
+    user['purchased_chapters'] = {}
+    for result in results:
+        user['purchased_chapters'][result[0]] = True
+    return user, 200

@@ -1,7 +1,12 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const BUY_CHAPTER = "session/BUY_CHAPTER"
 
+const buy_chapter = (user) => ({
+	type: BUY_CHAPTER,
+	payload: user
+})
 const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
@@ -95,12 +100,31 @@ export const signUp = (username, email, password, ...tags) => async (dispatch) =
 	}
 };
 
+export const fetchBuyChapter = (data) => async dispatch => {
+	const res = await fetch("/api/users/purchase_chapter", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			data
+		}),
+	});
+	if (res.ok){
+		const user = await res.json()
+		dispatch(buy_chapter(user))
+	}
+}
+
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
+		case BUY_CHAPTER:
+			return {user: action.payload}
 		default:
 			return state;
 	}

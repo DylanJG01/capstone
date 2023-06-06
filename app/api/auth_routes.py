@@ -25,10 +25,8 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-
         query = select(purchased_chapters.c.chapter_id).where(purchased_chapters.c.user_id == current_user.id)
 
-        # Execute the query and fetch all the results
         results = db.session.execute(query).all()
         user = current_user.to_dict()
         user['purchased_chapters'] = {}

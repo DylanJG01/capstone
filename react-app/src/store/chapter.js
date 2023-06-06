@@ -90,7 +90,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 allChapters: {...state.allChapters},
-                singleChapter: {...action.chapter}
+                singleChapter: action.chapter
             }
         }
         case GET_ALL_STORY_CHAPTERS: {

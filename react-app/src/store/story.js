@@ -134,6 +134,7 @@ export default function reducer(state = initialState, action) {
     const newState = {...state}
 	switch (action.type) {
         case GET_STORY : {
+
             return {
                 ...state,
                 allStories: {...state.allStories},
