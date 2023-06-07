@@ -102,15 +102,17 @@ export default function Chapter(){
 
                 <div className='chapter-title'>{chapter?.title}</div>
                 {/*  I understand we're dangerously setting inner html, but we really aren't important enough for someone to put the effort in, I do hope.*/}
-                {(!chapter.cost || story.user_id === user?.id || (user && user.purchased_chapters && user.purchased_chapters[chapter.id]) ) ?
+                {(!chapter.cost || story.user_id === user?.id || (user && user.purchased_chapters && user.purchased_chapters[chapter.id] === true) ) ?
+                <>
                 <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}/>
+                </>
                 :
                 <PurchaseChapter userId={user?.id} chapterId={chapter?.id} cost={chapter?.cost} writerId={story.user_id}/>
                 }
 
             </div>
             {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
-            { user && !myReviewId && user?.id !== story?.user_id && <button onClick={() => reviewModal("post")}>Review</button>}
+            { user && !myReviewId && user?.id !== story?.user_id && (!chapter.cost || user.purchased_chapters && user.purchased_chapters[chapter.id]) && <button onClick={() => reviewModal("post")}>Review</button>}
             <Reviews reviews={reviews} myReviewId={myReviewId}/>
         </div>
 	);

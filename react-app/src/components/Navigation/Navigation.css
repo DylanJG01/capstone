@@ -96,7 +96,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 5rem;
+  /* width: 5rem; */
   /* box-shadow: 0 0 0px 1px white; */
 }
 
