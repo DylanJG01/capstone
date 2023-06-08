@@ -1,8 +1,8 @@
-"""migrate
+"""mm
 
-Revision ID: 1837cbf94577
+Revision ID: d345e539f0e5
 Revises: 
-Create Date: 2023-06-07 18:07:46.194875
+Create Date: 2023-06-08 14:24:33.654717
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1837cbf94577'
+revision = 'd345e539f0e5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -48,8 +48,8 @@ def upgrade():
     sa.Column('published', sa.Boolean(), nullable=True),
     sa.Column('mature', sa.Boolean(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('category_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
+    sa.Column('category_name', sa.String(), nullable=True),
+    sa.ForeignKeyConstraint(['category_name'], ['categories.name'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -59,13 +59,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'category_id')
-    )
-    op.create_table('user_tags',
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('tag_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['tag_id'], ['tags.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_id', 'tag_id')
     )
     op.create_table('chapters',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -118,7 +111,6 @@ def downgrade():
     op.drop_table('comments')
     op.drop_table('story_tags')
     op.drop_table('chapters')
-    op.drop_table('user_tags')
     op.drop_table('user_categories')
     op.drop_table('stories')
     op.drop_table('users')

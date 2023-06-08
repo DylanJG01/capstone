@@ -3,6 +3,12 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const BUY_CHAPTER = "session/BUY_CHAPTER"
 const PURCHASE_COINS = "session/PURCHASE_COINS"
+const DEACTIVATE_WALLET = "session/DEACTIVATE"
+
+const deactivate_wallet = user => ({
+	type: DEACTIVATE_WALLET,
+	payload: user
+})
 
 const purchase_coins = user => ({
 	type: PURCHASE_COINS,
@@ -129,6 +135,17 @@ export const fetchBuyCoins = (data) => async dispatch => {
 	}
 }
 
+export const fetchDeactivateWallet = () => async dispatch => {
+	const res = await fetch("/api/users/deactivate_wallet", {
+		method: "DELETE",
+		headers: { "Content-Type": "application/json" },
+	});
+	if (res.ok){
+		const user = await res.json()
+		dispatch(purchase_coins(user))
+	}
+}
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:
@@ -138,6 +155,8 @@ export default function reducer(state = initialState, action) {
 		case BUY_CHAPTER:
 			return { user: action.payload }
 		case PURCHASE_COINS:
+			return { user: action.payload }
+		case DEACTIVATE_WALLET:
 			return { user: action.payload }
 		default:
 			return state;

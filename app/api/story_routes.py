@@ -14,13 +14,10 @@ def recommended_stories():
     """
     if not hasattr(current_user, 'id'):
         return_item = {}
-
-        user_tags = ['Romance', 'Fantasy', 'Mystery']
         user_categories = ['Romance', 'Fantasy', 'Mystery']
-
         for category in user_categories:
-            stories = Story.query.filter(Story.published == True)\
-            .join(Category, Story.category)\
+            # stories = Story.query.filter(Story.published == (True or False))\
+            stories = Story.query.join(Category, Story.category)\
             .filter((Category.name == category))\
             .limit(5)
             return_item[category] = []
@@ -40,47 +37,20 @@ def recommended_stories():
                     if new_story['avg']:
                         new_story['avg'] /= new_story['count']
                 return_item[category].append(new_story)
-        return  return_item, 200
+        return return_item, 200
 
-
-        for tag_name in user_tags:
-            stories = Story.query.filter(Story.published == True)\
-            .join(Tag, Story.tags)\
-            .filter((Tag.name == tag_name))\
-            .limit(5)
-            # return_item[tag] = [story.to_dict() for story in stories]
-            return_item[tag_name] = []
-            for story in stories:
-                new_story = story.to_dict()
-                new_story['numChapters'] = len(story.chapters)
-                new_story['avg'] = 0
-                new_story['count'] = 0
-                if story.chapters:
-                    new_story['firstChapterId'] = story.chapters[0].id
-                    for chapter in story.chapters:
-                        for review in chapter.reviews:
-                            new_story['avg'] += review.stars
-                            new_story['count'] += 1
-                        if chapter.cost:
-                            new_story['cost'] = 1
-                    if new_story['avg']:
-                        new_story['avg'] /= new_story['count']
-                return_item[tag_name].append(new_story)
-        return  return_item, 200
 
     user = User.query.get(current_user.id)
-
-
     return_item = {}
-
     for category in user.categories:
-        stories = Story.query.filter(Story.published == True)\
-            .join(Category, Story.category)\
+        # stories = Story.query.filter(Story.published == (True or False or None))\
+        stories = Story.query.join(Category, Story.category)\
             .filter((Category.name == category.name))\
             .limit(5)
         return_item[category.name] = []
         for story in stories:
             new_story = story.to_dict()
+            print(new_story)
             new_story['numChapters'] = len(story.chapters)
             new_story['avg'] = 0
             new_story['count'] = 0
@@ -94,7 +64,6 @@ def recommended_stories():
                         new_story['cost'] = 1
                 if new_story['avg']:
                     new_story['avg'] /= new_story['count']
-                print(new_story['title'])
             return_item[category.name].append(new_story)
     return return_item, 200
 
@@ -151,9 +120,12 @@ def create_story():
         """
         POST A NEW STORY! AND MAKE A NEW CHAPTER ATTACHED TO IT
         """
+
         form = StoryForm()
+
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
+
             new_story = Story()
             form.populate_obj(new_story)
             image = form.data["the_cover"]
@@ -161,18 +133,23 @@ def create_story():
                 image.filename = get_unique_filename(image.filename)
                 upload = upload_file_to_AWS(image)
                 new_story.cover = upload["url"]
+            new_story.cost = 0
+
+            tags = form.data['tag_list'].split()
+            for tag in tags:
+                db_tag = Tag.query.filter(Tag.name == tag)
+                if db_tag:
+                    story.tags.append(db_tag)
+                else:
+                    new_tag = Tag( name=tag )
+                    db.session.add(new_tag)
+                    db.session.flush()
+                    story.tags.append(new_tag)
+
             db.session.add(new_story)
             db.session.flush()
-            # tags_obj = request.get_json()
-            # for tag in tags_obj['tag']:
-            tag = Tag.query.filter(Tag.name == form.data['tag']).first()
-            if tag:
-                new_story.tags.append(tag)
-            # new_chapter = Chapter(story_id=new_story.id)
-            # db.session.add(new_chapter)
             db.session.commit()
             return_obj = new_story.to_dict()
-            # return_obj['singleChapter'] = new_chapter.to_dict()
             return return_obj, 200
         return {}, 500
 
@@ -234,7 +211,6 @@ def delete_edit_story(id):
             #         story_to_edit.tags.append(tag)
             db.session.commit()
             return_obj = story_to_edit.to_dict()
-            # return_obj['tags'] = story_to_edit.tags[-1].name
 
             return_obj['allChapters'] = {}
             for chapter in story_to_edit.chapters:

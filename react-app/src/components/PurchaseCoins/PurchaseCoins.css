@@ -1,0 +1,13 @@
+.purchase-coins {
+    border: 1px solid red;
+    margin-right: 1rem;
+    padding: .5rem;
+    background-color: green;
+}
+.coins-button{
+    padding: .25rem;
+}
+
+.coins-button:hover {
+    cursor: pointer;
+}

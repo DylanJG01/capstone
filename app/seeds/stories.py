@@ -8,14 +8,14 @@ def seed_stories():
         # cover = 'https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg',
         title = 'Sin Eater',
         published = True,
-        category_id=1
+        category_name="Romance"
     )
     story2 = Story(
         user_id = 1,
         # cover = 'https://legacynyplorg-live.s3.amazonaws.com/s3fs-public/a_desolation_called_peace_book_cover.jpg',
         title = "A Desolation Called Peace",
         published=True,
-        category_id=2
+        category_name="Romance"
     )
     stories = [
         Story(
@@ -23,7 +23,7 @@ def seed_stories():
             # cover="https://m.media-amazon.com/images/I/41CKw0DiUJL.jpg",
             description="A testing description",
             published=True,
-            category_id=3
+            category_name="Romance"
         ), #0
         Story(
             user_id = 1,
@@ -31,7 +31,7 @@ def seed_stories():
             title = 'The Blade Itself',
             description="A very good fantasy novel",
             published=True,
-            category_id=1
+            category_name="Romance"
         ), #1
         Story(
             user_id = 1,
@@ -39,7 +39,7 @@ def seed_stories():
             description="The sequel to 'The Blade Itself'",
             title = "Before They Are Hanged",
             published=True,
-            category_id=2
+            category_name="Romance"
         ), #2
         Story(
             user_id = 1,
@@ -47,7 +47,7 @@ def seed_stories():
             description="Foundation Series",
             title = "Foundation",
             published=True,
-            category_id=3
+            category_name="Fantasy"
         ), #3
         Story(
             user_id = 1,
@@ -55,7 +55,7 @@ def seed_stories():
             description="I heard this is a popular one",
             title = "Count of Monte Cristo",
             published=True,
-            category_id=2
+            category_name="Fantasy"
         ), #4
         Story(
             user_id = 2,
@@ -63,7 +63,7 @@ def seed_stories():
             description="Magical child soldiers, hurray!",
             title = "Red Sister",
             published=True,
-            category_id=2
+            category_name="Fantasy"
         ), #5
         Story(
             user_id = 2,
@@ -71,7 +71,7 @@ def seed_stories():
             description="What would you do to defeat the empire that colonized your home?",
             title = "The Traitor Baru Cormorant",
             published=True,
-            category_id=1
+            category_name="Fantasy"
 
         ), #6
         Story(
@@ -80,7 +80,7 @@ def seed_stories():
             description="Dystopian hacker races to stop a language virus",
             title = "Snow Crash",
             published=True,
-            category_id=3
+            category_name="Mystery"
         ), #7
         Story(
             user_id = 2,
@@ -88,7 +88,7 @@ def seed_stories():
             description="A testing description",
             title = "Do Androids Dream of Electric Sheep?",
             published=True,
-            category_id=3
+            category_name="Mystery"
         ), #8
         Story(
             user_id = 2,
@@ -96,14 +96,14 @@ def seed_stories():
             description="Mercenaries get up to the darndest things.",
             title = "The Black Company",
             published=True,
-            category_id=2
+            category_name="Mystery"
         ), #9
         Story(
             user_id = 2,
             # cover="https://s26162.pcdn.co/wp-content/uploads/2020/01/Sin-Eater-by-Megan-Campisi-677x1024.jpg",
             description="A testing description",
             published=True,
-            category_id=1
+            category_name="Mystery"
         ), #10
     ]
 

@@ -11,10 +11,11 @@ export default function StoryFormPage() {
   const [user, story] = useSelector((state) => [state.session.user, state.stories.singleStory]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tag1, setTag1] = useState("");
+  const [tags, setTags] = useState([])
+  const [tag, setTag] = useState("");
+  const [category, setCategory] = useState("None")
   const [mature, setMature] = useState("")
   const [cover, setCover] = useState(null)
-  const [coverLoading, setCoverLoading] = useState(false)
   const [errors, setErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false)
   const history = useHistory()
@@ -28,11 +29,13 @@ export default function StoryFormPage() {
     }
     // let newStory = await dispatch(fetchPostStory({title, description, cover: cover, tags: [tag1], 'user_id': user.id}))
     const formData = new FormData();
+    console.log(tags.join(" "),)
     const theObj = {
       title,
       description,
       cover,
-      tag: tag1,
+      tag_list: tags.join(" "),
+      category_name: category,
       user_id: user.id
     }
     for (const i in theObj){
@@ -46,7 +49,7 @@ export default function StoryFormPage() {
     const newStory = await dispatch(fetchPostStory(formData))
     // formData.append("user_id", user.id)
 
-    history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}`)
+    // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}`)
     // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/chapter/new`)
     //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
     //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
@@ -58,7 +61,20 @@ export default function StoryFormPage() {
     if(titleValidator(title)) ve.push(titleValidator(title))
     if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
-  },[title, description, cover, tag1])
+  },[title, description, cover, tag, tags])
+
+
+  const tagBundler = (e) => {
+    console.log(e.target.value)
+    if ((e.target.value).split(" ").length > 1) {
+      const tempArr = [...tags]
+      tempArr.push(tag)
+      setTag("")
+      setTags(tempArr)
+    } else {
+      setTag(e.target.value)
+    }
+  }
 
   const changeRating = () => {
     mature ? setMature(false) : setMature(true)
@@ -96,19 +112,6 @@ export default function StoryFormPage() {
             rows={10}
             />
           </label>
-          {/* <label className="label">
-            <div>Cover
-              {submitted && errors.includes("url") && (<span className="error red">Must be valid url (https://www.whatever.img)</span >)}
-              {submitted && errors.includes("img-type") && (<span className="error red">Url must end in file type 'img', 'jpg', or 'jpeg'.</span >)}
-            </div>
-            <input
-              type="text"
-              value={cover}
-              onChange={(e) => setCover(e.target.value)}
-              placeholder="Cover Image Url"
-            />
-          </label>
-           */}
           <label className="label">
             <div>Cover</div>
             <input
@@ -116,6 +119,27 @@ export default function StoryFormPage() {
               accept="image/*"
               onChange={(e) => setCover(e.target.files[0])}
             />
+          </label>
+          <label className="label">
+          <div className="story-category-selection-div">
+            <h5>Which category best fits your story?</h5>
+            <select className="story-category-selector" value={category} onChange={(e) => setCategory(e.target.value)}>
+              {options.map(option => <option>{option}</option>)}
+            </select>
+          </div>
+          </label>
+          <label className="label">
+          <div className="story-category-selection-div">
+            <h5>Which tags best fits your story?</h5>
+            <div className="tag-area">
+            {tags.length > 0 && tags.map(el => <div className="tag"> {el} </div>)}
+            <input
+              type="text"
+              value={tag}
+              onChange={(e) => tagBundler(e)}
+            />
+            </div>
+          </div>
           </label>
           <label className="label mature">
             Mature Content:
@@ -125,77 +149,10 @@ export default function StoryFormPage() {
               onChange={() => changeRating()}
             />
           </label>
-          <div className="story-tag-selection-div">
-            <h5>Which tag best fits your story?</h5>
-            <select className="story-tag-selector" value={tag1} onChange={(e) => setTag1(e.target.value)}>
-              {options.map(option => <option>{option}</option>)}
-            </select>
-          </div>
           <button className="submit-story-button btn log-in" type="submit">Submit</button>
         </form>
         </div>
       </div>
     </div>
-    // <div className="story-form-div">
-    //   <h2>Story Details</h2>
-    //   <div className="form-div">
-    //   <form onSubmit={handleSubmit} className="new-story-form">
-    //     <ul>
-    //       {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-    //     </ul>
-    //     <label className="label">
-    //       <div>Title</div>
-    //       <input
-    //         type="text"
-    //         value={title}
-    //         onChange={(e) => setTitle(e.target.value)}
-    //         placeholder="Title"
-    //       />
-    //     </label>
-    //     <label className="label">
-    //     <div>Description</div>
-    //       {/* <input
-    //         type="textarea"
-    //         value={description}
-    //         onChange={(e) => setDescription(e.target.value)}
-    //         placeholder="Description"
-    //       /> */}
-    //       <textarea
-    //       value={description}
-    //       onChange={(e) => setDescription(e.target.value)}
-    //       placeholder="Description"
-    //       rows={10}
-    //       />
-    //     </label>
-    //     <label className="label">
-    //     <div>Tags</div>
-    //       <input
-    //         type="text"
-    //         value={tags}
-    //         onChange={(e) => setTags(e.target.value)}
-    //         placeholder="Tags"
-    //       />
-    //     </label>
-    //     <label className="label">
-    //     <div>Cover</div>
-    //       <input
-    //         type="text"
-    //         value={cover}
-    //         onChange={(e) => setTags(e.target.value)}
-    //         placeholder="Cover Image Url"
-    //       />
-    //     </label>
-    //     <label className="label mature">
-    //       Mature Content:
-    //       <input
-    //         type="checkbox"
-    //         value={mature}
-    //         onChange={() => changeRating()}
-    //       />
-    //     </label>
-    //     <button className="submit-story-button btn log-in" type="submit">Post Story</button>
-    //   </form>
-    //   </div>
-    // </div>
   );
 }

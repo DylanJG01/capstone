@@ -153,3 +153,11 @@ textarea
 .story-tag-selector {
 
 }
+.tag {
+    padding-top: 1rem;
+    padding: .25rem;
+}
+.tag-area {
+    display: flex;
+    flex-wrap: wrap;
+}

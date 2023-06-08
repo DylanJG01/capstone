@@ -9,3 +9,4 @@ class ChapterForm(FlaskForm):
     cost = IntegerField('cost')
     title = StringField('title')
     story_id = IntegerField('story_id', [DataRequired()])
+    published = BooleanField('published')

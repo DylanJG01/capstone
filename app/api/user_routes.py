@@ -46,7 +46,7 @@ def purchase_chapter():
 
     active_user = User.query.get(user_id)
     active_user.coins -= cost
-    selling_user. coins += cost
+    selling_user.coins += cost
     db.session.commit()
 
     query = select(purchased_chapters.c.chapter_id).where(purchased_chapters.c.user_id == active_user.id)
@@ -64,8 +64,9 @@ def purchase_coins():
     Add coins to a user and then return said user object.
     """
     data = request.get_json()['data'];
-
     user = User.query.get(current_user.id)
+    if user.coins == None:
+        user.coins = 0
     user.coins += data['coins']
     db.session.commit()
 
@@ -76,5 +77,24 @@ def purchase_coins():
     for result in results:
         return_obj['purchased_chapters'][result[0]] = True
 
+
+    return return_obj, 200
+
+@user_routes.route('/deactivate_wallet', methods=["DELETE"])
+@login_required
+def deactivate_wallet():
+    """
+    Add coins to a user and then return said user object.
+    """
+    user = User.query.get(current_user.id)
+    user.coins = None
+    db.session.commit()
+
+    query = select(purchased_chapters.c.chapter_id).where(purchased_chapters.c.user_id == current_user.id)
+    results = db.session.execute(query).all()
+    return_obj = user.to_dict()
+    return_obj['purchased_chapters'] = {}
+    for result in results:
+        return_obj['purchased_chapters'][result[0]] = True
 
     return return_obj, 200

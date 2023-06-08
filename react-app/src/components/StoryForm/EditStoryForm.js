@@ -15,6 +15,7 @@ export default function EditStoryForm() {
   const [description, setDescription] = useState(story?.description || "");
   // const [tags, setTags] = useState(story?.tags || "");
   const [tag1, setTag1] = useState(story?.tag || "None")
+  const [category, setCategory] = useState(story?.category_name || "None")
   const [mature, setMature] = useState(story?.mature || false)
   const [cover, setCover] = useState(null)
   // const [theCover, setTheCover] = useState(story?.cover || '')
@@ -44,6 +45,7 @@ export default function EditStoryForm() {
         setTitle(story.title)
         setDescription(story.description)
         // setTag1(story.tags)
+        setCategory(story.category_name)
         setCover(story.cover)
         setMature(story.mature)
         // setTheCover(story.cover)
@@ -77,7 +79,8 @@ export default function EditStoryForm() {
       title,
       description,
       the_cover: cover,
-      tag: tag1,
+      // tag: tag1,
+      category_name: category,
       user_id: user.id
     }
     console.log(theObj.cover)
@@ -180,12 +183,14 @@ export default function EditStoryForm() {
               onChange={() => changeRating()}
             />
           </label>
+          <label className="label">
           <div className="story-tag-selection-div">
-            <h5>Which tag best fits your story?</h5>
-            <select className="story-tag-selector" value={tag1} onChange={(e) => setTag1(e.target.value)}>
+            <h5>Which category best fits your story?</h5>
+            <select className="story-tag-selector" value={category} onChange={(e) => setCategory(e.target.value)}>
               {options.map(option => <option>{option}</option>)}
             </select>
           </div>
+          </label>
           <button className="submit-story-button btn log-in" type="submit">Save</button>
         </form>
         </div>
@@ -200,7 +205,7 @@ export default function EditStoryForm() {
                         <p className="the-h3">{chapter.title}</p>
                         {i ? <>
                         <div>{chapter.cost}</div>
-                        <SetCost chapter={chapter}/>
+                        <SetCost chapter={chapter} user={user}/>
                         </> :
                         <div> First chapter always free </div>
                         }
