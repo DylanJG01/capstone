@@ -28,12 +28,12 @@ export function _passwordValidator(passwords){
     return false
 }
 
-export const urlChecka = url => {
-    const pattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
-    if (!pattern.test(url)) return "url"//"Not Valid Url"
-    if (!["img","jpg","jpeg"].includes(url.split(".").pop())) return "img-type"//"We only currently accept jpg, jpeg, and img"
-    return false
-}
+// export const urlChecka = url => {
+//     const pattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
+//     if (!pattern.test(url)) return "url"//"Not Valid Url"
+//     if (!["img","jpg","jpeg"].includes(url.split(".").pop())) return "img-type"//"We only currently accept jpg, jpeg, and img"
+//     return false
+// }
 
 export const titleValidator = title => {
     if (!title) return "title-short"

@@ -10,6 +10,13 @@ activate wallet?
 add to wallet.
 Cash out wallet?
 
+Can't buy chapter if not enough coins.
+
+
+Edit story tag!!!
+Story Status
+
+
 tags.
 
 tickets.

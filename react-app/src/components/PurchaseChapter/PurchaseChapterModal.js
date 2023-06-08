@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { fetchPostReview, fetchAllChapterReviews } from '../../store/review';
+import React from 'react'
 import { useDispatch } from 'react-redux';
 import { fetchBuyChapter } from '../../store/session';
 
 export default function PurchaseChapterModal({closeModal, cost, userId, chapterId, writerId}){
     const dispatch = useDispatch()
-    const [stars, setStars] = useState(0)
-
 
     const buyChapter = async (e) => {
         e.preventDefault();

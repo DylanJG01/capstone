@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import WriteButton from '../Write';
+import PurchaseCoinsModal from '../PurchaseCoins';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -17,6 +18,7 @@ function Navigation({ isLoaded }){
 				<>
 
 				<li className='profile-li'>
+					{sessionUser && <span><PurchaseCoinsModal/></span>}
 					{sessionUser && <span>{sessionUser.coins}</span>}
 					{sessionUser && <span><WriteButton /></span>}
 					<span><ProfileButton user={sessionUser} /></span>

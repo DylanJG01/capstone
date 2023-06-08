@@ -21,7 +21,9 @@ class Story(db.Model):
     user = db.relationship("User", back_populates="stories")
     chapters = db.relationship("Chapter", back_populates="stories", cascade="all, delete-orphan")
     tags = db.relationship('Tag', secondary=story_tags, backref='stories', lazy=True)
-
+    category = db.relationship("Category", back_populates="stories")
+    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')))
+    # category_name = db.Column(db.String(), db.ForeignKey(add_prefix_for_prod('categories.name')) )
     def to_dict(self):
         return {
             'id': self.id,
@@ -32,4 +34,5 @@ class Story(db.Model):
             'cost': self.cost,
             'mature': self.mature,
             'user_id': self.user_id,
+            'category_id': self.category_id
         }

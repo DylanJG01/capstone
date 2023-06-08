@@ -3,7 +3,6 @@ from sqlalchemy.sql import text
 
 def seed_tags():
 
-
     tags = [
         Tag(name="Romance"),
         Tag(name="Fantasy"),

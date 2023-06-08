@@ -14,7 +14,7 @@ export default function EditStoryForm() {
   const [title, setTitle] = useState(story?.title || "");
   const [description, setDescription] = useState(story?.description || "");
   // const [tags, setTags] = useState(story?.tags || "");
-  // const [tag1, setTag1] = useState("None")
+  const [tag1, setTag1] = useState(story?.tag || "None")
   const [mature, setMature] = useState(story?.mature || false)
   const [cover, setCover] = useState(null)
   // const [theCover, setTheCover] = useState(story?.cover || '')
@@ -77,7 +77,7 @@ export default function EditStoryForm() {
       title,
       description,
       the_cover: cover,
-      // tag: tag1,
+      tag: tag1,
       user_id: user.id
     }
     console.log(theObj.cover)
@@ -180,12 +180,12 @@ export default function EditStoryForm() {
               onChange={() => changeRating()}
             />
           </label>
-          {/* <div className="story-tag-selection-div">
+          <div className="story-tag-selection-div">
             <h5>Which tag best fits your story?</h5>
             <select className="story-tag-selector" value={tag1} onChange={(e) => setTag1(e.target.value)}>
               {options.map(option => <option>{option}</option>)}
             </select>
-          </div> */}
+          </div>
           <button className="submit-story-button btn log-in" type="submit">Save</button>
         </form>
         </div>

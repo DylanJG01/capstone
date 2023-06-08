@@ -2,7 +2,12 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const BUY_CHAPTER = "session/BUY_CHAPTER"
+const PURCHASE_COINS = "session/PURCHASE_COINS"
 
+const purchase_coins = user => ({
+	type: PURCHASE_COINS,
+	payload: user
+})
 const buy_chapter = (user) => ({
 	type: BUY_CHAPTER,
 	payload: user
@@ -103,12 +108,8 @@ export const signUp = (username, email, password, ...tags) => async (dispatch) =
 export const fetchBuyChapter = (data) => async dispatch => {
 	const res = await fetch("/api/users/purchase_chapter", {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			data
-		}),
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({data}),
 	});
 	if (res.ok){
 		const user = await res.json()
@@ -116,6 +117,17 @@ export const fetchBuyChapter = (data) => async dispatch => {
 	}
 }
 
+export const fetchBuyCoins = (data) => async dispatch => {
+	const res = await fetch("/api/users/purchase_coins", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({data}),
+	});
+	if (res.ok){
+		const user = await res.json()
+		dispatch(purchase_coins(user))
+	}
+}
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
@@ -124,7 +136,9 @@ export default function reducer(state = initialState, action) {
 		case REMOVE_USER:
 			return { user: null };
 		case BUY_CHAPTER:
-			return {user: action.payload}
+			return { user: action.payload }
+		case PURCHASE_COINS:
+			return { user: action.payload }
 		default:
 			return state;
 	}

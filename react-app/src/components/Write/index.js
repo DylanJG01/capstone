@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 export default function WriteButton() {
-  const dispatch = useDispatch();
   const history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();

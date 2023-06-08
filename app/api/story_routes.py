@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Story, User, Tag, story_tags, Chapter
+from app.models import Story, User, Tag, story_tags, Chapter, Category
 from app.forms.story_form import StoryForm
 from ..models.db import db
 from ._AWS_helpers import upload_file_to_AWS, get_unique_filename, remove_file_from_s3
@@ -14,7 +14,35 @@ def recommended_stories():
     """
     if not hasattr(current_user, 'id'):
         return_item = {}
+
         user_tags = ['Romance', 'Fantasy', 'Mystery']
+        user_categories = ['Romance', 'Fantasy', 'Mystery']
+
+        for category in user_categories:
+            stories = Story.query.filter(Story.published == True)\
+            .join(Category, Story.category)\
+            .filter((Category.name == category))\
+            .limit(5)
+            return_item[category] = []
+            for story in stories:
+                new_story = story.to_dict()
+                new_story['numChapters'] = len(story.chapters)
+                new_story['avg'] = 0
+                new_story['count'] = 0
+                if story.chapters:
+                    new_story['firstChapterId'] = story.chapters[0].id
+                    for chapter in story.chapters:
+                        for review in chapter.reviews:
+                            new_story['avg'] += review.stars
+                            new_story['count'] += 1
+                        if chapter.cost:
+                            new_story['cost'] = 1
+                    if new_story['avg']:
+                        new_story['avg'] /= new_story['count']
+                return_item[category].append(new_story)
+        return  return_item, 200
+
+
         for tag_name in user_tags:
             stories = Story.query.filter(Story.published == True)\
             .join(Tag, Story.tags)\
@@ -41,13 +69,16 @@ def recommended_stories():
         return  return_item, 200
 
     user = User.query.get(current_user.id)
+
+
     return_item = {}
-    for tag in user.tags:
+
+    for category in user.categories:
         stories = Story.query.filter(Story.published == True)\
-            .join(Tag, Story.tags)\
-            .filter((Tag.name == tag.name))\
+            .join(Category, Story.category)\
+            .filter((Category.name == category.name))\
             .limit(5)
-        return_item[tag.name] = []
+        return_item[category.name] = []
         for story in stories:
             new_story = story.to_dict()
             new_story['numChapters'] = len(story.chapters)
@@ -64,7 +95,7 @@ def recommended_stories():
                 if new_story['avg']:
                     new_story['avg'] /= new_story['count']
                 print(new_story['title'])
-            return_item[tag.name].append(new_story)
+            return_item[category.name].append(new_story)
     return return_item, 200
 
 @story_routes.route('/<int:id>')

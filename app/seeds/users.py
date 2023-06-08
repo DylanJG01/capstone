@@ -1,4 +1,4 @@
-from app.models import db, User, Tag, environment, SCHEMA
+from app.models import db, User, Category, environment, SCHEMA
 from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
@@ -19,11 +19,11 @@ def seed_users():
         password='password',
         )
 
-    tag1 = Tag.query.get(1)
-    tag2 = Tag.query.get(2)
+    category1 = Category.query.get(1)
+    category2 = Category.query.get(2)
 
-    demo.tags.append(tag1)
-    demo.tags.append(tag2)
+    demo.categories.append(category1)
+    demo.categories.append(category2)
 
     db.session.add(demo)
     db.session.add(marnie)
