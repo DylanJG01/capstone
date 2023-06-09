@@ -5,6 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { titleToSword, options, titleValidator, descriptionValidator} from "../_helpers";
 import { fetchAllChapters, fetchDeleteChapter } from "../../store/chapter";
 import SetCost from '../SetCostModal'
+import { tagBundler } from "../_helpers";
 
 import './StoryForm.css'
 
@@ -14,7 +15,8 @@ export default function EditStoryForm() {
   const [title, setTitle] = useState(story?.title || "");
   const [description, setDescription] = useState(story?.description || "");
   // const [tags, setTags] = useState(story?.tags || "");
-  const [tag1, setTag1] = useState(story?.tag || "None")
+  const [tags, setTags] = useState(story?.tags || [])
+  const [tag, setTag] = useState(story?.tag || "")
   const [category, setCategory] = useState(story?.category_name || "None")
   const [mature, setMature] = useState(story?.mature || false)
   const [cover, setCover] = useState(null)
@@ -44,7 +46,7 @@ export default function EditStoryForm() {
     if (loaded) {
         setTitle(story.title)
         setDescription(story.description)
-        // setTag1(story.tags)
+        setTags(story.tags)
         setCategory(story.category_name)
         setCover(story.cover)
         setMature(story.mature)
@@ -58,7 +60,7 @@ export default function EditStoryForm() {
     if(titleValidator(title)) ve.push(titleValidator(title))
     if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
-  },[title, description, /*tag1*/])
+  },[title, description])
 
   useEffect(() => {
     console.log(cover)
@@ -66,11 +68,8 @@ export default function EditStoryForm() {
 
 
   const handleSubmit = async (e) => {
-    console.log(story.cover)
-    console.log(cover)
     e.preventDefault();
     if (errors.length){
-      console.log(errors)
       setSubmitted(true)
       return
     }
@@ -79,11 +78,11 @@ export default function EditStoryForm() {
       title,
       description,
       the_cover: cover,
-      // tag: tag1,
+      tag_list: tags.join(" "),
       category_name: category,
       user_id: user.id
     }
-    console.log(theObj.cover)
+    console.log(theObj.tag_list)
 
     for (const i in theObj){
       if( i !== 'the_cover'){
@@ -187,11 +186,17 @@ export default function EditStoryForm() {
           <div className="story-category-selection-div">
             <h5>Which tags best fits your story?</h5>
             <div className="tag-area">
-            {tags.length > 0 && tags.map(el => <div className="tag"> {el} </div>)}
+            {tags?.length > 0 && tags.map(el => (
+            <div className="tag">
+              {el}
+              {console.log(tags)}
+            </div>
+
+            ))}
             <input
               type="text"
               value={tag}
-              onChange={(e) => tagBundler(e)}
+              onChange={(e) => tagBundler(e, tag, tags, setTag, setTags)}
             />
             </div>
           </div>

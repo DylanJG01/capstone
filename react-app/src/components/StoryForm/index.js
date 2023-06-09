@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPostStory } from "../../store/story";
 import { useHistory } from "react-router-dom/";
 import { titleToSword, options , titleValidator, urlChecka, descriptionValidator} from "../_helpers";
-
+import { tagBundler } from "../_helpers";
 import './StoryForm.css'
 
 export default function StoryFormPage() {
@@ -21,7 +21,6 @@ export default function StoryFormPage() {
   const history = useHistory()
 
   const handleSubmit = async (e) => {
-    console.log(cover)
     e.preventDefault();
     if (errors.length){
       setSubmitted(true);
@@ -29,7 +28,6 @@ export default function StoryFormPage() {
     }
     // let newStory = await dispatch(fetchPostStory({title, description, cover: cover, tags: [tag1], 'user_id': user.id}))
     const formData = new FormData();
-    console.log(tags.join(" "),)
     const theObj = {
       title,
       description,
@@ -61,20 +59,8 @@ export default function StoryFormPage() {
     if(titleValidator(title)) ve.push(titleValidator(title))
     if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
-  },[title, description, cover, tag, tags])
-
-
-  const tagBundler = (e) => {
-    console.log(e.target.value)
-    if ((e.target.value).split(" ").length > 1) {
-      const tempArr = [...tags]
-      tempArr.push(tag)
-      setTag("")
-      setTags(tempArr)
-    } else {
-      setTag(e.target.value)
-    }
-  }
+    console.log(tags)
+  },[title, description, tags])
 
   const changeRating = () => {
     mature ? setMature(false) : setMature(true)
@@ -132,11 +118,11 @@ export default function StoryFormPage() {
           <div className="story-category-selection-div">
             <h5>Which tags best fits your story?</h5>
             <div className="tag-area">
-            {tags.length > 0 && tags.map(el => <div className="tag"> {el} </div>)}
+            {tags?.length > 0 && tags.map(el => <div className="tag"> {console.log(el)}{el} </div>)}
             <input
               type="text"
               value={tag}
-              onChange={(e) => tagBundler(e)}
+              onChange={(e) => tagBundler(e, tag, tags, setTag, setTags)}
             />
             </div>
           </div>

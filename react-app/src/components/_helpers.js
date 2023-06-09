@@ -65,3 +65,17 @@ export const options = [
 	// "Historical Fiction",
 	// "Nonfiction",
 ]
+
+
+export const tagBundler = (e, tag, tags, setTag, setTags) => {
+    console.log(e.target.value)
+    console.log(e.target.value[(e.target.value).length - 1])
+    if (e.target.value[(e.target.value).length - 1] === " ") {
+      const tempArr = [...tags]
+      if (tag && !tags.includes(tag)) tempArr.push(tag)
+      setTag("")
+      setTags(tempArr)
+    } else {
+      setTag(e.target.value)
+    }
+  }

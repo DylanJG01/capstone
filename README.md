@@ -1,14 +1,14 @@
 TO DO LIST-
 
+Cannot add the same tag multiple times
+UPDATE STORE FOR PUTSTORY
+COMMENT IN HISTORY PUSH ON POST STORY
+
 submit chapter body length error handling.
 
 only show published stories/chapters.
 
 Can only publish a story if chapter 1 is published.
-
-activate wallet?
-add to wallet.
-Cash out wallet?
 
 Can't buy chapter if not enough coins.
 

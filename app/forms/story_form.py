@@ -14,5 +14,5 @@ class StoryForm(FlaskForm):
     published = BooleanField('published')
     user_id = IntegerField('user_id', [DataRequired()])
     mature = BooleanField('mature')
-    tag_list = StringField('tags')
+    tag_list = StringField('tags_list')
     category_name = StringField('category')

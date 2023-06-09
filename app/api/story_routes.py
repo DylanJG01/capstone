@@ -161,7 +161,6 @@ def create_story():
                     db.session.add(new_tag)
                     db.session.flush()
                     new_story.tags.append(new_tag)
-
             db.session.add(new_story)
             db.session.flush()
             db.session.commit()
@@ -225,15 +224,12 @@ def delete_edit_story(id):
                 story_to_edit.cover = upload["url"]
             if not image and current_cover:
                 story_to_edit.cover = current_cover
-
             tags = form.data['tag_list'].split()
-
-            story_tags = story_to_edit.tags.copy()
-            for tag in story_tags:
+            for tag in story_to_edit.tags:
                 if tag.name not in tags:
                     story_to_edit.tags.remove(tag)
             for tag in tags:
-                if tag not in story.tags:
+                if tag not in story_to_edit.tags:
                     db_tag = Tag.query.filter(Tag.name == tag).first()
                     if db_tag:
                         story_to_edit.tags.append(db_tag)
@@ -242,15 +238,29 @@ def delete_edit_story(id):
                         db.session.add(new_tag)
                         db.session.flush()
                         story_to_edit.tags.append(new_tag)
-
             db.session.commit()
             return_obj = story_to_edit.to_dict()
-
             return_obj['allChapters'] = {}
+            return_obj['avg'] = 0
+            return_obj['count'] = 0
+            index = 1
+            return_obj['tags'] = []
+            for tag in story_to_edit.tags:
+                return_obj['tags'].append(tag.name)
             for chapter in story_to_edit.chapters:
                 return_obj['allChapters'][chapter.id] = chapter.to_dict()
-
-            return return_obj, 200
+                return_obj['allChapters'][chapter.id]['index'] = index
+                try:
+                    return_obj['allChapters'][chapter.id]['nextChapterId'] = story_to_edit.chapters[index].id
+                except IndexError:
+                    return_obj['allChapters'][chapter.id]['nextChapterId'] = None
+                index += 1
+                for review in chapter.reviews:
+                    return_obj['avg'] += review.stars
+                    return_obj['count'] += 1
+                if return_obj['avg']:
+                    return_obj['avg'] /= return_obj['count']
+        return return_obj, 200
     return {"falure" : "FAILURE"}
 
 @story_routes.route('/<string:username>')
@@ -264,7 +274,6 @@ def get_stories_by_user(username):
     another_obj = {}
     for story in user.stories:
         another_obj[story.id] = story.to_dict()
-    # print(another_obj)
     return another_obj, 200
 
 
