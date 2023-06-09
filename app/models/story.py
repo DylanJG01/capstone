@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .story_tags import story_tags
 
-
 class Story(db.Model):
     __tablename__ = 'stories'
 

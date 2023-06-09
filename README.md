@@ -12,12 +12,13 @@ Cash out wallet?
 
 Can't buy chapter if not enough coins.
 
-
-Edit story tag!!!
 Story Status
 
+search by:
+    -category
+    -tags
+    -Keyword? Title, description .
 
-tags.
 
 tickets.
 

@@ -7,6 +7,13 @@ from ._AWS_helpers import upload_file_to_AWS, get_unique_filename, remove_file_f
 
 story_routes = Blueprint('stories', __name__)
 
+def delete_unused_tags():
+    tags = Tag.query.all()
+    for tag in tags:
+        if not Tag.is_connected_to_stories(tag.id):
+            db.session.delete(tag)
+    db.session.commit()
+
 @story_routes.route('/recommended')
 def recommended_stories():
     """
@@ -26,6 +33,9 @@ def recommended_stories():
                 new_story['numChapters'] = len(story.chapters)
                 new_story['avg'] = 0
                 new_story['count'] = 0
+                new_story['tags'] = []
+                for tag in story.tags:
+                    new_story['tags'].append(tag.name)
                 if story.chapters:
                     new_story['firstChapterId'] = story.chapters[0].id
                     for chapter in story.chapters:
@@ -54,6 +64,9 @@ def recommended_stories():
             new_story['numChapters'] = len(story.chapters)
             new_story['avg'] = 0
             new_story['count'] = 0
+            new_story['tags'] = []
+            for tag in story.tags:
+                new_story['tags'].append(tag.name)
             if story.chapters:
                 new_story['firstChapterId'] = story.chapters[0].id
                 for chapter in story.chapters:
@@ -79,6 +92,9 @@ def story(id):
         return_obj['avg'] = 0
         return_obj['count'] = 0
         index = 1
+        return_obj['tags'] = []
+        for tag in story.tags:
+            return_obj['tags'].append(tag.name)
         for chapter in story.chapters:
             return_obj['allChapters'][chapter.id] = chapter.to_dict()
             return_obj['allChapters'][chapter.id]['index'] = index
@@ -137,14 +153,14 @@ def create_story():
 
             tags = form.data['tag_list'].split()
             for tag in tags:
-                db_tag = Tag.query.filter(Tag.name == tag)
+                db_tag = Tag.query.filter(Tag.name == tag).first()
                 if db_tag:
-                    story.tags.append(db_tag)
+                    new_story.tags.append(db_tag)
                 else:
                     new_tag = Tag( name=tag )
                     db.session.add(new_tag)
                     db.session.flush()
-                    story.tags.append(new_tag)
+                    new_story.tags.append(new_tag)
 
             db.session.add(new_story)
             db.session.flush()
@@ -182,9 +198,14 @@ def delete_edit_story(id):
     """
     if request.method == "DELETE":
         story = Story.query.get(id)
-        remove_file_from_s3(story.cover)
+
+        if story.cover:
+            remove_file_from_s3(story.cover)
         db.session.delete(story)
         db.session.commit()
+
+        delete_unused_tags()
+
         return {"message": "story deleted"}, 204
     if request.method == "PUT":
         form = StoryForm()
@@ -204,11 +225,24 @@ def delete_edit_story(id):
                 story_to_edit.cover = upload["url"]
             if not image and current_cover:
                 story_to_edit.cover = current_cover
-            # tags_obj = request.get_json()
-            # for tag in tags_obj['tags']:
-            #     tag = Tag.query.filter(Tag.name == tag).all()
-            #     if tag:
-            #         story_to_edit.tags.append(tag)
+
+            tags = form.data['tag_list'].split()
+
+            story_tags = story_to_edit.tags.copy()
+            for tag in story_tags:
+                if tag.name not in tags:
+                    story_to_edit.tags.remove(tag)
+            for tag in tags:
+                if tag not in story.tags:
+                    db_tag = Tag.query.filter(Tag.name == tag).first()
+                    if db_tag:
+                        story_to_edit.tags.append(db_tag)
+                    else:
+                        new_tag = Tag( name=tag )
+                        db.session.add(new_tag)
+                        db.session.flush()
+                        story_to_edit.tags.append(new_tag)
+
             db.session.commit()
             return_obj = story_to_edit.to_dict()
 

@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from app.models import Story
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -14,3 +15,7 @@ class Tag(db.Model):
             'id': self.id,
             'name': self.name,
         }
+
+    @staticmethod
+    def is_connected_to_stories(tag_id):
+        return bool(Story.query.filter(Story.tags.any(id=tag_id)).first())

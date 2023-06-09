@@ -175,14 +175,6 @@ export default function EditStoryForm() {
               onChange={(e) => setCover(e.target.files[0])}
             />
           </label>
-          <label className="label mature">
-            Mature Content:
-            <input
-              type="checkbox"
-              value={mature}
-              onChange={() => changeRating()}
-            />
-          </label>
           <label className="label">
           <div className="story-tag-selection-div">
             <h5>Which category best fits your story?</h5>
@@ -190,6 +182,27 @@ export default function EditStoryForm() {
               {options.map(option => <option>{option}</option>)}
             </select>
           </div>
+          </label>
+          <label className="label">
+          <div className="story-category-selection-div">
+            <h5>Which tags best fits your story?</h5>
+            <div className="tag-area">
+            {tags.length > 0 && tags.map(el => <div className="tag"> {el} </div>)}
+            <input
+              type="text"
+              value={tag}
+              onChange={(e) => tagBundler(e)}
+            />
+            </div>
+          </div>
+          </label>
+          <label className="label mature">
+            Mature Content:
+            <input
+              type="checkbox"
+              value={mature}
+              onChange={() => changeRating()}
+            />
           </label>
           <button className="submit-story-button btn log-in" type="submit">Save</button>
         </form>
@@ -209,7 +222,6 @@ export default function EditStoryForm() {
                         </> :
                         <div> First chapter always free </div>
                         }
-
                         <div className="button-container">
                         <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i class="fa-solid fa-pen-to-square"></i></button>
                         <button className="btn delete" onClick={() => deleteChapter(chapter.id)}><i class="fa-solid fa-trash"></i></button>
