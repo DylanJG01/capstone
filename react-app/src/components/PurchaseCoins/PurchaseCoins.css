@@ -1,13 +1,79 @@
 .purchase-coins {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin-right: 1rem;
-    padding: .5rem;
-    background-color: green;
-}
-.coins-button{
-    padding: .25rem;
+    padding-right: 1rem;
+    background-color: #5e3268;
+    border-radius: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 5.5rem; */
 }
 
+.coins-button{
+    /* padding: .25rem; */
+    background: none;
+    border: none;
+    display: flex;
+}
+.coin-img {
+    aspect-ratio: 1;
+    height: 2rem;
+    border-radius: 50%;
+}
+.purchase-coins:hover,
 .coins-button:hover {
     cursor: pointer;
+    opacity: .75;
+}
+.coins-modal {
+    padding: 1rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.empty {
+    line-height: 1.5rem;
+}
+.end-wallet {
+    display: flex;
+}
+.coins-span {
+    text-align: end;
+}
+.coins-span:hover {
+    cursor: pointer;
+    /* color: black; */
+    background-color: #1d0f0f;
+    box-shadow: 0 0 2px 5px #1d0f0f;
+}
+.buy-coin-div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+    width: 18rem;
+}
+.purchase-message {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin: 1rem 0;
+    padding-bottom: 1rem;
+    font-size: 1.1rem;
+}
+.coin-btn{
+    background: #917fb3;
+}
+.coin-btn:hover {
+    opacity: .5;
+}
+.submit-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+    margin-bottom: .5rem;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+.user-coins {
+    margin-left: .5rem;
 }

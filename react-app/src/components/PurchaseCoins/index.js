@@ -11,9 +11,9 @@ export default function Purchase({user}){
     }
 
 	return (
-        <div className='purchase-coins'>
-            { user.coins === null ? null : <div>{user.coins}</div>}
-            <button className='coins-button' onClick={() => purchaseModal() }> C </button>
+        <div className='purchase-coins' onClick={() => purchaseModal()}>
+             <button className='coins-button'> <img className='coin-img' src="https://thisisthebucketthatdylanmade.s3.us-west-1.amazonaws.com/coin.png" alt='coins icon'/> </button>
+             { user.coins === null ? <div className='user-coins'> - </div> : <div className='user-coins'>{user.coins}</div>}
         </div>
 	);
 }

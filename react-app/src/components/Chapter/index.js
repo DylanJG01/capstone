@@ -87,7 +87,7 @@ export default function Chapter(){
 
         <div className='chapter-page'>
 
-            <div>
+            <div className='chapters-div'>
             <span>Select Chapter: </span>
             <select value={toChapter} onChange={e => {
                 setToChapter(e.target.value)}}>

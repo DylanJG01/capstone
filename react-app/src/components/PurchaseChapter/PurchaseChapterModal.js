@@ -18,12 +18,12 @@ export default function PurchaseChapterModal({closeModal, cost, user, chapterId,
       };
 
     return (
-        <>
+        <div className='purchase-modal-div'>
           <h1>Purchase Modal</h1>
-          <form onSubmit={buyChapter}>
+          <form className='purchase-form' onSubmit={buyChapter}>
             <div>You wanna purchase access to this chapter for {cost} coins? </div>
-            <button type="submit">Purchase?</button>
+            <button className='btn' type="submit">Purchase!</button>
           </form>
-        </>
+        </div>
       );
 }

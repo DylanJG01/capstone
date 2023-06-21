@@ -92,13 +92,14 @@ p {
   font-size: 1rem;
   border-radius: 10px;
   position: relative;
-  /* background: none; */
+  background: black;
   border: none;
   margin-right: 2rem;
+  color: #7B586B;
 }
 .user-profile-button:hover {
   /* background-color: green; */
-  color: #7B586B;
+  color: white;
   cursor: pointer;
 }
 .profile-li {
@@ -120,7 +121,7 @@ p {
   background: black;
   box-shadow: 0 0 5px 5px black;
   border: none;
-  margin-right: .5rem;
+  margin-right: 1rem;
   color: #7B586B;
 }
 

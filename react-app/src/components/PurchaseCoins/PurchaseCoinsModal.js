@@ -1,6 +1,7 @@
 import React, { useState, } from 'react'
 import { useDispatch } from 'react-redux';
 import { fetchBuyCoins, fetchDeactivateWallet } from '../../store/session';
+import { useModal } from '../../context/Modal';
 
 export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
     const dispatch = useDispatch()
@@ -9,26 +10,39 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
 
     const buyCoins = async (e) => {
         e.preventDefault();
-        dispatch(fetchBuyCoins({ coins: coinAmount }))
-        closeModal()
+        if (!coinAmount) return alert("You cannot purchase nothing.")
+        await dispatch(fetchBuyCoins({ coins: coinAmount }))
+        setModalContent(<div className='coins-modal'> Purchase successful </div>)
+        setTimeout(closeModal, 1500)
     };
     const activateWallet = async (e) => {
       e.preventDefault();
-      dispatch(fetchBuyCoins({ coins: 300 }))
-      closeModal()
+      await dispatch(fetchBuyCoins({ coins: 300 }))
+      setModalContent(<div className='coins-modal'> Wallet activation successful </div>)
+      setTimeout(closeModal, 1500)
     };
     const emptyWallet = async (e) => {
       e.preventDefault();
+      const payment = user.coins
       await dispatch(fetchBuyCoins({coins: -user.coins}))
-      closeModal()
+      setModalContent(
+      <div className='coins-modal empty'>
+      Wallet successfully emptied and {payment} imaginary monies have been deposited directly into your imagination
+      <button className='coin-btn btn' onClick={closeModal}>Close</button>
+      </div>
+
+      )
+      setTimeout(closeModal, 25000)
+
     };
     const deactivateWallet = async (e) => {
       e.preventDefault();
       await dispatch(fetchDeactivateWallet())
+      closeModal()
     };
 
     return (
-        <>
+        <div className='coins-modal'>
           {user.coins === null ?
             <>
             <h1>whaddup</h1>
@@ -41,21 +55,23 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
             <>
             <h1>Coin Shop</h1>
             <form onSubmit={buyCoins}>
-              <div>9 coins<span onClick={() => setCoinAmount(9)}>Buy</span></div>
-              <div>66 coins<span onClick={() => setCoinAmount(66)}>Buy</span></div>
-              <div>120 coins<span onClick={() => setCoinAmount(120)}>Buy</span></div>
-              <div>Purchase {coinAmount} coins for ${(coinAmount/100).toFixed(2)} ? </div>
-              <button type="submit">Purchase?</button>
+              <div className='buy-coin-div'><span>9 coins</span><span className='coins-span' onClick={() => setCoinAmount(9)}>select</span></div>
+              <div className='buy-coin-div'><span>66 coins</span><span className='coins-span' onClick={() => setCoinAmount(66)}>select</span></div>
+              <div className='buy-coin-div'><span>120 coins</span><span className='coins-span' onClick={() => setCoinAmount(120)}>select</span></div>
+              <div className='purchase-message'>Purchase {coinAmount} coins for ${(coinAmount/100).toFixed(2)} ? </div>
+              <div className='submit-wrapper'>
+              <button className='btn coin-btn' type="submit">Purchase?</button>
+              </div>
             </form>
+            <div className='end-wallet'>
             {user.coins > 0 && <form onSubmit={emptyWallet}>
-              <div>Cash out wallet?</div>
-              <button type="submit">Empty wallet</button>
+              <button className='btn coin-btn' type="submit" >Empty wallet</button>
             </form>}
             <form onSubmit={deactivateWallet}>
-              <div>Deactivate Wallet</div>
-              <button type="submit">Deactivate Wallet</button>
+              <button className='btn coin-btn' type="submit" >Deactivate Wallet</button>
             </form>
+            </div>
           </>}
-        </>
+        </div>
       );
 }

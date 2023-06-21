@@ -18,7 +18,7 @@
     font-weight: bold;
     text-align: center;
     border: none;
-    background: #453C41;
+    /* background: #453C41; */
     border-radius: .5rem;
     color: white;
     margin: 1rem 0;
@@ -45,7 +45,10 @@
     max-width: 50rem;
 
 }
-
+.chapters-div {
+    align-self: baseline;
+    margin-left: 2rem;
+}
 .the-body textarea {
     width: 100%;
     height: auto;
@@ -82,7 +85,23 @@
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
 }
-
+.purchase-chapter {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+.unlock-story-text {
+    text-align: center;
+}
 .quill {
 
+}
+.purchase-modal-div {
+    padding: 1rem;
+}
+.purchase-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

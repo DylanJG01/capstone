@@ -28,19 +28,13 @@ def authenticate():
         query = select(purchased_chapters.c.chapter_id).where(purchased_chapters.c.user_id == current_user.id)
 
         results = db.session.execute(query).all()
-        user = User.query.filter_by( username = current_user.username).first()
-        users = User.query.all()
+        user = User.query.filter_by(username = current_user.username).first()
 
-        for user in users:
-            print(user.to_dict())
-        print(current_user.id)
-        print(user)
-        print(user)
-        print(user.to_dict())
-        user['purchased_chapters'] = {}
+        return_obj = user.to_dict()
+        return_obj['purchased_chapters'] = {}
         for result in results:
-            user['purchased_chapters'][result[0]] = True
-        return user
+            return_obj['purchased_chapters'][result[0]] = True
+        return return_obj
     return {'errors': ['Unauthorized']}
 
 
