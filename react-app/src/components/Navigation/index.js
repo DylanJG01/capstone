@@ -19,7 +19,8 @@ function Navigation({ isLoaded }){
 
 				<li className='profile-li'>
 					{sessionUser && <span><PurchaseCoinsModal user={sessionUser}/></span>}
-					{sessionUser && <span><WriteButton /></span>}
+
+					{sessionUser && <span className='write-button-span'><WriteButton /></span>}
 					<span><ProfileButton user={sessionUser} /></span>
 				</li>
 				</>

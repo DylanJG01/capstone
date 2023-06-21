@@ -107,7 +107,7 @@ export default function Chapter(){
                 <div className='chapter-body' dangerouslySetInnerHTML={{__html: chapter.body}}/>
                 </>
                 :
-                <PurchaseChapter userId={user?.id} chapterId={chapter?.id} cost={chapter?.cost} writerId={story.user_id}/>
+                <PurchaseChapter user={user} chapterId={chapter?.id} cost={chapter?.cost} writerId={story.user_id}/>
                 }
 
             </div>

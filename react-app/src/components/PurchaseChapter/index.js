@@ -3,13 +3,13 @@ import { useModal } from '../../context/Modal';
 import PurchaseChapterModal from './PurchaseChapterModal';
 
 
-export default function Purchase({userId, chapterId, cost, writerId}){
+export default function Purchase({user, chapterId, cost, writerId}){
     const { setModalContent, closeModal } = useModal()
 
     const purchaseModal = () => {
         setModalContent(<PurchaseChapterModal
                         closeModal={closeModal}
-                        userId={userId}
+                        user={user}
                         chapterId={chapterId}
                         cost={cost}
                         writerId={writerId}

@@ -18,16 +18,35 @@ def seed_users():
         email='bobbie@aa.io',
         password='password',
         )
+    demo_user = User(
+        username='something',
+        email='something@aa.io',
+        password='password',
+    )
+    another_demo = User(
+        username='wraith-writer',
+        email='wraith@aa.io',
+        password='password',
+    )
 
     category1 = Category.query.get(1)
     category2 = Category.query.get(2)
+    category3 = Category.query.get(3)
+
+    demo_user.categories.append(category1)
+    demo_user.categories.append(category2)
 
     demo.categories.append(category1)
     demo.categories.append(category2)
 
+    another_demo.categories.append(category1)
+    another_demo.categories.append(category3)
+
+    db.session.add(demo_user)
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+
     db.session.commit()
 
 

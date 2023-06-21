@@ -13,6 +13,7 @@ export default function StoryFormPage() {
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([])
   const [tag, setTag] = useState("");
+  const [addTag, setAddTag] = useState(false)
   const [category, setCategory] = useState("None")
   const [mature, setMature] = useState("")
   const [cover, setCover] = useState(null)
@@ -45,12 +46,11 @@ export default function StoryFormPage() {
     }
 
     const newStory = await dispatch(fetchPostStory(formData))
-    // formData.append("user_id", user.id)
 
-    // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}`)
+    history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}`)
     // history.push(`/myworks/${newStory.id}-${titleToSword(newStory.title)}/chapter/new`)
-    //I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
-    //THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
+    // I THINK I WANT THIS TO CREATE A NEW STORY AND A NEW CHAPTER,
+    // THEN WE CAN RUN A PUT REQUEST ON THE CHAPTER.
     }
 
   useEffect(() => {
@@ -64,6 +64,13 @@ export default function StoryFormPage() {
 
   const changeRating = () => {
     mature ? setMature(false) : setMature(true)
+  }
+
+  const remove_tag = (e, tag) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const tempArr = tags.filter(el => el !== tag)
+    setTags(tempArr)
   }
 
   return (
@@ -118,13 +125,21 @@ export default function StoryFormPage() {
           <div className="story-category-selection-div">
             <h5>Which tags best fits your story?</h5>
             <div className="tag-area">
-            {tags?.length > 0 && tags.map(el => <div className="tag"> {console.log(el)}{el} </div>)}
-            <input
-              type="text"
-              value={tag}
-              onChange={(e) => tagBundler(e, tag, tags, setTag, setTags)}
-            />
+            {tags?.length > 0 && tags.map(el => (
+            <div className="tag" onClick={(e) => remove_tag(e, el)}>
+              {el}
+              <div className={'x'}>x</div>
             </div>
+            ))}
+            </div>
+              { !addTag ? <div className="tag" onClick={() => setAddTag(true)}>+ Add Tag</div>:
+                <input
+                className="tag-input"
+                type="text"
+                value={tag}
+                onChange={(e) => tagBundler(e, tag, tags, setTag, setTags)}
+                onBlur={() => setAddTag(false)}
+              />}
           </div>
           </label>
           <label className="label mature">

@@ -19,7 +19,6 @@ export default function SetCostModal({chapter, user}){
                 closeModal={closeModal} chapter={chapter}/>
                 )
         }
-
     }
 	return (
         <button className='set-cost' onClick={editCost}>

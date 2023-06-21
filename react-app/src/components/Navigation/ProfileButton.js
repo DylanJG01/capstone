@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useHistory } from "react-router-dom/";
+import { usersStories } from "../../store/story";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function ProfileButton({ user }) {
     <>
       <button onClick={openMenu} className="user-profile-button">
         <i className="fas fa-user-circle" />
+        <span>{user?.username}</span>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

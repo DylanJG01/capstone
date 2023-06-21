@@ -62,7 +62,7 @@ function SignupFormModal() {
 	},[email, username, password, confirmPassword])
 
 	const demoUser = async (e) => {
-		dispatch(login('demo@aa.io', 'password'))
+		dispatch(login('wraith@aa.io', 'password'))
 		closeModal()
 	}
 

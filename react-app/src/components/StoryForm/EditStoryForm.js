@@ -14,20 +14,17 @@ export default function EditStoryForm() {
   const [user, story, chapters] = useSelector((state) => [state.session.user, state.stories.singleStory, state.chapters.allChapters]);
   const [title, setTitle] = useState(story?.title || "");
   const [description, setDescription] = useState(story?.description || "");
-  // const [tags, setTags] = useState(story?.tags || "");
   const [tags, setTags] = useState(story?.tags || [])
   const [tag, setTag] = useState(story?.tag || "")
+  const [addTag, setAddTag] = useState(false)
   const [category, setCategory] = useState(story?.category_name || "None")
   const [mature, setMature] = useState(story?.mature || false)
   const [cover, setCover] = useState(null)
-  // const [theCover, setTheCover] = useState(story?.cover || '')
   const [errors, setErrors] = useState([]);
-
   const [tab, setTab] = useState('details')
-  const [loaded, setLoaded] = useState(false)
 
+  const [loaded, setLoaded] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [active, setActive] = useState(true)
   const params = useParams()
   const history = useHistory()
   const storyId = parseInt(params.storyId)
@@ -64,7 +61,7 @@ export default function EditStoryForm() {
 
   useEffect(() => {
     console.log(cover)
-}, [cover])
+  }, [cover])
 
 
   const handleSubmit = async (e) => {
@@ -82,7 +79,6 @@ export default function EditStoryForm() {
       category_name: category,
       user_id: user.id
     }
-    console.log(theObj.tag_list)
 
     for (const i in theObj){
       if( i !== 'the_cover'){
@@ -117,6 +113,13 @@ export default function EditStoryForm() {
   const changeRating = () => {
     mature ? setMature(false) : setMature(true)
   }
+
+  const remove_tag = (e, tag) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const tempArr = tags.filter(el => el !== tag)
+    setTags(tempArr)
+  }
   return (
     <>
         <div>
@@ -137,11 +140,9 @@ export default function EditStoryForm() {
               onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
               />
             </div>
+
           <div className="form-div">
           <form onSubmit={handleSubmit} className="new-story-form">
-          {/* <ul>
-            {submitted && errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul> */}
           <label className="label">
             <div>Title
               {submitted && errors.includes('title-short') && (<span className="error">Title must be over 0 characters</span>)}
@@ -167,14 +168,6 @@ export default function EditStoryForm() {
             />
           </label>
           <label className="label">
-            <div>Cover</div>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setCover(e.target.files[0])}
-            />
-          </label>
-          <label className="label">
           <div className="story-tag-selection-div">
             <h5>Which category best fits your story?</h5>
             <select className="story-tag-selector" value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -187,19 +180,30 @@ export default function EditStoryForm() {
             <h5>Which tags best fits your story?</h5>
             <div className="tag-area">
             {tags?.length > 0 && tags.map(el => (
-            <div className="tag">
+            <div className="tag" onClick={(e) => remove_tag(e, el)}>
               {el}
-              {console.log(tags)}
+              <div className={'x'}>x</div>
             </div>
-
             ))}
-            <input
-              type="text"
-              value={tag}
-              onChange={(e) => tagBundler(e, tag, tags, setTag, setTags)}
-            />
             </div>
+              { !addTag ? <div className="tag" onClick={() => setAddTag(true)}>+ Add Tag</div>:
+                <input
+                className="tag-input"
+                type="text"
+                value={tag}
+                onChange={(e) => tagBundler(e, tag, tags, setTag, setTags)}
+                onBlur={() => setAddTag(false)}
+              />}
           </div>
+          </label>
+          <div>Cover</div>
+          <label className="file-label">
+            <input
+              className="file-input"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setCover(e.target.files[0])}
+            />
           </label>
           <label className="label mature">
             Mature Content:

@@ -40,8 +40,6 @@ export default function CreateChapter (){
 
       },[title, body])
 
-
-
     if (!story) return null
 
 
@@ -62,7 +60,7 @@ export default function CreateChapter (){
         <div className='chapter-form-div'>
             <form onSubmit={handleSubmit} className='chapter-form'>
                 <ul>
-                {/* {errors.map((error, idx) => <li key={idx}>{error}</li>)} */}
+                {submitted && errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
                 <label>
                 <input
@@ -86,7 +84,7 @@ export default function CreateChapter (){
                 placeholder={submitted && errors.includes('body-length') ? "Please add some content, even if it's just a letter." : "Chapter content here..."}
                 className={submitted && errors.includes('body-length') ? "chapter-body red" : "chapter-body"}
                 /> */}
-                <ReactQuill theme="snow" value={body} onChange={setBody} />
+                <ReactQuill theme="snow" value={body} onChange={setBody} placeholder={submitted ? "Please enter content" : "fdsadfsa"}/>
 
                 </label>
                 <button className='btn log-in save-submit' type="submit">Submit</button>

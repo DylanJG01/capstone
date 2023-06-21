@@ -2,15 +2,18 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { fetchBuyChapter } from '../../store/session';
 
-export default function PurchaseChapterModal({closeModal, cost, userId, chapterId, writerId}){
+export default function PurchaseChapterModal({closeModal, cost, user, chapterId, writerId}){
     const dispatch = useDispatch()
 
     const buyChapter = async (e) => {
         e.preventDefault();
-        if(e.length){
-            return
+        if(user.coins === null){
+            return alert("You must have an activated wallet to purchase")
         }
-        dispatch(fetchBuyChapter({user_id: userId, chapter_id: chapterId, cost, writer_id: writerId}))
+        if(user.coins < cost){
+          return alert("You don't have the required number of coins!")
+        }
+        dispatch(fetchBuyChapter({user_id: user.id, chapter_id: chapterId, cost, writer_id: writerId}))
         closeModal()
       };
 

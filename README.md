@@ -1,8 +1,14 @@
 TO DO LIST-
 
-Cannot add the same tag multiple times
+Cannot add the same tag multiple times - solved
 UPDATE STORE FOR PUTSTORY
 COMMENT IN HISTORY PUSH ON POST STORY
+
+USER PROFILE
+{FIRSTNAME,
+LASTNAME,
+PROFILE PICTURE,
+}
 
 submit chapter body length error handling.
 
@@ -25,3 +31,8 @@ tickets.
 orders?
 
 Views.
+
+//
+
+
+Loading animation while waiting for api hits.

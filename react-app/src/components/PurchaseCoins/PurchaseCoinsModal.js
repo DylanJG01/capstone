@@ -21,11 +21,6 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
       e.preventDefault();
       await dispatch(fetchBuyCoins({coins: -user.coins}))
       closeModal()
-      if(!user.coins){
-        alert("Whaddup")
-      } else {
-        alert("Error emptying wallet")
-      }
     };
     const deactivateWallet = async (e) => {
       e.preventDefault();

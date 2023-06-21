@@ -56,7 +56,7 @@ export default function EditChapter (){
     }
 	return (
         <>
-        <button onClick={() => history.push(`/myworks/${params.storyId}`)}>Back</button>
+        <button className='back' onClick={() => history.push(`/myworks/${params.storyId}`)}>Back</button>
         <div className='chapter-form-div'>
             <form onSubmit={handleSubmit} className='chapter-form'>
                 <ul>

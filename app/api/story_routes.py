@@ -136,12 +136,9 @@ def create_story():
         """
         POST A NEW STORY! AND MAKE A NEW CHAPTER ATTACHED TO IT
         """
-
         form = StoryForm()
-
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-
             new_story = Story()
             form.populate_obj(new_story)
             image = form.data["the_cover"]
@@ -149,8 +146,8 @@ def create_story():
                 image.filename = get_unique_filename(image.filename)
                 upload = upload_file_to_AWS(image)
                 new_story.cover = upload["url"]
-            new_story.cost = 0
 
+            new_story.cost = 0
             tags = form.data['tag_list'].split()
             for tag in tags:
                 db_tag = Tag.query.filter(Tag.name == tag).first()
