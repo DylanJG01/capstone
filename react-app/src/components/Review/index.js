@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { editReview, fetchDeleteReview } from '../../store/review';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchDeleteReview } from '../../store/review';
 import EditReview from './EditReview';
 import { useModal } from '../../context/Modal';
 

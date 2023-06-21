@@ -5,11 +5,6 @@ const BUY_CHAPTER = "session/BUY_CHAPTER"
 const PURCHASE_COINS = "session/PURCHASE_COINS"
 const DEACTIVATE_WALLET = "session/DEACTIVATE"
 
-const deactivate_wallet = user => ({
-	type: DEACTIVATE_WALLET,
-	payload: user
-})
-
 const purchase_coins = user => ({
 	type: PURCHASE_COINS,
 	payload: user

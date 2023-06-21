@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostStory } from "../../store/story";
 import { useHistory } from "react-router-dom/";
-import { titleToSword, options , titleValidator, urlChecka, descriptionValidator} from "../_helpers";
+import { titleToSword, options , titleValidator, descriptionValidator} from "../_helpers";
 import { tagBundler } from "../_helpers";
 import './StoryForm.css'
 
 export default function StoryFormPage() {
   const dispatch = useDispatch();
-  const [user, story] = useSelector((state) => [state.session.user, state.stories.singleStory]);
+  const user = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([])

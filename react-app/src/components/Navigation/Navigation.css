@@ -96,6 +96,7 @@ p {
   border: none;
   margin-right: 2rem;
   color: #7B586B;
+  box-shadow: 0 0 5px 2px black;
 }
 .user-profile-button:hover {
   /* background-color: green; */

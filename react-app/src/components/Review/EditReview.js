@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fetchPutReview, fetchAllChapterReviews } from '../../store/review';
+import { fetchPutReview } from '../../store/review';
 import { useDispatch } from 'react-redux';
 
 export default function EditReview({closeModal, review}){
@@ -7,7 +7,6 @@ export default function EditReview({closeModal, review}){
     const [stars, setStars] = useState(review.stars || 0)
     const [content, setContent] = useState(review.content)
     const [errors, setErrors] = useState([])
-    const [submitted, setSubmitted] = useState(false)
 
     useEffect(() => {
         const e = []
@@ -17,7 +16,6 @@ export default function EditReview({closeModal, review}){
 
     const sendReview = async (e) => {
         e.preventDefault();
-        setSubmitted(true)
         if(e.length){
             return
         }

@@ -1,7 +1,4 @@
 import React from "react";
-// import { login } from "../../store/session";
-// import { useDispatch } from "react-redux";
-// import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom"
 
 export default function StoryModal({story, closeModal}) {
@@ -12,15 +9,11 @@ export default function StoryModal({story, closeModal}) {
         history.push(`/stories/${story.id}/chapter/${story.firstChapterId}`)
         closeModal()
     }
-    const toStoryDetails = () => {
-        history.push(`/story/${story.id}`)
-        closeModal()
-    }
 
     return (
     <div className="story-details-modal">
         <div className="cover-img-div">
-            <img className="cover-img" src={story.cover}
+            <img className="cover-img" alt='book-cover' src={story.cover}
             onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
             />
         </div>

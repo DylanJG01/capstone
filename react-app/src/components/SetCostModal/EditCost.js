@@ -7,7 +7,6 @@ export default function EditCost({closeModal, chapter}){
     const dispatch = useDispatch()
     const [cost, setCost] = useState(chapter?.cost || 0)
     const [errors, setErrors] = useState([])
-    const [submitted, setSubmitted] = useState(false)
 
     useEffect(() => {
         const e = []
@@ -16,7 +15,6 @@ export default function EditCost({closeModal, chapter}){
 
     const editCost = async (e) => {
         e.preventDefault();
-        setSubmitted(true)
         if(e.length){
             return
         }

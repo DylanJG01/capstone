@@ -43,10 +43,9 @@ export default function Chapter(){
 
     useEffect(() => {
         if (user && reviews){
-
         setMyReviewId(Object.values(reviews).filter(review => review.userId === user.id)[0]?.id)
         }
-    }, [reviews])
+    }, [reviews, user])
 
     if (!chapter || !story) return null
     const chapterArr = Object.values(story.allChapters)
@@ -66,12 +65,7 @@ export default function Chapter(){
     }
 
     const aFunc = () => {
-        const chapter = chapterArr.filter(el =>{
-                if(parseInt(el.index) === parseInt(toChapter)) {
-                    return el
-                }
-            })[0]
-
+        const chapter = chapterArr.filter(el => parseInt(el.index) === parseInt(toChapter))[0]
         return history.push(`/stories/${story.id}/chapter/${chapter.id}`)
     }
 

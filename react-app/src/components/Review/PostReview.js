@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fetchPostReview, fetchAllChapterReviews } from '../../store/review';
+import { fetchPostReview } from '../../store/review';
 import { useDispatch } from 'react-redux';
 
 export default function PostReview({userId, chapterId, closeModal, setMyReviewId}){

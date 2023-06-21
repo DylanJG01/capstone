@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllStories } from '../../store/story';
 import { useModal } from '../../context/Modal';
 import StoryModal from '../Story/StoryModal'
-import { useHistory } from 'react-router-dom';
 import './AllStories.css'
 
 export default function AllStories(){
-	const [user, stories] = useSelector(state => [state.session.user, state.stories.allStories]);
+	const stories = useSelector(state => state.stories.allStories);
     const dispatch = useDispatch()
-    const history = useHistory()
     const { setModalContent, closeModal } = useModal();
 
     useEffect(() => {

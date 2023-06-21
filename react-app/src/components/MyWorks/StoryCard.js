@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React from 'react';
 import { fetchDeleteStory } from '../../store/story';
 import { titleToSword } from '../_helpers';
 import { useDispatch } from 'react-redux';

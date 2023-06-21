@@ -1,8 +1,6 @@
-import React, { useEffect, useState, version} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChapter } from '../../store/story';
 import { fetchSingleChapter, fetchPutChapter } from '../../store/chapter';
-// import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
 import { titleValidator } from '../_helpers';
 
@@ -19,19 +17,14 @@ export default function EditChapter (){
     // const { setModalContent, setOnModalClose, closeModal } = useModal();
     const [title, setTitle] = useState(chapter?.title || "")
     const [body, setBody] = useState(chapter?.body || "")
-    const [content, setContent] = useState(chapter?.body || "")
-    const [submitted, setSubmitted] = useState(false)
     const history = useHistory()
 
     useEffect(() => {
-        // dispatch(fetchChapter( parseInt(params.chapterId), parseInt(params.
-        // storyId),))
         dispatch(fetchSingleChapter(parseInt(params.chapterId)))
     },[dispatch, user, params.chapterId, params.storyId])
 
     useEffect (() => {
         if (!chapter) return null
-        // setBody(chapter.body)
         setTitle(chapter.title)
         setBody(chapter.body)
     }, [dispatch, chapter])

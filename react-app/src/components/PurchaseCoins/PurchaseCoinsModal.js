@@ -1,12 +1,10 @@
 import React, { useState, } from 'react'
 import { useDispatch } from 'react-redux';
 import { fetchBuyCoins, fetchDeactivateWallet } from '../../store/session';
-import { useModal } from '../../context/Modal';
 
 export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
     const dispatch = useDispatch()
     const [coinAmount, setCoinAmount] = useState(0)
-    const [content, setContent] = useState("default")
 
     const buyCoins = async (e) => {
         e.preventDefault();
@@ -44,13 +42,13 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
     return (
         <div className='coins-modal'>
           {user.coins === null ?
-            <>
+            <div>
             <h1>whaddup</h1>
             <form onSubmit={activateWallet}>
             Activate wallet and get 300 free coins!
             <button type="submit">Activate!</button>
             </form>
-            </>
+            </div>
             :
             <>
             <h1>Coin Shop</h1>

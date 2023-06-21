@@ -1,7 +1,6 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsersStories, storyWithChapter } from '../../store/story';
-import { useModal } from '../../context/Modal';
+import { fetchUsersStories } from '../../store/story';
 import { useHistory, useParams } from 'react-router-dom'
 
 export default function UserProfile(){
@@ -12,7 +11,7 @@ export default function UserProfile(){
 
     useEffect(() => {
         dispatch(fetchUsersStories(params.username))
-    },[dispatch, user])
+    },[dispatch, user, params.username])
     if (!stories) return null
 
 	return (

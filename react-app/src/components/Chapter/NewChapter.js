@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChapter } from '../../store/story';
-import { fetchSingleChapter, fetchPostChapter } from '../../store/chapter';
+import { fetchPostChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
 import { titleToSword, titleValidator } from '../_helpers';
@@ -12,24 +11,15 @@ import 'react-quill/dist/quill.snow.css'
 import './Chapter.css'
 
 export default function CreateChapter (){
-	const [user, story, chapter] = useSelector(state => [state.session.user, state.stories.singleStory, state.chapters.singleChapter]);
+	const story = useSelector(state => state.stories.singleStory);
     const dispatch = useDispatch()
     const params = useParams()
     const [errors, setErrors] = useState([])
-    // const { setModalContent, setOnModalClose, closeModal } = useModal();
+
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
-    const [content, setContent] = useState("")
     const [submitted, setSubmitted] = useState(false)
     const history = useHistory()
-
-
-    // useEffect(() => {
-    //     // dispatch(fetchChapter( parseInt(params.chapterId), parseInt(params.
-    //     // storyId),))
-    //     dispatch(fetchSingleChapter(parseInt(params.chapterId)))
-    // },[dispatch, user, params.chapterId, params.storyId])
-
 
     useEffect(() => {
         const ve = [] //Validation Errors
@@ -41,7 +31,6 @@ export default function CreateChapter (){
       },[title, body])
 
     if (!story) return null
-
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -72,18 +61,6 @@ export default function CreateChapter (){
                 />
                 </label>
                 <label className='the-body'>
-                {/* <input
-                    type="text"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                /> */}
-                {/* <textarea
-                type="text"
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                placeholder={submitted && errors.includes('body-length') ? "Please add some content, even if it's just a letter." : "Chapter content here..."}
-                className={submitted && errors.includes('body-length') ? "chapter-body red" : "chapter-body"}
-                /> */}
                 <ReactQuill theme="snow" value={body} onChange={setBody} placeholder={submitted ? "Please enter content" : "fdsadfsa"}/>
 
                 </label>

@@ -14,7 +14,7 @@ import EditChapter from "./components/Chapter/EditChapter"
 import AllStories from "./components/AllStories";
 import FourOhFour from "./components/FourOhFour";
 import NewChapter from "./components/Chapter/NewChapter"
-import UserProfile from "./components/UserProfile";
+// import UserProfile from "./components/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
