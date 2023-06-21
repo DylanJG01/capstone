@@ -6,17 +6,20 @@ export default function PostReview({userId, chapterId, closeModal, setMyReviewId
     const dispatch = useDispatch()
     const [stars, setStars] = useState(0)
     const [content, setContent] = useState("")
+    const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
 
     useEffect(() => {
         const e = []
-        if (content.length > 1410) e.push("content")
+        if (content.length < 10) e.push("content-short")
+        if (content.length > 1410) e.push("content-long")
         setErrors(e)
     }, [stars, content])
 
     const sendReview = async (e) => {
         e.preventDefault();
-        if(e.length){
+        setSubmitted(true)
+        if(errors.length){
             return
         }
         dispatch(fetchPostReview({
@@ -29,12 +32,15 @@ export default function PostReview({userId, chapterId, closeModal, setMyReviewId
       };
 
     return (
-        <>
+        <div className='review-modal'>
           <h1>Review</h1>
-          <form onSubmit={sendReview}>
+          <form className='review-form' onSubmit={sendReview}>
             <label>
-              Review {errors.includes("content") && <span className='err'> Review too long!</span>}
+              {/* <p className='review-p rel'>Review</p> */}
+              {submitted && errors.includes("content-long") && <span className='err abs'> Review too long!</span>}
+              {submitted && errors.includes("content-short") && <span className='err abs'> Review too short!</span>}
               <textarea
+                className='review-textarea'
                 type="textarea"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -42,7 +48,7 @@ export default function PostReview({userId, chapterId, closeModal, setMyReviewId
                 cols={30}
               />
             </label>
-            <label>
+            <label className='review-stars-label'>
                 Rating
                 <div className="rate">
                     <input type="checkbox" id="star1" name="rate" value={stars} onChange={e => stars === 5 ? setStars(0) : setStars(5)} checked={(5===stars)}/>
@@ -57,8 +63,8 @@ export default function PostReview({userId, chapterId, closeModal, setMyReviewId
                     <label htmlFor="star5" title="text"></label>
                 </div>
             </label>
-            <button type="submit">Review</button>
+            <button className='btn log-in' type="submit">Review</button>
           </form>
-        </>
+        </div>
       );
 }

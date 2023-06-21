@@ -139,9 +139,11 @@ function SignupFormModal() {
 						{options.map(option => <option>{option}</option>)}
 					</select>
 				</div>
-				<button className="signup-button" type="submit">Sign Up</button>
+				{/* <button className="signup-button" type="submit">Sign Up</button> */}
+				<button className="btn log-in signup" type="submit">Sign Up</button>
 				<div className="demo-button-div">
-				<button className="demo-user-button" onClick={() => demoUser()}>Demo User</button>
+				{/* <button className="demo-user-button" onClick={() => demoUser()}>Demo User</button> */}
+				<button className="btn log-in" onClick={() => demoUser()}>Demo User</button>
 				</div>
 			</form>
 		</div>

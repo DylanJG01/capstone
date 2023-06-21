@@ -1,3 +1,11 @@
+/* .abs {
+    position: absolute;
+}
+
+.rel {
+    position: relative;
+} */
+
 .review-container {
     width: 70%;
     display: flex;
@@ -9,9 +17,6 @@
     border: 1px solid green;
     margin: 1rem;
 }
-
-
-
 
 .rate {
     float: left;
@@ -55,4 +60,23 @@
 .rate>input:checked~label:hover~label,
 .rate>label:hover~input:checked~label {
     color: #c59b08;
+}
+.review-modal {
+    padding: 1rem;
+}
+.review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review-stars-label {
+    display: flex;
+    align-items: center;
+}
+.review-textarea {
+    padding: .5rem;
+    background-color: #412635;
+    color: white;
+    border: 1px solid black;
 }

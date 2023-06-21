@@ -12,7 +12,9 @@
     border-radius: 2.5rem;
     width: 16rem;
 }
-
+.signup {
+    margin-top: 1rem;
+}
 .signup-form label {
     margin-top: 1.25rem;
     display: flex;

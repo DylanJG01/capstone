@@ -25,12 +25,12 @@ export default function Reviews({reviews, myReviewId}){
             <ul>
                 {reviews && Object.values(reviews).map(el => (
                 <li className='review'>
-                    <div> {el.stars} </div>
-                    <p> {el.content} </p>
+                    <div className='rating'> {el.stars} </div>
+                    <p className='review-p'> {el.content} </p>
                     { myReviewId === el.id &&
                     <div>
-                    <button onClick={() => deleteReview(el.id)}> delete </button>
-                    <button onClick={() => editReview()}> edit </button>
+                    <button className='btn log-in' onClick={() => deleteReview(el.id)}> delete </button>
+                    <button className='btn log-in' onClick={() => editReview()}> edit </button>
                     </div>
                     }
                 </li>

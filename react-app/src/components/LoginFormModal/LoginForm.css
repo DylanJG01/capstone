@@ -29,7 +29,10 @@
 .login-form button:hover{
     cursor: pointer;
 }
-
+.log-in{
+    color: white;
+    background: black;
+}
 .log-in:hover {
     background: #7B586B;
     color: white;

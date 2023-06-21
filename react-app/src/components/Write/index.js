@@ -42,14 +42,12 @@ export default function WriteButton() {
         Write
       </button>
       <ul className={ulClassName} ref={ulRef}>
-          <>
-            <li>
+            <li className="write-button-li">
                 <button onClick={() => toNewStory()}>Create a new story</button>
             </li>
-            <li>
+            <li className="">
                 <button onClick={() => toMyStories()}>My Stories</button>
             </li>
-          </>
       </ul>
     </>
   );

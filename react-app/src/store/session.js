@@ -137,7 +137,7 @@ export const fetchDeactivateWallet = () => async dispatch => {
 	});
 	if (res.ok){
 		const user = await res.json()
-		dispatch(purchase_coins(user))
+		return dispatch(purchase_coins(user))
 	}
 }
 

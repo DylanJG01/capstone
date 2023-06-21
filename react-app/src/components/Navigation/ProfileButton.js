@@ -50,8 +50,8 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
+            <li className="user-info">{user.username}</li>
+            <li className="user-info wraith">{user.email}</li>
             {/* <li><button classname={'to-user-profile'} onClick={() => history.push(`/user/${user.username}`)}>User Profile</button></li> */}
             <li>
               <button id='logout-button' onClick={handleLogout}>Log Out</button>
@@ -59,17 +59,20 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
+          <div className="login-button">
             <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
-
+            </div>
+            <div>
             <OpenModalButton
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+            </div>
           </>
         )}
       </ul>

@@ -25,28 +25,36 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
       await dispatch(fetchBuyCoins({coins: -user.coins}))
       setModalContent(
       <div className='coins-modal empty'>
-      Wallet successfully emptied and {payment} imaginary monies have been deposited directly into your imagination
+      Wallet successfully emptied and ${payment} has been deposited directly into your imagination
       <button className='coin-btn btn' onClick={closeModal}>Close</button>
       </div>
-
       )
-      setTimeout(closeModal, 25000)
+      setTimeout(closeModal, 3000)
 
     };
     const deactivateWallet = async (e) => {
       e.preventDefault();
-      await dispatch(fetchDeactivateWallet())
-      closeModal()
+      const payout = user.coins
+      let x = await dispatch(fetchDeactivateWallet())
+      if (x) {
+        setModalContent(
+          <div className='coins-modal empty'>
+          Wallet successfully deactivated and ${payout} have been deposited directly into your imagination.
+          <button className='coin-btn btn' onClick={closeModal}>Close</button>
+          </div>
+          )
+      }
+      setTimeout(closeModal, 3000)
     };
 
     return (
         <div className='coins-modal'>
           {user.coins === null ?
             <div>
-            <h1>whaddup</h1>
-            <form onSubmit={activateWallet}>
-            Activate wallet and get 300 free coins!
-            <button type="submit">Activate!</button>
+            <h1>Activate</h1>
+            <form onSubmit={activateWallet} className='activate-form'>
+              <p className='activate-p'> Activate wallet and get 300 free coins! </p>
+            <button className="btn coin-btn active-btn" type="submit">Activate!</button>
             </form>
             </div>
             :

@@ -56,10 +56,9 @@ function LoginFormModal() {
         </label>
         <button className="log-in" type="submit">Log In</button>
         <div className="demo-button-div">
-        <button className="demo-user-button" onClick={() => demoUser()}>Demo User</button>
+        <button className="log-in" onClick={() => demoUser()}>Demo User</button>
         </div>
       </form>
-
     </div>
   );
 }

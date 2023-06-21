@@ -38,9 +38,12 @@
 }
 .end-wallet {
     display: flex;
+    justify-content: space-around;
+    width: 100%;
 }
 .coins-span {
     text-align: end;
+    padding: .15rem;
 }
 .coins-span:hover {
     cursor: pointer;
@@ -76,4 +79,13 @@
 }
 .user-coins {
     margin-left: .5rem;
+}
+.activate-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.active-btn {
+    margin-top: 1rem;
 }
