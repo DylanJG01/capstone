@@ -199,3 +199,9 @@ textarea {
   padding-bottom: .25rem;
   border-bottom: 1px solid black;
 }
+.review-err {
+  position: absolute;
+  top: -1.1rem;
+  left: 5rem;
+  /* background-color: black; */
+}

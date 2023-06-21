@@ -37,8 +37,8 @@ export default function PostReview({userId, chapterId, closeModal, setMyReviewId
           <form className='review-form' onSubmit={sendReview}>
             <label>
               {/* <p className='review-p rel'>Review</p> */}
-              {submitted && errors.includes("content-long") && <span className='err abs'> Review too long!</span>}
-              {submitted && errors.includes("content-short") && <span className='err abs'> Review too short!</span>}
+              {submitted && errors.includes("content-long") && <span className='err abs review-err'> Review too long!</span>}
+              {submitted && errors.includes("content-short") && <span className='err abs review-err'> Review too short!</span>}
               <textarea
                 className='review-textarea'
                 type="textarea"

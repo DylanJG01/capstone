@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db, Tag, purchased_chapters
+from app.models import User, db, Tag, purchased_chapters, Category
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -81,10 +81,12 @@ def sign_up():
         db.session.flush()
 
         tags_obj = request.get_json()
+
+        print(tags_obj)
         for tag in tags_obj['tags']:
-            tag = Tag.query.filter(Tag.name == tag).first()
+            tag = Category.query.filter(Category.name == tag).first()
             if tag:
-                user.tags.append(tag)
+                user.categories.append(tag)
 
         db.session.commit()
         login_user(user)

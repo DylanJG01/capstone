@@ -12,7 +12,7 @@ export default function EditReview({closeModal, review}){
     useEffect(() => {
         const e = []
         if (content.length < 10) e.push("content-short")
-        if (content.length > 1410) e.push("content")
+        if (content.length > 1410) e.push("content-long")
         setErrors(e)
     }, [stars, content])
 
@@ -38,8 +38,8 @@ export default function EditReview({closeModal, review}){
           <form className='review-form' onSubmit={sendReview}>
             <label>
               {/* <p className='review-p rel'>Review</p> */}
-              {submitted && errors.includes("content-long") && <span className='err abs'> Review too long!</span>}
-              {submitted && errors.includes("content-short") && <span className='err abs'> Review too short!</span>}
+              {submitted && errors.includes("content-long") && <span className='err abs review-err'> Review too long!</span>}
+              {submitted && errors.includes("content-short") && <span className='err abs review-err'> Review too short!</span>}
               <textarea
                 className='review-textarea'
                 type="textarea"
