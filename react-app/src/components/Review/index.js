@@ -22,11 +22,13 @@ export default function Reviews({reviews, myReviewId}){
     }
 	return (
         <div className='review-container'>
+            <h3 className='h3-reviews'>Reviews</h3>
             <ul>
-                {reviews && Object.values(reviews).map(el => (
-                <li className='review'>
-                    <div className='rating'> {el.stars} </div>
-                    <p className='review-p'> {el.content} </p>
+                {reviews && Object.values(reviews).map((el, i) => (
+                <li className='review' key={"review" + i}>
+                    <div className='review-user'> {el.user.username}</div>
+                    <div className='rating'> Rating: {el.stars} <i class="fa-solid fa-star" /></div>
+                    <div className='review-p'> {el.content} </div>
                     { myReviewId === el.id &&
                     <div>
                     <button className='btn log-in' onClick={() => deleteReview(el.id)}> delete </button>

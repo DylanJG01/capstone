@@ -20,7 +20,6 @@ export default function EditChapter (){
     // const { setModalContent, setOnModalClose, closeModal } = useModal();
     const [title, setTitle] = useState(chapter?.title || "")
     const [body, setBody] = useState(chapter?.body || "")
-    const [content, setContent] = useState(chapter?.body || "")
     const [submitted, setSubmitted] = useState(false)
     const history = useHistory()
 

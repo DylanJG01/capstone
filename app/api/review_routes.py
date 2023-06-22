@@ -29,7 +29,10 @@ def review(id):
             edited_review = Review.query.get(id)
             form.populate_obj(edited_review)
             db.session.commit()
-            return edited_review.to_dict(), 201
+
+            return_obj = edited_review.to_dict()
+            return_obj['user'] = edited_review.user.to_dict()
+            return return_obj, 201
     if request.method == "DELETE":
         db.session.delete(review)
         db.session.commit()
@@ -44,4 +47,6 @@ def new_review():
         new_review = Review(**form.data)
         db.session.add(new_review)
         db.session.commit()
-        return new_review.to_dict(), 200
+        return_obj = new_review.to_dict()
+        return_obj['user'] = new_review.user.to_dict()
+        return return_obj, 201

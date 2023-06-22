@@ -121,3 +121,15 @@
 .chapter-title-long {
     position: absolute;
 }
+
+.go-button {
+margin-left: 1rem;
+}
+.select-chapter{
+    background: black;
+    color: white;
+    padding: .25rem;
+}
+.review-this {
+    margin: 1rem;
+}

@@ -28,9 +28,7 @@
     box-shadow: 0 0 10px 5px #7B586B;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    /* margin: 1rem 15%; */
-    background-image: linear-gradient(to left, #1d0f0f, #453c41);
+    background-image: linear-gradient(to left,  #35203f, #33282e);
     border-radius: 1rem;
     width: max-content;
     align-self: center;
@@ -42,7 +40,7 @@
     align-items: center;
 }
 .start {
-    background-color: #bd88a5;
+    /* background-color: #bd88a5; */
 }
 .start:hover {
     cursor: pointer;
@@ -52,11 +50,6 @@
     width: 40rem;
     display: flex;
     padding: 1rem;
-    /* background-color: white;
-    border-radius: 5rem; */
-    /* margin: 1rem; */
-    /* border: 5px solid green; */
-    /* border-radius: 50px; */
 }
 
 .cover-img-div {

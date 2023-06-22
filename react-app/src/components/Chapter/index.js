@@ -82,13 +82,13 @@ export default function Chapter(){
         <div className='chapter-page'>
             <div className='chapters-div'>
             <span>Select Chapter: </span>
-            <select value={toChapter} onChange={e => {
+            <select className="select-chapter" value={toChapter} onChange={e => {
                 setToChapter(e.target.value)}}>
             {options.map(i => (
                 <option value={i}>{i}</option>
             ))}
             </select>
-            <button onClick={() => aFunc()}> Go!</button>
+            <button className="go-button log-in btn" onClick={() => aFunc()}> Go!</button>
             </div>
 
             <div className='chapter-content-div'>
@@ -104,8 +104,8 @@ export default function Chapter(){
                 }
 
             </div>
-            {chapter && chapter.nextChapterId && (<button onClick={() => toNext()}>Next</button>)}
-            { user && !myReviewId && user?.id !== story?.user_id && (!chapter.cost || user.purchased_chapters && user.purchased_chapters[chapter.id]) && <button onClick={() => reviewModal("post")}>Review</button>}
+            {chapter && chapter.nextChapterId && (<button className="log-in btn" onClick={() => toNext()}>Next</button>)}
+            { user && !myReviewId && user?.id !== story?.user_id && (!chapter.cost || user.purchased_chapters && user.purchased_chapters[chapter.id]) && <div className='review-this'><button className='log-in btn' onClick={() => reviewModal("post")}>Review</button></div>}
             <Reviews reviews={reviews} myReviewId={myReviewId}/>
         </div>
 	);

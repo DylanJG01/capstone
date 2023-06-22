@@ -11,7 +11,7 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
         if (!coinAmount) return alert("You cannot purchase nothing.")
         await dispatch(fetchBuyCoins({ coins: coinAmount }))
         setModalContent(<div className='coins-modal'> Purchase successful
-        <button className='coin-btn btn' onClick={closeModal}>Close</button>
+        <button className='log-in btn' onClick={closeModal}>Close</button>
         </div>)
         setTimeout(closeModal, 1500)
     };
@@ -20,7 +20,7 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
       await dispatch(fetchBuyCoins({ coins: 300 }))
       setModalContent(<div className='coins-modal'>
          Wallet activation successful
-         <button className='coin-btn btn' onClick={closeModal}>Close</button>
+         <button className='log-in btn' onClick={closeModal}>Close</button>
          </div>)
 
       setTimeout(closeModal, 1500)
@@ -32,7 +32,7 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
       setModalContent(
       <div className='coins-modal empty'>
       Wallet successfully emptied and ${payment} has been deposited directly into your imagination
-      <button className='coin-btn btn' onClick={closeModal}>Close</button>
+      <button className='log-in btn' onClick={closeModal}>Close</button>
       </div>
       )
       setTimeout(closeModal, 3000)
@@ -46,7 +46,7 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
         setModalContent(
           <div className='coins-modal empty'>
           Wallet successfully deactivated and ${payout} have been deposited directly into your imagination.
-          <button className='coin-btn btn' onClick={closeModal}>Close</button>
+          <button className='log-in btn' onClick={closeModal}>Close</button>
           </div>
           )
       }
@@ -60,7 +60,7 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
             <h1>Activate</h1>
             <form onSubmit={activateWallet} className='activate-form'>
               <p className='activate-p'> Activate wallet and get 300 free coins! </p>
-            <button className="btn coin-btn active-btn" type="submit">Activate!</button>
+            <button className="btn log-in active-btn" type="submit">Activate!</button>
             </form>
             </div>
             :
@@ -72,15 +72,15 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
               <div className='buy-coin-div'><span>120 coins</span><span className='coins-span' onClick={() => setCoinAmount(120)}>select</span></div>
               <div className='purchase-message'>Purchase {coinAmount} coins for ${(coinAmount/100).toFixed(2)} ? </div>
               <div className='submit-wrapper'>
-              <button className='btn coin-btn' type="submit">Purchase?</button>
+              <button className='btn log-in' type="submit">Purchase?</button>
               </div>
             </form>
             <div className='end-wallet'>
             {user.coins > 0 && <form onSubmit={emptyWallet}>
-              <button className='btn coin-btn' type="submit" >Empty wallet</button>
+              <button className='btn log-in' type="submit" >Empty wallet</button>
             </form>}
             <form onSubmit={deactivateWallet}>
-              <button className='btn coin-btn' type="submit" >Deactivate Wallet</button>
+              <button className='btn log-in' type="submit" >Deactivate Wallet</button>
             </form>
             </div>
           </>}

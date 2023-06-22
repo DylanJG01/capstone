@@ -7,15 +7,18 @@
 } */
 
 .review-container {
-    width: 70%;
+    width: 600px;
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .review {
-    border: 1px solid green;
+    border-bottom: 1px solid black;
     margin: 1rem;
+}
+.review div {
+    margin: .5rem;
 }
 
 .rate {
@@ -30,7 +33,9 @@
     position: absolute;
     top: -9999px;
 }
-
+.fa-star {
+    color: goldenrod;
+}
 .rate:not(:checked)>label {
     float: right;
     width: 1em;
@@ -79,4 +84,12 @@
     background-color: #412635;
     color: white;
     border: 1px solid black;
+}
+
+.h3-reviews{
+    margin-top: 1rem;
+    border-bottom: 1px solid black;
+}
+.review-p {
+    word-wrap: break-word;
 }
