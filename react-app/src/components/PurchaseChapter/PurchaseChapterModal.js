@@ -22,7 +22,7 @@ export default function PurchaseChapterModal({closeModal, cost, user, chapterId,
           <h1>Purchase Modal</h1>
           <form className='purchase-form' onSubmit={buyChapter}>
             <div>You wanna purchase access to this chapter for {cost} coins? </div>
-            <button className='btn' type="submit">Purchase!</button>
+            <button className='btn log-in' type="submit">Purchase!</button>
           </form>
         </div>
       );

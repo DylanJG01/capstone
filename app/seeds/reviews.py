@@ -5,35 +5,80 @@ import random
 def seed_reviews():
 
     reviews = [
-        Review(stars=0,user_id=1, chapter_id=1, content="This is the worst thing I've ever read! An insult to thought itself!"),
-        Review(stars=5,user_id=2, chapter_id=1, content="This is the best thing I've ever read! It really makes you think!"),
-
-        Review(stars=3,user_id=3, chapter_id=1, content='"The Unveiling of Secrets" is an intriguing chapter with suspense. The unexpected twists add depth, but rushed pacing and unclear plot execution hinder the impact. Improved pacing and clarity would make it more immersive. Despite flaws, it keeps readers engaged and curious about what lies ahead.'),
-
-        # Review(stars=2, chapter_id=1, content="I found 'The Unveiling of Secrets' to be somewhat disappointing. While it had potential with its suspenseful atmosphere, the execution fell short. The pacing felt off, and the plot twists lacked impact. It left me wanting more coherence and depth."),
-
-        # Review(stars=4, chapter_id=1, content="A compelling chapter that keeps you hooked. 'The Unveiling of Secrets' delivers unexpected twists that make you question everything. Though the pacing could have been smoother, the story's potential shines through, leaving readers eager for the next chapter."),
-
-        # Review(stars=3, chapter_id=1, content="While 'The Unveiling of Secrets' had its moments of intrigue, it struggled to maintain a consistent tone. Some plot elements felt forced, and the pacing was erratic. Nevertheless, the chapter had its captivating moments that kept me invested in the overall storyline."),
-
-        # Review(stars=4, chapter_id=1, content="'The Unveiling of Secrets' is a thrilling chapter that grabs your attention from the start. The unexpected twists and turns add excitement, although the pacing could have been more balanced. Overall, it's a solid addition to the story, leaving readers curious for what's to come."),
-
-        # Review(stars=1, chapter_id=1, content="I regret investing my time in 'The Unveiling of Secrets.' The plot was convoluted, and the twists felt forced. The pacing dragged, making it difficult to stay engaged. It failed to deliver the impact it promised."),
-
-        # Review(stars=5, chapter_id=1, content="'The Unveiling of Secrets' is a masterpiece! The suspense is palpable, and the twists are mind-bending. The author's ability to keep readers guessing is commendable. It's an absolute joy to read and leaves you yearning for more."),
-
-        # Review(stars=3, chapter_id=1, content="While 'The Unveiling of Secrets' had its intriguing moments, the execution fell short. The plot twists lacked depth, and the pacing felt disjointed at times. However, the chapter managed to pique my curiosity, making me want to explore the story further."),
-
-        # Review(stars=4, chapter_id=1, content="In 'The Unveiling of Secrets,' the author skillfully builds suspense, keeping readers on edge throughout. Though the pacing could have been smoother, the unexpected plot twists added excitement. Overall, an engaging chapter that leaves you hungry for more answers."),
-
-        # Review(stars=2, chapter_id=1, content="I struggled to connect with 'The Unveiling of Secrets.' The plot lacked clarity, and the pacing felt uneven. The chapter failed to engage me fully, leaving me unsatisfied with the overall reading experience."),
-
-        # Review(stars=4, chapter_id=1, content="With 'The Unveiling of Secrets,' the author successfully creates an atmosphere of suspense. The plot twists, though they could have been better executed, added depth to the story. While the pacing had its ups and downs, it managed to hold my interest."),
-
-        # Review(stars=3, chapter_id=1, content="'The Unveiling of Secrets' presents intriguing ideas, but the execution fell short. The pacing was inconsistent, and the plot twists lacked a satisfying impact. Nevertheless, the chapter still managed to keep me curious about what lies ahead."),
-
-        # Review(stars=5, chapter_id=1, content="'The Unveiling of Secrets' is a captivating chapter that kept me on the edge of my seat. The unexpected plot twists were brilliantly executed, adding layers to the narrative. The pacing was just right, allowing for an immersive reading experience. I eagerly anticipate the next chapter!"),
+        # Review(stars=0,user_id=5, chapter_id=1, content="This is the worst thing I've ever read! An insult to thought itself!"),
+        # Review(stars=5,user_id=6, chapter_id=1, content="This is the best thing I've ever read! It really makes you think!"),
+        # Review(stars=3,user_id=7, chapter_id=1, content='This is pretty average'),
     ]
+
+    # Chapter 1
+    reviews.append(Review(stars=3, user_id=5, chapter_id=1, content="This chapter had its moments, but it could have been better."))
+    reviews.append(Review(stars=4, user_id=6, chapter_id=1, content="I really enjoyed this chapter! It kept me engaged throughout."))
+    reviews.append(Review(stars=2, user_id=7, chapter_id=1, content="I found this chapter to be quite disappointing. It didn't meet my expectations."))
+
+    # Chapter 2
+    reviews.append(Review(stars=4, user_id=5, chapter_id=2, content="What an amazing chapter! It exceeded my expectations."))
+    reviews.append(Review(stars=5, user_id=6, chapter_id=2, content="This chapter blew my mind! It's a must-read for everyone."))
+    reviews.append(Review(stars=3, user_id=7, chapter_id=2, content="A decent chapter overall, but it lacked some depth."))
+
+    # Chapter 3
+    reviews.append(Review(stars=2, user_id=5, chapter_id=3, content="I didn't really connect with this chapter. It felt dull."))
+    reviews.append(Review(stars=1, user_id=6, chapter_id=3, content="This chapter was a complete letdown. I expected more."))
+    reviews.append(Review(stars=3, user_id=7, chapter_id=3, content="An average chapter. It had its moments, but nothing extraordinary."))
+
+    # Chapter 4
+    reviews.append(Review(stars=4, user_id=5, chapter_id=4, content="A captivating chapter that kept me hooked until the end."))
+    reviews.append(Review(stars=3, user_id=6, chapter_id=4, content="This chapter had its strengths, but it didn't fully captivate me."))
+    reviews.append(Review(stars=5, user_id=7, chapter_id=4, content="An exceptional chapter that left me wanting more."))
+
+    # Chapter 5
+    reviews.append(Review(stars=1, user_id=5, chapter_id=5, content="This chapter was a disaster. I regret spending time on it."))
+    reviews.append(Review(stars=2, user_id=6, chapter_id=5, content="I had high hopes, but this chapter fell short of my expectations."))
+    reviews.append(Review(stars=4, user_id=7, chapter_id=5, content="A solid chapter that kept me engaged. I enjoyed the storyline."))
+
+    # Chapter 6
+    reviews.append(Review(stars=3, user_id=5, chapter_id=6, content="A decent chapter with some interesting moments, but it lacked depth."))
+    reviews.append(Review(stars=5, user_id=6, chapter_id=6, content="This chapter was brilliant! It made me ponder the deeper meaning."))
+    reviews.append(Review(stars=4, user_id=7, chapter_id=6, content="I thoroughly enjoyed this chapter. It was well-crafted and engaging."))
+
+    # Chapter 7
+    reviews.append(Review(stars=4, user_id=5, chapter_id=7, content="An excellent chapter that left me wanting more. Can't wait for the next one!"))
+    reviews.append(Review(stars=3, user_id=6, chapter_id=7, content="This chapter had its strengths, but it didn't fully resonate with me."))
+    reviews.append(Review(stars=5, user_id=7, chapter_id=7, content="A remarkable chapter that challenged my perspective. Truly thought-provoking."))
+
+    # Chapter 8
+    reviews.append(Review(stars=2, user_id=5, chapter_id=8, content="I found this chapter to be quite disappointing. It didn't live up to the hype."))
+    reviews.append(Review(stars=4, user_id=6, chapter_id=8, content="This chapter was enjoyable, but it could have been better paced."))
+    reviews.append(Review(stars=3, user_id=7, chapter_id=8, content="An average chapter. It didn't leave a lasting impression."))
+
+    # Chapter 9
+    reviews.append(Review(stars=5, user_id=5, chapter_id=9, content="This chapter was exceptional! It left me awestruck with its depth and creativity."))
+    reviews.append(Review(stars=3, user_id=6, chapter_id=9, content="A good chapter that had its moments, but it didn't fully captivate me."))
+    reviews.append(Review(stars=4, user_id=7, chapter_id=9, content="I found this chapter to be thought-provoking and well-written. A worthwhile read."))
+
+    # Chapter 10
+    reviews.append(Review(stars=4, user_id=5, chapter_id=10, content="A captivating chapter that kept me hooked until the end. Highly recommended!"))
+    reviews.append(Review(stars=5, user_id=6, chapter_id=10, content="This chapter blew me away! It's a masterpiece of storytelling."))
+    reviews.append(Review(stars=3, user_id=7, chapter_id=10, content="An average chapter. It had its moments, but it didn't leave a lasting impression."))
+
+    # Chapter 11
+    reviews.append(Review(stars=2, user_id=5, chapter_id=11, content="I expected more from this chapter. It felt lacking and uninspiring."))
+    reviews.append(Review(stars=3, user_id=6, chapter_id=11, content="A decent chapter, but it didn't fully resonate with me."))
+    reviews.append(Review(stars=5, user_id=7, chapter_id=11, content="This chapter was a game-changer! It challenged my perspective and left me in awe."))
+
+    # Chapter 12
+    reviews.append(Review(stars=4, user_id=5, chapter_id=12, content="An excellent closing chapter that wrapped up the story beautifully."))
+    reviews.append(Review(stars=2, user_id=6, chapter_id=12, content="I was slightly disappointed with this chapter. It didn't meet my expectations."))
+    reviews.append(Review(stars=5, user_id=7, chapter_id=12, content="A remarkable chapter that left a profound impact. It will stay with me for a long time."))
+
+    # Chapter 13
+    reviews.append(Review(stars=3, user_id=5, chapter_id=13, content="This chapter had some interesting moments, but it lacked coherence."))
+    reviews.append(Review(stars=4, user_id=6, chapter_id=13, content="I enjoyed this chapter overall, but it could have been more engaging."))
+    reviews.append(Review(stars=2, user_id=7, chapter_id=13, content="Unfortunately, this chapter didn't resonate with me. It felt disjointed."))
+
+    # Chapter 14
+    reviews.append(Review(stars=5, user_id=5, chapter_id=14, content="This chapter exceeded my expectations! It was a thrilling ride from start to finish."))
+    reviews.append(Review(stars=4, user_id=6, chapter_id=14, content="I couldn't put this chapter down! It had me on the edge of my seat."))
+    reviews.append(Review(stars=3, user_id=7, chapter_id=14, content="A decent chapter with some gripping moments, but it didn't fully captivate me."))
 
     db.session.bulk_save_objects(reviews)
 

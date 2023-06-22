@@ -88,6 +88,7 @@ def story(id):
     story = Story.query.get(id)
     if story:
         return_obj = story.to_dict()
+        return_obj['author'] = story.user.username
         return_obj['allChapters'] = {}
         return_obj['avg'] = 0
         return_obj['count'] = 0

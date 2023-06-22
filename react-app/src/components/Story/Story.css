@@ -12,8 +12,8 @@
     /* cursor: pointer; */
 }
 .story-cover-img{
-    width: 100px;
-    aspect-ratio: 2/3;
+    width: 115px;
+    aspect-ratio: 3/4;
 }
 .story-cover-img:hover {
     box-shadow: 0 0 5px 5px #7B586B;

@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllStories } from '../../store/story';
 import { useModal } from '../../context/Modal';
@@ -10,10 +10,15 @@ export default function AllStories(){
 	const stories = useSelector(state => state.stories.allStories);
     const dispatch = useDispatch()
     const history = useHistory();
+    const [loaded, setLoaded] = useState(false)
     const { setModalContent, closeModal } = useModal();
 
     useEffect(() => {
-        dispatch(fetchAllStories())
+        const load = async () => {
+            await dispatch(fetchAllStories())
+            setLoaded(true)
+        }
+        load()
     },[dispatch])
     // console.log("STORIES", stories)
     if (!stories) return <h2>You ain't got none stories, friend. So we got nothin' to sho ya</h2>
@@ -21,6 +26,7 @@ export default function AllStories(){
     const theModal = (story) => {
         setModalContent(<StoryModal story={story} closeModal={closeModal}/>)
     }
+
 
     const byCategory = () => {
         const ans = Object.values(stories).reduce((acc, el) => {
@@ -42,12 +48,16 @@ export default function AllStories(){
                             onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
                             onClick={() => theModal(story)}
                             />
-                             {story.cost ? (<div className='rel'><i className="fa-solid fa-sack-dollar currency"></i></div>) : <></>}
+                                {story.cost ? (<div className='rel'><i className="fa-solid fa-sack-dollar currency"></i></div>) : <></>}
                         </li>
                 ))}
                 </div>
             </ul>
         ))
+    }
+
+    if(!loaded){
+        return <h2 className='txt-ctr'>Loading ...</h2>
     }
 
 	return (

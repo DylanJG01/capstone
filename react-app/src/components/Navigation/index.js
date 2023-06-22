@@ -16,7 +16,6 @@ function Navigation({ isLoaded }){
 			</li>
 			{isLoaded && (
 				<>
-
 				<li className='profile-li'>
 					{sessionUser && <span><PurchaseCoinsModal user={sessionUser}/></span>}
 

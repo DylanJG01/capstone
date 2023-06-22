@@ -7,22 +7,46 @@ def seed_users():
         username='Demo',
         email='demo@aa.io',
         password='password',
+        coins=1
         )
     marnie = User(
         username='marnie',
         email='marnie@aa.io',
         password='password',
+        coins=1
         )
     bobbie = User(
         username='bobbie',
         email='bobbie@aa.io',
         password='password',
+        coins=1
         )
     demo_user = User(
-        username='something',
+        username='RandomDelight',
         email='something@aa.io',
         password='password',
+        coins=1
     )
+    extra = [
+        User(
+        username='SillyDog',
+        email='something3@aa.io',
+        password='password',
+        coins=1
+        ),
+        User(
+        username='CoolCat',
+        email='something1@aa.io',
+        password='password',
+        coins=1
+        ),
+        User(
+        username='TheBLAH',
+        email='something2@aa.io',
+        password='password',
+        coins=1
+        ),
+    ]
     another_demo = User(
         username='wraith-writer',
         email='wraith@aa.io',
@@ -47,6 +71,8 @@ def seed_users():
     db.session.add(marnie)
     db.session.add(bobbie)
 
+    for item in extra:
+        db.session.add(item)
     db.session.commit()
 
 

@@ -25,7 +25,8 @@ export default function CreateChapter (){
         const ve = [] //Validation Errors
         setErrors([])
         if(titleValidator(title)) ve.push(titleValidator(title))
-        if(body && !stripHtmlTags(body)) ve.push(("body-length"))
+        if(!body) ve.push(("body-length"))
+        if(!body || (body && !stripHtmlTags(body))) ve.push(("body-length"))
         if(ve.length) setErrors(ve)
       },[title, body])
 

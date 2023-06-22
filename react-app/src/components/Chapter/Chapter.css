@@ -121,7 +121,12 @@
 .chapter-title-long {
     position: absolute;
 }
-
+.fa-lock {
+    margin: 1rem 0;
+}
+.click-me {
+    margin-top: 2rem;
+}
 .go-button {
 margin-left: 1rem;
 }

@@ -48,7 +48,7 @@ export default function RecommendedStories(){
       }
 
     if(!loaded){
-        return <h2>Loading ...</h2>
+        return <h2 className='txt-ctr'>Loading ...</h2>
     }
 
 	return (
