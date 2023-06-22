@@ -23,9 +23,15 @@
     color: white;
     margin: 1rem 0;
 }
+.chapter-title {
+    word-break: break-word;
+}
+.chapter-t-input {
+    background-image: linear-gradient(to right, #1d0f0f, #453c41);
+
+}
 .unique-classname {
     margin-left: 2rem;
-
 }
 .save-submit {
     margin-bottom: 2rem;
@@ -33,6 +39,7 @@
 .chapter-form-div {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .chapter-form {
@@ -41,9 +48,8 @@
     align-items: center;
 }
 .the-body {
-    width: 70vw;
-    max-width: 50rem;
-
+    width: clamp(35rem, 80vw, 50rem);
+    margin-bottom: 1rem;
 }
 .chapters-div {
     align-self: baseline;
@@ -104,4 +110,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.ql-editor.ql-blank::before {
+    color: rgb(179, 179, 179) !important;
+}
+.chapter-body-length {
+    position: absolute;
+    top: -1.5rem;
+}
+.chapter-title-long {
+    position: absolute;
 }

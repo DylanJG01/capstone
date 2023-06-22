@@ -9,7 +9,9 @@ export default function SetCostModal({chapter, user}){
     const editCost = () => {
         if (user.coins === null){
             setModalContent(
-                <div>You must activate your wallet to set the cost of a chapter</div>
+                <div className='coins-modal'>You must activate your wallet to set the cost of a chapter
+                <button className='btn log-in active-close' onClick={closeModal}>Close </button></div>
+
             )
         } else {
             setModalContent(<EditCost
@@ -18,7 +20,7 @@ export default function SetCostModal({chapter, user}){
         }
     }
 	return (
-        <button className='set-cost' onClick={editCost}>
+        <button className='set-cost btn log-in' onClick={editCost}>
             Edit Cost
         </button>
 	);

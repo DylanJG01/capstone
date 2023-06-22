@@ -70,3 +70,7 @@ export const tagBundler = (e, tag, tags, setTag, setTags) => {
       setTag(e.target.value)
     }
   }
+
+export function stripHtmlTags(text) {
+    return text.replace(/<.*?>/g, '');
+}

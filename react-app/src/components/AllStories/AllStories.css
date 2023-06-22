@@ -32,7 +32,7 @@
 }
 
 .parts {
-    margin: .5rem 1rem;
+
 }
 
 .all-stories-ul {
@@ -58,6 +58,6 @@
 }
 
 .all-story-h2 {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     font-size: 2rem;
 }

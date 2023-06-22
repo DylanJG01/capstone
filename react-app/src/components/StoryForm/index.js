@@ -35,7 +35,8 @@ export default function StoryFormPage() {
       cover,
       tag_list: tags.join(" "),
       category_name: category,
-      user_id: user.id
+      user_id: user.id,
+      mature
     }
     for (const i in theObj){
       if (i !== 'cover'){
@@ -108,6 +109,7 @@ export default function StoryFormPage() {
           <label className="label">
             <div>Cover</div>
             <input
+              id="file-input"
               type="file"
               accept="image/*"
               onChange={(e) => setCover(e.target.files[0])}
@@ -133,13 +135,15 @@ export default function StoryFormPage() {
             ))}
             </div>
               { !addTag ? <div className="tag" onClick={() => setAddTag(true)}>+ Add Tag</div>:
+              <div className="input-tag-div">
                 <input
                 className="tag-input"
                 type="text"
                 value={tag}
                 onChange={(e) => tagBundler(e, tag, tags, setTag, setTags)}
                 onBlur={() => setAddTag(false)}
-              />}
+              />
+              </div>}
           </div>
           </label>
           <label className="label mature">

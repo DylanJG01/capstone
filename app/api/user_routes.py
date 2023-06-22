@@ -88,6 +88,9 @@ def deactivate_wallet():
     """
     user = User.query.get(current_user.id)
     user.coins = None
+    for story in user.stories:
+        for chapter in story.chapters:
+            chapter.cost = 0
     db.session.commit()
 
     query = select(purchased_chapters.c.chapter_id).where(purchased_chapters.c.user_id == current_user.id)

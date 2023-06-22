@@ -1,8 +1,11 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState, version} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchChapter } from '../../store/story';
 import { fetchSingleChapter, fetchPutChapter } from '../../store/chapter';
+// import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
 import { titleValidator } from '../_helpers';
+import { stripHtmlTags } from '../_helpers';
 
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -17,14 +20,19 @@ export default function EditChapter (){
     // const { setModalContent, setOnModalClose, closeModal } = useModal();
     const [title, setTitle] = useState(chapter?.title || "")
     const [body, setBody] = useState(chapter?.body || "")
+    const [content, setContent] = useState(chapter?.body || "")
+    const [submitted, setSubmitted] = useState(false)
     const history = useHistory()
 
     useEffect(() => {
+        // dispatch(fetchChapter( parseInt(params.chapterId), parseInt(params.
+        // storyId),))
         dispatch(fetchSingleChapter(parseInt(params.chapterId)))
     },[dispatch, user, params.chapterId, params.storyId])
 
     useEffect (() => {
         if (!chapter) return null
+        // setBody(chapter.body)
         setTitle(chapter.title)
         setBody(chapter.body)
     }, [dispatch, chapter])
@@ -33,7 +41,7 @@ export default function EditChapter (){
         const ve = [] //Validation Errors
         setErrors([])
         if(titleValidator(title)) ve.push(titleValidator(title))
-        if(!body) ve.push(("body-length"))
+        if(body && !stripHtmlTags(body)) ve.push(("body-length"))
         if(ve.length) setErrors(ve)
 
       },[title, body])
@@ -42,42 +50,48 @@ export default function EditChapter (){
 
     const handleSubmit = async e => {
         e.preventDefault()
-        if(errors.length){
+        if (errors.length > 0){
+            setSubmitted(true)
+            console.log(errors)
+            return
         }
         dispatch(fetchPutChapter({title, body, story_id: parseInt(params.storyId)}, parseInt(params.chapterId)))
         return alert("Saved! Prettier notification coming soon...")
     }
 	return (
         <>
-        <button className='back' onClick={() => history.push(`/myworks/${params.storyId}`)}>Back</button>
+        <button className='btn log-in unique-classname' onClick={() => history.push(`/myworks/${params.storyId}`)}>Back</button>
         <div className='chapter-form-div'>
             <form onSubmit={handleSubmit} className='chapter-form'>
-                <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+                {submitted && errors.includes('body-length') &&
+                <div className='err chapter-body-length'>
+                    The merest mote of language is all we demand, a single, measely character
+                </div>}
+
+                {submitted && errors.includes('title-long') &&
+                <div className='err chapter-title-long'>
+                    Title is too long!
+                </div>}
+
                 <label>
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle((e.target.value).replace(/^\s+/, ''))}
-                    placeholder="Untitled Story"
-                    className='chapter-title'
+                    placeholder={submitted && errors.includes('title-short') ? "Title too short" : "Untitled..."}
+                    className={submitted && errors.includes('title-short') ? "chapter-title red chapter-t-input" : "chapter-title chapter-t-input"}
                 />
                 </label>
                 <label className='the-body'>
-                {/* <input
-                    type="text"
+                <ReactQuill
+                    theme="snow"
                     value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                /> */}
-                {/* <textarea
-                type="text"
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                placeholder={submitted && errors.includes('body-length') ? "Please add some content, even if it's just a letter." : "Chapter content here..."}
-                className={submitted && errors.includes('body-length') ? "chapter-body" : "chapter-body red"}
-                /> */}
-                <ReactQuill theme="snow" value={body} onChange={setBody} />
+                    onChange={setBody}
+                    placeholder="Begin your story..."
+                    style={{ '--placeholder-color': 'gray' }} // Apply custom placeholder color
+
+                    />
+
                 </label>
                 <button className='btn log-in save-submit' type="submit">Save</button>
             </form>

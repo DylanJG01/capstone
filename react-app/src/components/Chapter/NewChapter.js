@@ -7,7 +7,7 @@ import { titleToSword, titleValidator } from '../_helpers';
 
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-
+import { stripHtmlTags } from '../_helpers';
 import './Chapter.css'
 
 export default function CreateChapter (){
@@ -25,9 +25,8 @@ export default function CreateChapter (){
         const ve = [] //Validation Errors
         setErrors([])
         if(titleValidator(title)) ve.push(titleValidator(title))
-        if(!body) ve.push(("body-length"))
+        if(body && !stripHtmlTags(body)) ve.push(("body-length"))
         if(ve.length) setErrors(ve)
-
       },[title, body])
 
     if (!story) return null
@@ -43,25 +42,42 @@ export default function CreateChapter (){
 
         return history.push(`/myworks/${story.id}-${titleToSword(story.title)}`)
     }
+
+
 	return (
         <>
         <button className='btn log-in unique-classname' onClick={() => history.push(`/myworks/${params.storyId}`)}>Back</button>
         <div className='chapter-form-div'>
+
             <form onSubmit={handleSubmit} className='chapter-form'>
-                <ul>
-                {submitted && errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+                {submitted && errors.includes('body-length') &&
+                <div className='err chapter-body-length'>
+                    The merest mote of language is all we demand, a single, measely character
+                </div>}
+
+                {submitted && errors.includes('title-long') &&
+                <div className='err chapter-title-long'>
+                    Title is too long!
+                </div>}
+
                 <label>
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle((e.target.value).replace(/^\s+/, ''))}
                     placeholder={submitted && errors.includes('title-short') ? "Title too short" : "Untitled..."}
-                    className={submitted && errors.includes('title-short') ? "chapter-title red" : "chapter-title"}
+                    className={submitted && errors.includes('title-short') ? "chapter-title red chapter-t-input" : "chapter-title chapter-t-input"}
                 />
                 </label>
                 <label className='the-body'>
-                <ReactQuill theme="snow" value={body} onChange={setBody} placeholder={submitted ? "Please enter content" : "fdsadfsa"}/>
+                <ReactQuill
+                    theme="snow"
+                    value={body}
+                    onChange={setBody}
+                    placeholder="Begin your story..."
+                    style={{ '--placeholder-color': 'gray' }} // Apply custom placeholder color
+
+                    />
 
                 </label>
                 <button className='btn log-in save-submit' type="submit">Submit</button>

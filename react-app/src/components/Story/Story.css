@@ -88,17 +88,6 @@ text-align: center;
 .welcome > p {
     text-align: center;
 }
-.welcome > p  > button {
-    /* margin-left: 1rem; */
-    color: white;
-    padding: .15rem;
-    background: #7B7C81;
-}
-.welcome > p  > button:hover{
-    /* margin-left: 1rem; */
-    cursor: pointer;
-    background-color: #7B586B;
-}
 
 .ghost-pic {
     border-radius: 50%;
@@ -126,21 +115,18 @@ text-align: center;
     margin-bottom: .5rem;
 }
 .all-stories-button {
-    margin-left: .25rem;
-    /* border: none; */
-    background: none;
-}
-.all-stories-button:hover{
-    /* background-color: coral; */
+    margin-left: 0.25rem;
+    padding: 0.25rem;
+    background: black;
 }
 
-.no-parts {
-    /* border: 1px solid black; */
-    margin-left: .2rem;
+.parts {
+    /* border-bottom: 1px solid black; */
+    margin: .75rem 0;
 }
 
 .description-p {
-    margin-left: .2rem;
+    /* margin-left: .2rem; */
     /* height: 315px; */
     word-wrap: break-word;
     overflow: hidden;
@@ -148,6 +134,7 @@ text-align: center;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 15;
+    /* border-bottom: 1px solid black; */
 }
 
 .tab-selector{
@@ -217,4 +204,11 @@ text-align: center;
 
 .rel {
     position: relative;
+}
+
+.welcome-h2 {
+    margin-bottom: 1.5rem;
+}
+.back-to-rec {
+    margin-bottom: 1.5rem;
 }

@@ -1,6 +1,7 @@
 .story-card-div {
     /* height: 100px; */
     display: flex;
+    padding: .25rem;
 }
 .myworks-div h2 {
     text-align: center;
@@ -21,21 +22,39 @@
     box-shadow: 0 0 0px 1px white;
     display: flex;
 }
-
+.the-buttons {
+    align-self: baseline;
+}
+.the-buttons button {
+    padding: .65rem;
+}
 .img-div {
     height: 100px;
-    width: 100px;
+    /* width: 100px; */
+    margin-right: 1rem;
 }
-
+.title-p {
+    /* width: 200px;
+    height: 1.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
+    -webkit-line-clamp: 1; */
+}
 .img-div img {
     height: 100%;
-    width: 70px;
+    /* width: 100px; */
+    aspect-ratio: 2/3;
+    object-fit: cover;
 }
 
 .title {
-    font-weight: bold;
-    margin-top: 1rem;
-    width: 350px;
+    width: 200px;
+    height: 1.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
+    -webkit-line-clamp: 1;
 }
 
 .tag-selection-div {
@@ -86,7 +105,7 @@ p{
 .my-story-card-li {
 box-shadow:0 0 2px 2px #7B586B;
 margin: 1rem;
-display: flex;
+/* display: flex; */
 }
 
 .delete-story-modal {
@@ -94,7 +113,12 @@ display: flex;
     display: flex;
     flex-direction: column;
 }
-
+.title-and-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
 .delete-story-modal button {
     padding: 1rem;
     color: white;

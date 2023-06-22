@@ -37,7 +37,7 @@ export default function EditStoryForm() {
   }
     load()
     // if (!story) return
-  },[dispatch, storyId])
+  },[dispatch, storyId, user])
 
   useEffect(() => {
     if (loaded) {
@@ -77,7 +77,8 @@ export default function EditStoryForm() {
       the_cover: cover,
       tag_list: tags.join(" "),
       category_name: category,
-      user_id: user.id
+      user_id: user.id,
+      mature
     }
 
     for (const i in theObj){
@@ -142,11 +143,11 @@ export default function EditStoryForm() {
             </div>
 
           <div className="form-div">
-          <form onSubmit={handleSubmit} className="new-story-form">
+          <form className="new-story-form" onSubmit={handleSubmit} encType="multipart/form-data" >
           <label className="label">
             <div>Title
-              {submitted && errors.includes('title-short') && (<span className="error">Title must be over 0 characters</span>)}
-              {submitted && errors.includes('title-long') && (<span className="error">Title must be under 100 characters</span>)}
+              {submitted && errors.includes("title-short") && (<span className="error red">Title must a least 1 character.</span >)}
+              {submitted && errors.includes("title-long") && (<span className="error red">Title must a less than 100 character.</span >)}
             </div>
             <input
               type="text"
@@ -158,7 +159,6 @@ export default function EditStoryForm() {
           <label className="label">
           <div>Description
           {submitted && errors.includes('des-long') && (<span className="error"> must be shorter than 2000 characters</span>)}
-
           </div>
             <textarea
             value={description}
@@ -168,9 +168,18 @@ export default function EditStoryForm() {
             />
           </label>
           <label className="label">
-          <div className="story-tag-selection-div">
+            <div>Cover</div>
+            <input
+              id="file-input"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setCover(e.target.files[0])}
+            />
+          </label>
+          <label className="label">
+          <div className="story-category-selection-div">
             <h5>Which category best fits your story?</h5>
-            <select className="story-tag-selector" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <select className="story-category-selector" value={category} onChange={(e) => setCategory(e.target.value)}>
               {options.map(option => <option>{option}</option>)}
             </select>
           </div>
@@ -187,33 +196,27 @@ export default function EditStoryForm() {
             ))}
             </div>
               { !addTag ? <div className="tag" onClick={() => setAddTag(true)}>+ Add Tag</div>:
+              <div className="input-tag-div">
                 <input
                 className="tag-input"
                 type="text"
                 value={tag}
                 onChange={(e) => tagBundler(e, tag, tags, setTag, setTags)}
                 onBlur={() => setAddTag(false)}
-              />}
+              />
+              </div>}
           </div>
-          </label>
-          <div>Cover</div>
-          <label className="file-label">
-            <input
-              className="file-input"
-              type="file"
-              accept="image/*"
-              onChange={(e) => setCover(e.target.files[0])}
-            />
           </label>
           <label className="label mature">
             Mature Content:
             <input
               type="checkbox"
+              checked={mature}
               value={mature}
               onChange={() => changeRating()}
             />
           </label>
-          <button className="submit-story-button btn log-in" type="submit">Save</button>
+          <button className="submit-story-button btn log-in" type="submit">Submit</button>
         </form>
         </div>
       </div>
@@ -226,13 +229,13 @@ export default function EditStoryForm() {
                     <li className="chapter-li" key={`chapter${chapter.id}`}>
                         <p className="the-h3">{chapter.title}</p>
                         {i ? <>
-                        <div>{chapter.cost}</div>
+                        <div className="cost-div">Cost : {chapter.cost}</div>
                         <SetCost chapter={chapter} user={user}/>
                         </> :
-                        <div> First chapter always free </div>
+                        <div className="cost-div first-chap-free"> First chapter always free </div>
                         }
                         <div className="button-container">
-                        <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button className='btn edit' onClick={() => history.push(`${story.id}-${titleToSword(title)}/${chapter.id}-${titleToSword(chapter.title)}`)}><i className="fa-solid fa-pen-to-square"></i></button>
                         <button className="btn delete" onClick={() => deleteChapter(chapter.id)}><i class="fa-solid fa-trash"></i></button>
                         </div>
                     </li>

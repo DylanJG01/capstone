@@ -21,8 +21,9 @@ export default function RecommendedStories(){
             setLoaded(true)
         }
         load()
-        setRandomStories(getRandomObjects)
-    },[dispatch, user])
+        setRandomStories(getRandomObjects())
+        // console.log(getRandomObjects())
+    },[dispatch, user, loaded])
     if (!stories) return null
 
     const theModal = (story) => {
@@ -31,22 +32,18 @@ export default function RecommendedStories(){
 
 
     function getRandomObjects() {
-
         const keys = Object.keys(allStories);
-
         for (let i = keys.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           const temp = keys[i];
           keys[i] = keys[j];
           keys[j] = temp;
         }
-
         const selectedKeys = keys.slice(0, 5);
 
         const selectedObjects = selectedKeys.map(function (key) {
           return allStories[key];
         });
-
         return selectedObjects;
       }
 
@@ -63,9 +60,9 @@ export default function RecommendedStories(){
         </div>
 
         <div className='welcome'>
-        <h2>Welcome to Word Wraiths {user?.username &&<>, {user.username}</>}</h2>
+        <h2 className='welcome-h2'>Welcome to Word Wraiths {user?.username &&<>, {user.username}</>}</h2>
         <p>Phooey to suggestions, show me
-        <button className="all-stories-button" onClick={() => history.push('/all')}>All Stories</button>
+        <button className="all-stories-button log-in btn" onClick={() => history.push('/all')}>All Stories</button>
         </p>
         </div>
 

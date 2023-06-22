@@ -52,14 +52,15 @@ export default function StoryCard({story}){
               onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
             />
         </div>
-        <div>
-        <div className='title'>
-        <p>{story.title}</p>
-        </div>
-        <div className='the-buttons'>
-        <button class="btn edit" onClick={() => editTheStory(story.id, story.title)}><i class="fa-solid fa-pen-to-square"></i></button>
-        <button class="btn delete" onClick={() => deleteStoryModal()}><i class="fa-solid fa-trash"></i></button>
-        </div>
+        <div className='title-and-buttons'>
+            <div className='title'>
+            <p className='title-p'>{story.title}</p>
+            </div>
+            <div></div>
+            <div className='the-buttons'>
+                <button class="btn edit" onClick={() => editTheStory(story.id, story.title)}><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="btn delete" onClick={() => deleteStoryModal()}><i class="fa-solid fa-trash"></i></button>
+            </div>
         </div>
     </div>)
 }

@@ -9,14 +9,16 @@ export default function EditCost({closeModal, chapter}){
     const [errors, setErrors] = useState([])
 
     useEffect(() => {
-        const e = []
-        setErrors(e)
-    }, [chapter])
+      setErrors([])
+        if (cost.toString().length > 5) {
+          setErrors(['cost-high'])
+        }
+    }, [chapter, cost])
 
     const editCost = async (e) => {
         e.preventDefault();
-        if(e.length){
-            return
+        if(errors.length){
+            return alert("Cost cannot exceed 9999")
         }
         const data = {...chapter}
         data.cost = cost
@@ -25,19 +27,18 @@ export default function EditCost({closeModal, chapter}){
       };
 
     return (
-        <>
-          <h1>Cost</h1>
-          <form onSubmit={editCost}>
+        <div className='cost-modal-div'>
+          <h1>Set New Cost</h1>
+          <form onSubmit={editCost} className='edit-cost-form'>
           <label>
-              Cost {errors.includes("content") && <span className='err'> Review too long!</span>}
               <input
                 type="text"
                 value={cost}
                 onChange={(e) => setCost((e.target.value).replace(/\D/g, ''))}
               />
             </label>
-            <button type="submit">Edit</button>
+            <button className='log-in btn edit-cost-btn' type="submit">Edit</button>
           </form>
-        </>
+        </div>
       );
 }

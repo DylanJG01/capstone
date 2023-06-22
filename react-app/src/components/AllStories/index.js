@@ -4,10 +4,12 @@ import { fetchAllStories } from '../../store/story';
 import { useModal } from '../../context/Modal';
 import StoryModal from '../Story/StoryModal'
 import './AllStories.css'
+import { useHistory } from 'react-router-dom';
 
 export default function AllStories(){
 	const stories = useSelector(state => state.stories.allStories);
     const dispatch = useDispatch()
+    const history = useHistory();
     const { setModalContent, closeModal } = useModal();
 
     useEffect(() => {
@@ -27,7 +29,7 @@ export default function AllStories(){
             return acc
         }, {})
 
-        let x = Object.keys(ans).map(key => (
+        return Object.keys(ans).map(key => (
             <ul className='all-stories-ul'>
                 <div className='category-div'>{key}</div>
                 <div className='stories-by-category'>
@@ -40,17 +42,18 @@ export default function AllStories(){
                             onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
                             onClick={() => theModal(story)}
                             />
+                             {story.cost ? (<div className='rel'><i className="fa-solid fa-sack-dollar currency"></i></div>) : <></>}
                         </li>
                 ))}
                 </div>
             </ul>
         ))
-                return x
     }
 
 	return (
         <div className='myworks-div recommended-page'>
             <h2 className='all-story-h2'>All Stories</h2>
+            <p className='back-to-rec'>Back to <button className=' all-stories-button btn log-in' onClick={() => history.push('/')}>recommended</button></p>
         <div className='recommended-div'>
             <ul className='all-ul'>
             {byCategory()}

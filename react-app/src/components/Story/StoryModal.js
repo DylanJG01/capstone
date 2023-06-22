@@ -19,11 +19,11 @@ export default function StoryModal({story, closeModal}) {
         </div>
         <div className="info-modal-div">
             <div className="story-title-modal-div">
-                <p>{story.cost ? <span className="paid-stories">$$</span> : ""}{story.title}</p>
+                <p>{story.title}</p>
             </div>
-            <div className=''> {!story.numChapters ? <>No Parts</>
+            <div className='parts rel'> {!story.numChapters ? <>No Parts</>
                         : story.numChapters === 1 ? <>1 Part</>
-                        : <>{story.numChapters} Parts</>}
+                        : <>{story.numChapters} Parts {story.cost ?<i className="fa-solid fa-sack-dollar money-bag" /> : ""}</>}
             </div>
             <div>
                 {/* {story.numChapters ? (<button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button>)
