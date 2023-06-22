@@ -23,8 +23,8 @@ def seed_stories():
         Story(
             user_id = 1,
             cover="https://m.media-amazon.com/images/I/41CKw0DiUJL.jpg",
-            description="A testing description",
-            title='In the post-apocalyptic adventure "Rabbits of the Apocalypse," a group of intelligent and resourceful rabbits embark on a quest to uncover the mysteries of their ravaged world. Led by the cunning Hopper, they navigate dangers and unravel a deeper truth. With humor and heart, this imaginative tale showcases the unexpected heroes in a world on the brink of collapse.',
+            description='In the post-apocalyptic adventure "Rabbits of the Apocalypse," a group of intelligent and resourceful rabbits embark on a quest to uncover the mysteries of their ravaged world. Led by the cunning Hopper, they navigate dangers and unravel a deeper truth. With humor and heart, this imaginative tale showcases the unexpected heroes in a world on the brink of collapse.',
+            title="Rabbits of the Aplocalpyse",
             published=True,
             category_name="Romance"
         ), #0
@@ -55,8 +55,8 @@ def seed_stories():
         Story(
             user_id = 1,
             cover="https://images.nightcafe.studio/jobs/Ep03W4EW6Yp1fkgP6vh8/Ep03W4EW6Yp1fkgP6vh8--3--a5453.jpg?tr=w-1600,c-at_max",
-            description="I heard this is a popular one",
-            title = '"They Who Would Rule" is an enthralling fantasy book where ambition, power, and treachery intertwine as contenders vie for control of a magical realm. Journey through a world of political intrigue and unexpected alliances, where the pursuit of power comes at a profound cost.',
+            description='"They Who Would Rule" is an enthralling fantasy book where ambition, power, and treachery intertwine as contenders vie for control of a magical realm. Journey through a world of political intrigue and unexpected alliances, where the pursuit of power comes at a profound cost.',
+            title = "They Who Would Rule",
             published=True,
             category_name="Fantasy"
         ), #4
@@ -96,6 +96,7 @@ def seed_stories():
         Story(
             user_id = 2,
             cover="https://m.media-amazon.com/images/I/51f1jqTYNxL.jpg",
+
             description='"The Black Company" is a gritty and immersive dark fantasy tale that thrusts readers into a world ravaged by war and sorcery. Follow the eponymous mercenary group known as the Black Company, a band of hardened warriors with a reputation for taking on the deadliest of contracts. Led by the enigmatic Captain, their loyalty is tested as they navigate treacherous alliances, face supernatural adversaries, and confront their own inner demons. Set against a backdrop of political intrigue and ancient prophecies, the story delves into the moral complexities of war, where survival often comes at a high price. Through the eyes of a new recruit, readers witness the trials and camaraderie that bind the Black Company together, as they fight for their lives and seek to unravel the mysteries of a world plunged into darkness. "The Black Company" is a compelling exploration of the blurred lines between heroism and villainy, and the sacrifices made in the pursuit of power and survival.',
             title = "The Black Company",
             published=True,
