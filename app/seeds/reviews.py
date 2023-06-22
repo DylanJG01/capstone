@@ -8,7 +8,7 @@ def seed_reviews():
         Review(stars=0,user_id=1, chapter_id=1, content="This is the worst thing I've ever read! An insult to thought itself!"),
         Review(stars=5,user_id=2, chapter_id=1, content="This is the best thing I've ever read! It really makes you think!"),
 
-        Review(stars=3,user_id=3, chapter_id=1, content='"The Unveiling of Secrets" is an intriguing chapter with an air of suspense. While the unexpected twists add depth to the story, the rushed pacing and lack of clarity in the plot execution hinder the overall impact. With improved pacing and clearer explanations, this chapter could have been more immersive and captivating. Despite its flaws, "The Unveiling of Secrets" succeeds in keeping readers engaged and curious about what lies ahead in the narrative.'),
+        Review(stars=3,user_id=3, chapter_id=1, content='"The Unveiling of Secrets" is an intriguing chapter with suspense. The unexpected twists add depth, but rushed pacing and unclear plot execution hinder the impact. Improved pacing and clarity would make it more immersive. Despite flaws, it keeps readers engaged and curious about what lies ahead.'),
 
         # Review(stars=2, chapter_id=1, content="I found 'The Unveiling of Secrets' to be somewhat disappointing. While it had potential with its suspenseful atmosphere, the execution fell short. The pacing felt off, and the plot twists lacked impact. It left me wanting more coherence and depth."),
 
