@@ -7,7 +7,7 @@ class Category(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(50), nullable=False, unique=True)
 
     stories = db.relationship("Story", back_populates="category")
     def to_dict(self):
