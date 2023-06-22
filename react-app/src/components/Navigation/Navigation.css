@@ -81,7 +81,7 @@ p {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  padding-bottom: .5rem;
+  padding-bottom: 1rem;
   margin: 1rem;
   /* box-shadow: 0 0 0px 1px white; */
   border-bottom: 1px solid white;

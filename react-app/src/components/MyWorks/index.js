@@ -18,7 +18,7 @@ export default function MyWorks(){
     if (!user) return <h2>You are not logged in! Without knowing who you are, we cannot find your stories!</h2>
 
 	return (
-        <div className='myworks-div'>
+        <div className='myworks-div myworks-extra'>
             <h2>My Stories</h2>
             <div className='new-story-button-div'>
             <button className='new-story-button' onClick={() => history.push('/myworks/new')}>New Story</button>

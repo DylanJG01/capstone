@@ -34,3 +34,30 @@
 .parts {
     margin: .5rem 1rem;
 }
+
+.all-stories-ul {
+    align-items: flex-start;
+    /* padding-bottom: .5rem; */
+    margin-bottom: .5rem;
+}
+
+.stories-by-category {
+    display: flex;
+}
+
+.all-ul{
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+}
+
+.category-div {
+    font-size: 2rem;
+    margin: .75rem;
+    border-bottom: 3px solid black;
+}
+
+.all-story-h2 {
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}

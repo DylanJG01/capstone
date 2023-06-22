@@ -10,13 +10,19 @@ export default function PurchaseCoinsModal({closeModal, user, setModalContent}){
         e.preventDefault();
         if (!coinAmount) return alert("You cannot purchase nothing.")
         await dispatch(fetchBuyCoins({ coins: coinAmount }))
-        setModalContent(<div className='coins-modal'> Purchase successful </div>)
+        setModalContent(<div className='coins-modal'> Purchase successful
+        <button className='coin-btn btn' onClick={closeModal}>Close</button>
+        </div>)
         setTimeout(closeModal, 1500)
     };
     const activateWallet = async (e) => {
       e.preventDefault();
       await dispatch(fetchBuyCoins({ coins: 300 }))
-      setModalContent(<div className='coins-modal'> Wallet activation successful </div>)
+      setModalContent(<div className='coins-modal'>
+         Wallet activation successful
+         <button className='coin-btn btn' onClick={closeModal}>Close</button>
+         </div>)
+
       setTimeout(closeModal, 1500)
     };
     const emptyWallet = async (e) => {

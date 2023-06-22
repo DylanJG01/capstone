@@ -20,31 +20,42 @@ export default function AllStories(){
         setModalContent(<StoryModal story={story} closeModal={closeModal}/>)
     }
 
+    const byCategory = () => {
+        const ans = Object.values(stories).reduce((acc, el) => {
+            if (!acc[el.category_name]) acc[el.category_name] = []
+            acc[el.category_name].push(el)
+            return acc
+        }, {})
+
+        let x = Object.keys(ans).map(key => (
+            <ul className='all-stories-ul'>
+                <div className='category-div'>{key}</div>
+                <div className='stories-by-category'>
+                    {ans[key].map(story => (
+                        <li className='story-img-li'>
+                            <img className='story-cover-img'
+                            src={story.cover}
+                            alt={story.title}
+                            key={story.id}
+                            onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
+                            onClick={() => theModal(story)}
+                            />
+                        </li>
+                ))}
+                </div>
+            </ul>
+        ))
+                return x
+    }
+
 	return (
-        <div className='myworks-div'>
-            <h2>All Stories</h2>
-        <ul>
-		{Object.values(stories).map(story => (
-        <li className='story-card-li' onClick={() => theModal(story)}>
-            <div>
-            <img className='all-story-cover-img'
-            src={story.cover}
-            alt={story.title}
-            key={story.id}
-            onError={e => { e.currentTarget.src = "https://images.nightcafe.studio/jobs/kyupaCPTO8Lm1jh1Kw8P/kyupaCPTO8Lm1jh1Kw8P--2--r15eb.jpg?tr=w-1600,c-at_max"; }}
-            />
-            {story.cost ? (<div>$$</div>) : <></>}
-            </div>
-            <div className='all-story-info'>
-            <p className='story-title-p'>{story.title}</p>
-           <div className='parts'> {!story.numChapters ? <>No Parts</>
-                    : story.numChapters === 1 ? <>1 Part</>
-                    : <>{story.numChapters} Parts</>}
-           </div>
+        <div className='myworks-div recommended-page'>
+            <h2 className='all-story-h2'>All Stories</h2>
+        <div className='recommended-div'>
+            <ul className='all-ul'>
+            {byCategory()}
+            </ul>
         </div>
-        </li>
-       ))}
-       </ul>
     </div>
 	);
 }

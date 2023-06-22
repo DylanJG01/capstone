@@ -16,16 +16,30 @@ export default function StoryCard({story}){
     }
 
     const deleteStory = async () => {
-        await dispatch(fetchDeleteStory(story.id))
-        closeModal();
+        const x = await dispatch(fetchDeleteStory(story.id))
+        if (x) {
+            setModalContent (
+                <div className='coins-modal'>
+                Story Successfully Deleted
+                <button className='coin-btn btn' onClick={closeModal}>Close</button>
+                </div>
+            )
+            return setTimeout(closeModal, 1500)
+        }
+        else {
+                setModalContent (
+                <div> Sorry, something went wrong! </div>
+                )
+                return setTimeout(closeModal, 1500)
+        }
     }
 
     const deleteStoryModal = () => {
         return setModalContent(
-            <div>
+            <div className='delete-story-modal'>
                 <h2>Delete Story?</h2>
-                <button onClick={deleteStory}>Yes</button>
-                <button onClick={closeModal}>No</button>
+                <button className='btn' onClick={deleteStory}>Yes</button>
+                <button className='btn' onClick={closeModal}>No</button>
             </div>
             )
     }

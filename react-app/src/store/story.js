@@ -125,6 +125,7 @@ export const fetchDeleteStory = (storyId) => async dispatch => {
 
     if (res.ok){
         dispatch(deleteStory(storyId))
+        return true
     }
 }
 

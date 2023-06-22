@@ -9,7 +9,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+}
+.myworks-div {
+    margin-top: 3rem;
 }
 
 .story-card-li {
@@ -67,7 +70,9 @@
     color: white;
     box-shadow: 0 0 2px 2px #7B586B;
 }
-
+.myworks-extra ul {
+    align-items: center;
+}
 p{
     /* width:100%; */
 
@@ -78,8 +83,25 @@ p{
     word-wrap: break-word;
   }
 
-  .my-story-card-li {
-    box-shadow:0 0 2px 2px #7B586B;
-    margin: 1rem;
+.my-story-card-li {
+box-shadow:0 0 2px 2px #7B586B;
+margin: 1rem;
+display: flex;
+}
+
+.delete-story-modal {
+    padding: 1rem;
     display: flex;
-  }
+    flex-direction: column;
+}
+
+.delete-story-modal button {
+    padding: 1rem;
+    color: white;
+    background: black;
+    margin-top: 1rem;
+}
+
+.delete-story-modal button:hover {
+    opacity: .5;
+}
