@@ -289,19 +289,14 @@ def seed_chapters():
         ),
         Chapter(
         title="Shadows Of The Past",
-        body="""The wind howled through the desolate streets of Beryl, a city abandoned by hope and ravaged by war. In this grim and unforgiving world, the Black Company, a notorious group of mercenaries, found themselves in the heart of the chaos. Led by their enigmatic captain, Croaker, they navigated the treacherous landscape with hardened resolve.
-
-        As darkness settled over the city, Croaker and his company sought refuge in an abandoned tavern. The once lively establishment now stood as a hollow shell, a testament to the destruction that had befallen Beryl. The company's members huddled together, their faces etched with weariness and battle scars.
-
-        Croaker, a man of few words, brooded over a tattered map spread across a wooden table. His mind drifted back to the past, to the origins of the Black Company. They were an ancient and secretive group, renowned for their skill and their willingness to take on any job, no matter how dangerous or morally ambiguous.
-
-        The company's latest assignment was a contract with Lady, a powerful sorceress and ruler of the northern city of Beryl. Lady's grip on power was threatened by rebel factions and rival sorcerers, and she sought the Black Company's aid in maintaining her control. The promise of a generous payment and the reputation of the company made it an offer they couldn't refuse.
-
-        Croaker's thoughts were interrupted by the arrival of One-Eye and Goblin, two eccentric wizards and long-standing members of the Black Company. They entered the tavern, their presence preceded by an air of mischief and magic. One-Eye, with his mismatched eyes and a mischievous grin, was known for his unpredictable nature, while Goblin, small and wiry, possessed a keen intellect that belied his appearance.
-
-        Together, the trio discussed the imminent challenges they would face in Beryl. They spoke of the rival sorcerers and the bloody battles that awaited them. They knew that survival in this cutthroat world required more than just skill with a sword or command over magic—it demanded cunning, adaptability, and a willingness to get their hands dirty.
-
-        As they prepared to embark on their mission, Croaker couldn't shake the nagging feeling that they were entangled in something far more sinister than they had bargained for. The shadows cast by their pasts loomed large, threatening to consume them and plunge them into a darkness from which they might never emerge.""",
+        body="""
+        <p>    The wind howled through the desolate streets of Beryl, a city abandoned by hope and ravaged by war. In this grim and unforgiving world, the Black Company, a notorious group of mercenaries, found themselves in the heart of the chaos. Led by their enigmatic captain, Croaker, they navigated the treacherous landscape with hardened resolve.</p>
+        <p>    As darkness settled over the city, Croaker and his company sought refuge in an abandoned tavern. The once lively establishment now stood as a hollow shell, a testament to the destruction that had befallen Beryl. The company's members huddled together, their faces etched with weariness and battle scars.</p>
+        <p>    Croaker, a man of few words, brooded over a tattered map spread across a wooden table. His mind drifted back to the past, to the origins of the Black Company. They were an ancient and secretive group, renowned for their skill and their willingness to take on any job, no matter how dangerous or morally ambiguous.</p>
+        <p>    The company's latest assignment was a contract with Lady, a powerful sorceress and ruler of the northern city of Beryl. Lady's grip on power was threatened by rebel factions and rival sorcerers, and she sought the Black Company's aid in maintaining her control. The promise of a generous payment and the reputation of the company made it an offer they couldn't refuse.</p>
+        <p>    Croaker's thoughts were interrupted by the arrival of One-Eye and Goblin, two eccentric wizards and long-standing members of the Black Company. They entered the tavern, their presence preceded by an air of mischief and magic. One-Eye, with his mismatched eyes and a mischievous grin, was known for his unpredictable nature, while Goblin, small and wiry, possessed a keen intellect that belied his appearance.</p>
+        <p>    Together, the trio discussed the imminent challenges they would face in Beryl. They spoke of the rival sorcerers and the bloody battles that awaited them. They knew that survival in this cutthroat world required more than just skill with a sword or command over magic—it demanded cunning, adaptability, and a willingness to get their hands dirty.</p>
+        <p>     As they prepared to embark on their mission, Croaker couldn't shake the nagging feeling that they were entangled in something far more sinister than they had bargained for. The shadows cast by their pasts loomed large, threatening to consume them and plunge them into a darkness from which they might never emerge.</p>""",
         story_id=11,
         published=True
         ),
