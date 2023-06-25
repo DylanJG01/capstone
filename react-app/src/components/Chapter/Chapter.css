@@ -74,7 +74,7 @@
     padding-top: 1rem;
     margin-left: 1rem;
     margin-bottom: 1rem;
-    white-space-collapse: preserve;
+    /* white-space-collapse: preserve; */
 }
 .chapter-body::placeholder {
     color: white;
