@@ -255,10 +255,10 @@ textarea
     position: absolute;
     color: gold;
     background: black;
-    padding: .25rem;
+    padding: 0.25rem;
     border-radius: 50%;
-    left: 4rem;
-    top: -.3rem;
+    left: 11.3rem;
+    top: -0.6rem;
 }
 
 .rel { position: relative;}

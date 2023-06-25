@@ -69,15 +69,21 @@
     line-height: 24px;
 }
 .chapter-body {
-    border-top: 2px solid white;
+    /* border-top: 2px solid white; */
     margin-top: 1rem;
-    padding-top: 1rem;
     margin-left: 1rem;
     margin-bottom: 1rem;
-    /* white-space-collapse: preserve; */
+    background-color: black;
+    padding: 1rem;
 }
 .chapter-body::placeholder {
     color: white;
+}
+.chapter-body p {
+    text-wrap: wrap;
+    line-height: 1.35;
+    font-size: 1rem;
+    font-family: monospace;
 }
 
 .ql-editor > p {

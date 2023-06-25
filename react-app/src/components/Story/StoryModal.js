@@ -21,16 +21,18 @@ export default function StoryModal({story, closeModal}) {
             <div className="story-title-modal-div">
                 <p>{story.title}</p>
             </div>
-            <div className='parts rel'> {!story.numChapters ? <>No Parts</>
-                        : story.numChapters === 1 ? <>1 Part</>
-                        : <>{story.numChapters} Parts {story.cost ?<i className="fa-solid fa-sack-dollar money-bag" /> : ""}</>}
-            </div>
-            <div>
-                {/* {story.numChapters ? (<button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button>)
-                : <div><p className="no-parts">No published content</p></div>} */}
+            <div className="parts-and-start">
+                <div className='parts rel'> {!story.numChapters ? <>No Parts</>
+                            : story.numChapters === 1 ? <>1 Part</>
+                            : <>{story.numChapters} Parts {story.cost ?<i className="fa-solid fa-sack-dollar money-bag" /> : ""}</>}
+                </div>
+                <div>
+                    {/* {story.numChapters ? (<button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button>)
+                    : <div><p className="no-parts">No published content</p></div>} */}
 
-                {story.numChapters ? (story.cost ? (<button className="btn log-in start" onClick={() => toTheStory()}>Free Preview</button>) :
-                    (<button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button>) ) : null}
+                    {story.numChapters ? (story.cost ? (<button className="btn log-in start" onClick={() => toTheStory()}>Free Preview</button>) :
+                        (<button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button>) ) : null}
+                </div>
             </div>
 
             <div className="description-p">{story.description}</div>

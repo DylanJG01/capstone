@@ -24,7 +24,7 @@ def seed_stories():
             user_id = 1,
             cover="https://m.media-amazon.com/images/I/41CKw0DiUJL.jpg",
             description='In the post-apocalyptic adventure "Rabbits of the Apocalypse," a group of intelligent and resourceful rabbits embark on a quest to uncover the mysteries of their ravaged world. Led by the cunning Hopper, they navigate dangers and unravel a deeper truth. With humor and heart, this imaginative tale showcases the unexpected heroes in a world on the brink of collapse.',
-            title="Rabbits of the Aplocalpyse",
+            title="Rabbits of the Apocalypse",
             published=True,
             category_name="Romance"
         ), #0
