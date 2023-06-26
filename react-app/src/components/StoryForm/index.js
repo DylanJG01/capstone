@@ -60,7 +60,6 @@ export default function StoryFormPage() {
     if(titleValidator(title)) ve.push(titleValidator(title))
     if(description && (descriptionValidator(description))) ve.push((descriptionValidator(description)))
     if(ve.length) setErrors(ve)
-    console.log(tags)
   },[title, description, tags])
 
   const changeRating = () => {

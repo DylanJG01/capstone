@@ -251,14 +251,6 @@ textarea
 .first-chap-free{
     width: 265px;
 }
-.money-bag {
-    position: absolute;
-    color: gold;
-    background: black;
-    padding: 0.25rem;
-    border-radius: 50%;
-    left: 11.3rem;
-    top: -0.6rem;
-}
+
 
 .rel { position: relative;}

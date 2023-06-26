@@ -36,7 +36,6 @@ export default function CreateChapter (){
         e.preventDefault()
         if (errors.length > 0){
             setSubmitted(true)
-            console.log(errors)
             return
         }
         await dispatch(fetchPostChapter({title, body, story_id: parseInt(params.storyId)}))

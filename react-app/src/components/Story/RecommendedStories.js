@@ -22,7 +22,6 @@ export default function RecommendedStories(){
         }
         load()
         setRandomStories(getRandomObjects())
-        // console.log(getRandomObjects())
     },[dispatch, user, loaded])
     if (!stories) return null
 

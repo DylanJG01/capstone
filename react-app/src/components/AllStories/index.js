@@ -20,7 +20,6 @@ export default function AllStories(){
         }
         load()
     },[dispatch])
-    // console.log("STORIES", stories)
     if (!stories) return <h2>You ain't got none stories, friend. So we got nothin' to sho ya</h2>
 
     const theModal = (story) => {

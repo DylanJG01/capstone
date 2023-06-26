@@ -51,7 +51,6 @@ export default function EditChapter (){
         e.preventDefault()
         if (errors.length > 0){
             setSubmitted(true)
-            console.log(errors)
             return
         }
         dispatch(fetchPutChapter({title, body, story_id: parseInt(params.storyId)}, parseInt(params.chapterId)))
@@ -88,9 +87,7 @@ export default function EditChapter (){
                     onChange={setBody}
                     placeholder="Begin your story..."
                     style={{ '--placeholder-color': 'gray' }} // Apply custom placeholder color
-
                     />
-
                 </label>
                 <button className='btn log-in save-submit' type="submit">Save</button>
             </form>

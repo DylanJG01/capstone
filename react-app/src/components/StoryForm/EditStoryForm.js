@@ -59,11 +59,6 @@ export default function EditStoryForm() {
     if(ve.length) setErrors(ve)
   },[title, description])
 
-  useEffect(() => {
-    console.log(cover)
-  }, [cover])
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (errors.length){

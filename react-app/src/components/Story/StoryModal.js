@@ -34,9 +34,9 @@ export default function StoryModal({story, closeModal}) {
                         (<button className="btn log-in start" onClick={() => toTheStory()}>Start Reading</button>) ) : null}
                 </div>
             </div>
-
+            <div>Description</div>
             <div className="description-p">{story.description}</div>
-            <div className="avg-rating">Avg rating {console.log(typeof story.avg)}{(story.avg).toFixed(1)}</div>
+            <div className="avg-rating">Avg rating {(story.avg).toFixed(1)}</div>
             {/* <div onClick={() => toStoryDetails()}>More Details </div> */}
         </div>
     </div>)

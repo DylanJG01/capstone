@@ -46,6 +46,7 @@ export default function PostReview({userId, chapterId, closeModal, setMyReviewId
                 onChange={(e) => setContent(e.target.value)}
                 rows={10}
                 cols={30}
+                placeholder='What did you think?...'
               />
             </label>
             <label className='review-stars-label'>

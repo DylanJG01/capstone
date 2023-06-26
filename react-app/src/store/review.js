@@ -59,7 +59,6 @@ export const fetchPostReview = (reviewData) => async dispatch => {
 };
 
 export const fetchPutReview = (review) => async dispatch => {
-  console.log(review)
   const res = await fetch(`/api/reviews/${review.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
