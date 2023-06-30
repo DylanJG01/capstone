@@ -1,0 +1,12 @@
+.splash-page h2, h3 {
+    text-align: center;
+}
+.splash-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.splash-page {
+ width: 800px;
+}

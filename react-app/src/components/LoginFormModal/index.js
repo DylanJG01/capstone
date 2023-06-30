@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -10,7 +11,7 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
-
+  const history = useHistory();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -19,12 +20,14 @@ function LoginFormModal() {
       setErrors(['Invalid Credientials'])
     } else {
         closeModal()
+        history.push('/recommended')
     }
   };
 
   const demoUser = async (e) => {
-    dispatch(login('wraith@aa.io', 'password'))
+    await dispatch(login('wraith@aa.io', 'password'))
     closeModal()
+    history.push('/recommended')
   }
 
   return (

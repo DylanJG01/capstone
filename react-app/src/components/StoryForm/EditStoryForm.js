@@ -219,7 +219,7 @@ export default function EditStoryForm() {
         { tab === "contents" ? (<>
             <div className="table-of-contents-div">
               <div className="table-of-contents">
-              <button onClick={() => postChapter()}>New Part</button>
+              <button onClick={() => postChapter()}>New Chapter</button>
                 {chapters && Object.values(chapters).map((chapter, i )=> (
                     <li className="chapter-li" key={`chapter${chapter.id}`}>
                         <p className="the-h3">{chapter.title}</p>

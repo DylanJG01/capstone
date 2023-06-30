@@ -52,7 +52,7 @@ export default function CreateChapter (){
             <form onSubmit={handleSubmit} className='chapter-form'>
                 {submitted && errors.includes('body-length') &&
                 <div className='err chapter-body-length'>
-                    The merest mote of language is all we demand, a single, measely character
+                    The chapter body requires the merest mote of language, we demand a single, measely character.
                 </div>}
 
                 {submitted && errors.includes('title-long') &&
@@ -65,7 +65,7 @@ export default function CreateChapter (){
                     type="text"
                     value={title}
                     onChange={(e) => setTitle((e.target.value).replace(/^\s+/, ''))}
-                    placeholder={submitted && errors.includes('title-short') ? "Title too short" : "Untitled..."}
+                    placeholder={submitted && errors.includes('title-short') ? "Title goes here" : "Title goes here..."}
                     className={submitted && errors.includes('title-short') ? "chapter-title red chapter-t-input" : "chapter-title chapter-t-input"}
                 />
                 </label>

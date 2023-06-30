@@ -11,9 +11,13 @@ function Navigation({ isLoaded }){
 
 	return (
 		<ul className='nav-bar'>
+			{sessionUser ? <li className='home-li'>
+				<NavLink exact to="/recommended" className="wordwraiths-home">Word Wraiths</NavLink>
+			</li> :
 			<li className='home-li'>
 				<NavLink exact to="/" className="wordwraiths-home">Word Wraiths</NavLink>
 			</li>
+			}
 			{isLoaded && (
 				<>
 				<li className='profile-li'>

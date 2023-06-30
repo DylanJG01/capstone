@@ -6,6 +6,7 @@ import { login } from "../../store/session";
 import "./SignupForm.css";
 import { _usernameValidator, _emailValidator, _passwordValidator } from "../_helpers";
 import { options } from '../_helpers'
+import { useHistory } from "react-router-dom";
 
 function SignupFormModal() {
 	const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const [submitted, setSubmitted] = useState(false)
 	const { closeModal } = useModal();
+	const history = useHistory()
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -34,6 +36,7 @@ function SignupFormModal() {
 				}
 			} else {
 				closeModal();
+				history.push('/recommended')
 			}
 		} else {
 			setErrors([
@@ -63,6 +66,7 @@ function SignupFormModal() {
 
 	const demoUser = async (e) => {
 		dispatch(login('wraith@aa.io', 'password'))
+		history.push('/recommended')
 		closeModal()
 	}
 

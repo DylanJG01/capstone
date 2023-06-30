@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
@@ -14,6 +14,7 @@ import EditChapter from "./components/Chapter/EditChapter"
 import AllStories from "./components/AllStories";
 import FourOhFour from "./components/FourOhFour";
 import NewChapter from "./components/Chapter/NewChapter"
+import SplashPage from "./components/Splash";
 // import UserProfile from "./components/UserProfile";
 
 function App() {
@@ -25,10 +26,13 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded}/>
       {isLoaded && (
         <Switch>
           <Route path='/' exact={true}>
+            <SplashPage />
+          </Route>
+          <Route path='/recommended' exact={true}>
             <RecommendedStories />
           </Route>
           <Route path='/all' exact={true}>
