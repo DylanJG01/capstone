@@ -1,6 +1,5 @@
-import React, { useEffect, useState, version} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChapter } from '../../store/story';
 import { fetchSingleChapter, fetchPutChapter } from '../../store/chapter';
 // import { useModal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom'
