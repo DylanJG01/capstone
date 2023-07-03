@@ -54,12 +54,22 @@ export default function StoryCard({story}){
         </div>
         <div className='title-and-buttons'>
             <div className='title'>
-            <p className='title-p'>{story.title}</p>
+            <p className='title-p txt-ctr'>{story.title}</p>
             </div>
             <div></div>
             <div className='the-buttons'>
-                <button class="btn edit" onClick={() => editTheStory(story.id, story.title)}><i class="fa-solid fa-pen-to-square"></i></button>
-                <button class="btn delete" onClick={() => deleteStoryModal()}><i class="fa-solid fa-trash"></i></button>
+                <div>
+                    <p className='txt-ctr mrg-btm-1'>Edit</p>
+                    <button class="btn edit" onClick={() => editTheStory(story.id, story.title)}><i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+                <div>
+                    <p className='txt-ctr mrg-btm-1'>Delete</p>
+                    <button class="btn delete" onClick={() => deleteStoryModal()}><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div>
+                    <p className='txt-ctr mrg-btm-1'>New Chapter</p>
+                    <button class="btn plus" onClick={() => history.push(`/myworks/${story.id}-${titleToSword(story.title)}/chapter/new`)}><i class="fa fa-plus"></i></button>
+                </div>
             </div>
         </div>
     </div>)

@@ -24,9 +24,20 @@
 }
 .the-buttons {
     align-self: baseline;
+    display: flex;
+    justify-content: center;
+}
+.the-buttons div {
+    margin: 0 .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 .the-buttons button {
     padding: .65rem;
+    margin: 0 0.5rem;
+    width: 3rem;
 }
 .img-div {
     height: 100px;
@@ -128,4 +139,10 @@ margin: 1rem;
 
 .delete-story-modal button:hover {
     opacity: .5;
+}
+.plus:hover{
+    background-color: green;
+}
+.mrg-btm-1 {
+    margin-bottom: .25rem;
 }
